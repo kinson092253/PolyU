@@ -8,7 +8,7 @@ def clear_screen():
 def print_board(board):
     print("   " + " ".join(f"{i:2}" for i in range(BOARD_SIZE)))
     for idx, row in enumerate(board):
-        print(f"{idx:2} " + " ".join(row))
+        print(f"{idx:2} " + "  ".join(row))
 
 def check_win(board, x, y, player):
     directions = [(1,0), (0,1), (1,1), (1,-1)]
