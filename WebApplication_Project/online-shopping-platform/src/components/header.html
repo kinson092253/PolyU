@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Shopping Platform</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="header-top">
+            <div class="logo-area">
+                <a href="#"><img src="assets/logo.png" alt="YOHO Logo" class="logo-img"></a>
+            </div>
+            <div class="search-area">
+                <input type="text" class="search-input" placeholder="搜尋你喜愛的產品">
+                <div class="hot-search">
+                    熱門搜尋：
+                    <a href="#">抽濕機</a>
+                    <a href="#">風扇</a>
+                    <a href="#">潤海梳</a>
+                    <a href="#">冷氣機</a>
+                    <a href="#">面膜機</a>
+                    <a href="#">HIFU機</a>
+                    <a href="#">電視機</a>
+                    <a href="#">清洗冷氣機</a>
+                </div>
+            </div>
+            <div class="header-icons">
+                <a href="#" class="cart-icon" title="購物車">🛒</a>
+                <a href="#" class="login-icon" title="登入註冊">👤 登入註冊</a>
+            </div>
+        </div>
+
+        <!-- 側邊分類彈窗 -->
+        <div id="category-sidebar" class="sidebar">
+            <div class="sidebar-content">
+                <div id="category-level-1" class="category-level active">
+                    <h3>選擇產品種類</h3>
+                    <ul>
+                        <li data-category="tv">電視</li>
+                        <li data-category="laptop">手提電腦</li>
+                        <li data-category="phone">手機</li>
+                    </ul>
+                </div>
+                <div id="category-level-2" class="category-level">
+                    <button id="back-btn">&lt; 返回</button>
+                    <h3 id="category-title"></h3>
+                    <ul id="subcategory-list"></ul>
+                </div>
+            </div>
+        </div>
+        <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+        <nav class="main-nav">
+            <a href="#" id="category-btn"><span class="menu-icon">☰</span> 產品分類</a>
+            <a href="#">本週熱話</a>
+            <a href="#">最新產品</a>
+            <a href="#">閃電送貨</a>
+            <a href="#">限時優惠</a>
+            <a href="#">信用卡優惠</a>
+            <a href="#">風扇推介</a>
+            <div class="dropdown">
+                <a href="#">會員專區 ▼</a>
+            </div>
+            <div class="dropdown">
+                <a href="#">推廣優惠 ▼</a>
+            </div>
+        </nav>
+
+
+    </header>
+</body>
+</html>
