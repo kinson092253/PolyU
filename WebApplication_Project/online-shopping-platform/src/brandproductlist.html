@@ -1,0 +1,375 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>品牌商品</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/compare-details.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+</head>
+<body>
+    <div id="site-header"></div>
+
+    <main class="brandproductlist-container">
+        <div class="brandproductlist-listing">
+            <h1 id="brandproductlist-title">Apple</h1>
+            
+            <!-- Product Category Bar -->
+            <div class="brandproductlist-category-bar">
+                <div class="brandproductlist-category-scroll">
+                    <button class="brandproductlist-category-item active" data-category="all">
+                        <div class="brandproductlist-category-icon">
+                            <i class="fas fa-th-large"></i>
+                        </div>
+                        <span>全部商品</span>
+                    </button>
+                    <button class="brandproductlist-category-item" data-category="earphones">
+                        <div class="brandproductlist-category-icon">
+                            <img src="assets/products/productbar1.webp" alt="耳機">
+                        </div>
+                        <span>真無線藍牙耳機</span>
+                    </button>
+                    <button class="brandproductlist-category-item" data-category="headphones">
+                        <div class="brandproductlist-category-icon">
+                            <img src="assets/products/productbar2.webp" alt="藍牙耳機">
+                        </div>
+                        <span>藍牙耳機</span>
+                    </button>
+                    <button class="brandproductlist-category-item" data-category="smartwatch">
+                        <div class="brandproductlist-category-icon">
+                            <img src="assets/products/productbar3.webp" alt="智能手錶">
+                        </div>
+                        <span>智能手錶</span>
+                    </button>
+                    <button class="brandproductlist-category-item" data-category="mobile">
+                        <div class="brandproductlist-category-icon">
+                            <img src="assets/products/productbar5.webp" alt="手機電腦">
+                        </div>
+                        <span>手機電腦</span>
+                    </button>
+                    <button class="brandproductlist-category-item" data-category="tablet">
+                        <div class="brandproductlist-category-icon">
+                            <img src="assets/products/productbar6.webp" alt="平板電腦">
+                        </div>
+                        <span>平板電腦</span>
+                    </button>
+                    <button class="brandproductlist-category-item" data-category="desktop">
+                        <div class="brandproductlist-category-icon">
+                            <img src="assets/products/productbar7.webp" alt="桌上電腦">
+                        </div>
+                        <span>桌上電腦</span>
+                    </button>
+                    <button class="brandproductlist-category-item" data-category="accessories">
+                        <div class="brandproductlist-category-icon">
+                            <img src="assets/products/productbar8.webp" alt="電腦週邊配件">
+                        </div>
+                        <span>電腦週邊配件</span>
+                    </button>
+                    <button class="brandproductlist-category-item" data-category="cables">
+                        <div class="brandproductlist-category-icon">
+                            <img src="assets/products/productbar9.webp" alt="電腦線材">
+                        </div>
+                        <span>電腦線材</span>
+                    </button>
+                </div>
+                <button class="brandproductlist-category-scroll-btn brandproductlist-category-prev">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="brandproductlist-category-scroll-btn brandproductlist-category-next">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+
+            <div id="brandproductlist-grid" class="brandproductlist-product-grid">
+                
+                <!-- Product Card 1 - AirPods -->
+                <div class="brandproductlist-product-card">
+                    <input type="checkbox" class="product-compare-checkbox" data-product-id="apple-airpods4">
+                    <div class="brandproductlist-discount-badge">減8%</div>
+                    <div class="brandproductlist-product-image-wrap">
+                        <img class="brandproductlist-product-image" src="assets/products/rbtep1.webp" alt="Apple AirPods 4">
+                    </div>
+                    <div class="brandproductlist-product-body">
+                        <div class="brandproductlist-price-section">
+                            <span class="brandproductlist-current-price">HK$1020</span>
+                            <span class="brandproductlist-original-price">1099</span>
+                        </div>
+                        <h3 class="brandproductlist-product-title">Apple 蘋果 Airpods 4 真無線藍牙耳機 MXP63ZP/A 香港行貨</h3>
+                        <div class="brandproductlist-rating">
+                            <div class="brandproductlist-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="brandproductlist-rating-count">40</span>
+                        </div>
+                        <div class="brandproductlist-shipping-info">
+                            <i class="fas fa-truck"></i>
+                            <span>免費送貨</span>
+                            <span class="brandproductlist-stock-info">銷量 >500</span>
+                        </div>
+                        <button class="brandproductlist-product-add-btn brandproductlist-btn-add-cart" type="button">
+                            <i class="fas fa-shopping-cart"></i>
+                            加入購物車
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product Card 2 - iPhone -->
+                <div class="brandproductlist-product-card">
+                    <input type="checkbox" class="product-compare-checkbox" data-product-id="apple-iphone16pro">
+                    <div class="brandproductlist-discount-badge">減4%</div>
+                    <div class="brandproductlist-product-image-wrap">
+                        <img class="brandproductlist-product-image" src="assets/products/iPhone_16_Pro.avif" alt="Apple iPhone 16 Pro">
+                    </div>
+                    <div class="brandproductlist-product-body">
+                        <div class="brandproductlist-price-section">
+                            <span class="brandproductlist-current-price">HK$9099</span>
+                            <span class="brandproductlist-original-price">9399</span>
+                        </div>
+                        <h3 class="brandproductlist-product-title">Apple 蘋果 iPhone 16 Pro 256GB 5G 智能手機 沙漠鈦金色</h3>
+                        <div class="brandproductlist-rating">
+                            <div class="brandproductlist-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="brandproductlist-rating-count">134</span>
+                        </div>
+                        <div class="brandproductlist-shipping-info">
+                            <i class="fas fa-truck"></i>
+                            <span>免費送貨</span>
+                            <span class="brandproductlist-stock-info">銷量 >500</span>
+                        </div>
+                        <button class="brandproductlist-product-add-btn brandproductlist-btn-add-cart" type="button">
+                            <i class="fas fa-shopping-cart"></i>
+                            加入購物車
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product Card 3 - AirTag -->
+                <div class="brandproductlist-product-card">
+                    <input type="checkbox" class="product-compare-checkbox" data-product-id="apple-airtag-4pack">
+                    <div class="brandproductlist-discount-badge">減21%</div>
+                    <div class="brandproductlist-product-image-wrap">
+                        <img class="brandproductlist-product-image" src="assets/products/Apple_Air_Tag_.webp" alt="Apple AirTag">
+                    </div>
+                    <div class="brandproductlist-product-body">
+                        <div class="brandproductlist-price-section">
+                            <span class="brandproductlist-current-price">HK$788</span>
+                            <span class="brandproductlist-original-price">799</span>
+                        </div>
+                        <h3 class="brandproductlist-product-title">Apple 蘋果 AirTag 智能定位追蹤 (4個裝) MX542ZP/A 香港行貨</h3>
+                        <div class="brandproductlist-rating">
+                            <div class="brandproductlist-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="brandproductlist-rating-count">124</span>
+                        </div>
+                        <div class="brandproductlist-shipping-info">
+                            <i class="fas fa-truck"></i>
+                            <span>免費送貨</span>
+                            <span class="brandproductlist-stock-info">銷量 >1000</span>
+                        </div>
+                        <div class="brandproductlist-promo-tag">+$199 換購 Apple AirTag 精美皮革...</div>
+                        <button class="brandproductlist-product-add-btn brandproductlist-btn-add-cart" type="button">
+                            <i class="fas fa-shopping-cart"></i>
+                            加入購物車
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product Card 4 - iPad Air -->
+                <div class="brandproductlist-product-card">
+                    <input type="checkbox" class="product-compare-checkbox" data-product-id="apple-ipadair-6th">
+                    <div class="brandproductlist-discount-badge">減4%</div>
+                    <div class="brandproductlist-product-image-wrap">
+                        <img class="brandproductlist-product-image" src="assets/products/IPad_Air_6th_Gen_2024.webp" alt="Apple iPad Air">
+                    </div>
+                    <div class="brandproductlist-product-body">
+                        <div class="brandproductlist-price-section">
+                            <span class="brandproductlist-current-price">HK$5199</span>
+                            <span class="brandproductlist-original-price">5399</span>
+                        </div>
+                        <h3 class="brandproductlist-product-title">Apple 蘋果 iPad Air (6th Gen 2024) 11" 256GB Wi-Fi 太空灰色</h3>
+                        <div class="brandproductlist-rating">
+                            <div class="brandproductlist-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="brandproductlist-rating-count">16</span>
+                        </div>
+                        <div class="brandproductlist-shipping-info">
+                            <i class="fas fa-truck"></i>
+                            <span>免費送貨</span>
+                            <span class="brandproductlist-stock-info">銷量 >100</span>
+                        </div>
+                        <button class="brandproductlist-product-add-btn brandproductlist-btn-add-cart" type="button">
+                            <i class="fas fa-shopping-cart"></i>
+                            加入購物車
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product Card 5 - Apple Pencil Pro -->
+                <div class="brandproductlist-product-card">
+                    <input type="checkbox" class="product-compare-checkbox" data-product-id="apple-pencil-pro">
+                    <div class="brandproductlist-discount-badge">減2%</div>
+                    <div class="brandproductlist-product-image-wrap">
+                        <img class="brandproductlist-product-image" src="assets/products/Apple_Pencil_Pro.webp" alt="Apple Pencil Pro">
+                    </div>
+                    <div class="brandproductlist-product-body">
+                        <div class="brandproductlist-price-section">
+                            <span class="brandproductlist-current-price">HK$988</span>
+                            <span class="brandproductlist-original-price">999</span>
+                        </div>
+                        <h3 class="brandproductlist-product-title">Apple 蘋果 Pencil Pro MX2D3ZA/A 香港行貨</h3>
+                        <div class="brandproductlist-rating">
+                            <div class="brandproductlist-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="brandproductlist-rating-count">9</span>
+                        </div>
+                        <div class="brandproductlist-shipping-info">
+                            <i class="fas fa-truck"></i>
+                            <span>免費送貨</span>
+                            <span class="brandproductlist-stock-info">銷量 <50</span>
+                        </div>
+                        <button class="brandproductlist-product-add-btn brandproductlist-btn-add-cart" type="button">
+                            <i class="fas fa-shopping-cart"></i>
+                            加入購物車
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product Card 6 - MacBook Air -->
+                <div class="brandproductlist-product-card">
+                    <input type="checkbox" class="product-compare-checkbox" data-product-id="apple-macbook-air-m3">
+                    <div class="brandproductlist-discount-badge">減16%</div>
+                    <div class="brandproductlist-product-image-wrap">
+                        <img class="brandproductlist-product-image" src="assets/products/MacBook_Air_M3.webp" alt="Apple MacBook Air">
+                    </div>
+                    <div class="brandproductlist-product-body">
+                        <div class="brandproductlist-price-section">
+                            <span class="brandproductlist-current-price">HK$10099</span>
+                            <span class="brandproductlist-original-price">11999</span>
+                        </div>
+                        <h3 class="brandproductlist-product-title">Apple 蘋果 MacBook Air 13.6" Liquid Retina M3 8-core/16GB/512GB/10 GPU/Mac OS 筆記型電腦 午夜藍色</h3>
+                        <div class="brandproductlist-rating">
+                            <div class="brandproductlist-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="brandproductlist-rating-count">1</span>
+                        </div>
+                        <div class="brandproductlist-shipping-info">
+                            <i class="fas fa-truck"></i>
+                            <span>免費送貨</span>
+                            <span class="brandproductlist-stock-info">銷量 <20</span>
+                        </div>
+                        <button class="brandproductlist-product-add-btn brandproductlist-btn-add-cart" type="button">
+                            <i class="fas fa-shopping-cart"></i>
+                            加入購物車
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Comparison Panel -->
+    <div id="compare-panel" class="compare-panel">
+        <div class="compare-panel-header">
+            <h3 class="compare-panel-title">
+                產品比較
+                <span id="compare-count" class="compare-count">0</span>
+            </h3>
+            <button id="compare-panel-close" class="compare-panel-close">&times;</button>
+        </div>
+        <div class="compare-panel-body" id="compare-panel-body">
+            <div class="compare-empty">
+                <i class="fas fa-balance-scale"></i>
+                <p>選擇產品進行比較</p>
+            </div>
+        </div>
+        <div class="compare-panel-footer">
+            <button id="compare-now" class="compare-btn compare-btn-primary" disabled>
+                <i class="fas fa-eye"></i> 立即比較
+            </button>
+            <button id="clear-all-compare" class="compare-btn compare-btn-secondary">
+                <i class="fas fa-trash"></i> 清空
+            </button>
+        </div>
+    </div>
+
+    <div id="site-footer"></div>
+
+    <script>
+        // Dynamically load header
+        fetch('components/header.html')
+            .then(res => res.text())
+            .then(html => { 
+                document.getElementById('site-header').innerHTML = html;
+                // Reinitialize shopping cart
+                if (window.ShoppingCart) {
+                    window.ShoppingCart.cartIconBound = false;
+                    window.ShoppingCart.setupCart();
+                }
+            });
+
+        // Dynamically load footer
+        fetch('components/footer.html')
+            .then(res => res.text())
+            .then(html => document.getElementById('site-footer').innerHTML = html);
+    </script>
+
+    <!-- Ensure comparison functionality loads after DOM is fully loaded -->
+    <script>
+        // Ensure comparison functionality initializes after all content is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('🚀 DOM fully loaded, checking comparison functionality...');
+            
+            // Check if comparison panel exists
+            const panel = document.getElementById('compare-panel');
+            if (panel) {
+                console.log('✅ Comparison panel exists');
+            } else {
+                console.error('❌ Comparison panel does not exist');
+            }
+            
+            // Check if checkboxes exist
+            const checkboxes = document.querySelectorAll('.product-compare-checkbox');
+            console.log(`☑️ Found ${checkboxes.length} comparison checkboxes`);
+            
+            // Manual test event binding
+            checkboxes.forEach((checkbox, index) => {
+                console.log(`Checkbox ${index + 1}:`, checkbox.dataset.productId);
+            });
+        });
+    </script>
+    
+    <script src="js/app.js"></script>
+    <script src="js/product-compare.js"></script>
+</body>
+</html>

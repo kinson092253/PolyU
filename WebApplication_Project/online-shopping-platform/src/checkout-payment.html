@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>付款</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/checkout.css">
+    <link rel="stylesheet" href="css/auth-modal.css">
+    <link rel="stylesheet" href="css/compare-details.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div id="site-header"></div>
+
+    <main class="cp_container">
+        <div class="cp_steps">
+            <div class="cp_step cp_completed">
+                <div class="cp_step_number"><i class="fas fa-check"></i></div>
+                <div class="cp_step_text">確認產品詳情</div>
+            </div>
+            <div class="cp_step_line"></div>
+            <div class="cp_step cp_active">
+                <div class="cp_step_number">2</div>
+                <div class="cp_step_text">付款</div>
+            </div>
+            <div class="cp_step_line"></div>
+            <div class="cp_step">
+                <div class="cp_step_number">3</div>
+                <div class="cp_step_text">完成</div>
+            </div>
+        </div>
+
+        <h1 class="cp_title">付款資訊</h1>
+
+        <div class="cp_layout">
+            <div class="cp_form_section">
+                <!-- Delivery Method Selection -->
+                <h2>你想如何收取訂單產品？</h2>
+                <div class="cp_delivery_methods">
+                    <label class="cp_delivery_method">
+                        <input type="radio" name="delivery" value="shipping" checked>
+                        <div class="cp_delivery_content">
+                            <i class="fas fa-truck"></i>
+                            <span>我希望送貨</span>
+                        </div>
+                    </label>
+                    <label class="cp_delivery_method">
+                        <input type="radio" name="delivery" value="pickup">
+                        <div class="cp_delivery_content">
+                            <i class="fas fa-store"></i>
+                            <span>我會前來取貨</span>
+                        </div>
+                    </label>
+                </div>
+
+                <h2>配送資訊</h2>
+                <form id="cp_payment_form">
+                    <!-- Shipping Address Section -->
+                    <div id="cp_shipping_fields">
+                        <div class="cp_form_group">
+                            <label>收件人姓名 *</label>
+                            <input type="text" name="name" required>
+                        </div>
+                        <div class="cp_form_group">
+                            <label>電話號碼 *</label>
+                            <input type="tel" name="phone" required>
+                        </div>
+                        <div class="cp_form_group">
+                            <label>電子郵件 *</label>
+                            <input type="email" name="email" required>
+                        </div>
+                        <div class="cp_form_group">
+                            <label>配送地址 *</label>
+                            <textarea name="address" rows="3" required></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Pickup Store Selection Section -->
+                    <div id="cp_pickup_fields" style="display: none;">
+                        <div class="cp_form_group">
+                            <label>取貨人姓名 *</label>
+                            <input type="text" name="pickup-name">
+                        </div>
+                        <div class="cp_form_group">
+                            <label>聯絡電話 *</label>
+                            <input type="tel" name="pickup-phone">
+                        </div>
+                        <div class="cp_form_group">
+                            <label>電子郵件 *</label>
+                            <input type="email" name="pickup-email">
+                        </div>
+                        <div class="cp_form_group">
+                            <label>選擇取貨門市 *</label>
+                            <select name="pickup-store" class="cp_store_select">
+                                <option value="">請選擇 Apple Store</option>
+                                <optgroup label="香港">
+                                    <option value="IFC Mall">Apple IFC Mall</option>
+                                    <option value="Causeway Bay">Apple Causeway Bay</option>
+                                    <option value="Festival Walk">Apple Festival Walk</option>
+                                    <option value="Canton Road">Apple Canton Road</option>
+                                </optgroup>
+                                <optgroup label="九龍">
+                                    <option value="Elements">Apple Elements</option>
+                                    <option value="Telford Plaza">Apple Telford Plaza</option>
+                                </optgroup>
+                                <optgroup label="新界">
+                                    <option value="New Town Plaza">Apple New Town Plaza</option>
+                                    <option value="Maritime Square">Apple Maritime Square</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <div class="cp_store_info">
+                            <i class="fas fa-info-circle"></i>
+                            <span>商品將於 3-5 個工作天內送達所選門市，我們會發送取貨通知至您的電郵。</span>
+                        </div>
+                    </div>
+
+                    <h2>付款方式</h2>
+                    <div class="cp_payment_methods">
+                        <label class="cp_payment_method">
+                            <input type="radio" name="payment" value="credit" checked>
+                            <div class="cp_method_content">
+                                <i class="fas fa-credit-card"></i>
+                                <span>信用卡 / 扣賬卡</span>
+                            </div>
+                        </label>
+                        <label class="cp_payment_method">
+                            <input type="radio" name="payment" value="paypal">
+                            <div class="cp_method_content">
+                                <i class="fab fa-paypal"></i>
+                                <span>PayPal</span>
+                            </div>
+                        </label>
+                        <label class="cp_payment_method">
+                            <input type="radio" name="payment" value="alipay">
+                            <div class="cp_method_content">
+                                <i class="fab fa-alipay"></i>
+                                <span>支付寶</span>
+                            </div>
+                        </label>
+                        <label class="cp_payment_method">
+                            <input type="radio" name="payment" value="wechat">
+                            <div class="cp_method_content">
+                                <i class="fab fa-weixin"></i>
+                                <span>微信支付</span>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div id="cp_credit_card_fields" class="cp_credit_card_fields">
+                        <div class="cp_form_group">
+                            <label>卡號 *</label>
+                            <input type="text" name="card-number" placeholder="1234 5678 9012 3456" maxlength="19">
+                        </div>
+                        <div class="cp_form_row">
+                            <div class="cp_form_group">
+                                <label>有效期限 *</label>
+                                <input type="text" name="expiry" placeholder="MM/YY" maxlength="5">
+                            </div>
+                            <div class="cp_form_group">
+                                <label>CVV *</label>
+                                <input type="text" name="cvv" placeholder="123" maxlength="3">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Alipay QR Code -->
+                    <div id="cp_alipay_qr" class="cp_qr_code_section" style="display: none;">
+                        <div class="cp_qr_container">
+                            <div class="cp_qr_header">
+                                <i class="fab fa-alipay"></i>
+                                <h3>支付寶支付</h3>
+                            </div>
+                            <img src="assets/AlipayQRCode.jpg" alt="支付寶二維碼" class="cp_qr_image">
+                            <div class="cp_qr_instruction">
+                                <i class="fas fa-mobile-alt"></i>
+                                <p>請使用支付寶掃描二維碼完成支付</p>
+                            </div>
+                            <div class="cp_qr_amount">
+                                支付金額：<span id="cp_alipay_amount">HK$ 0.00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- WeChat Pay QR code -->
+                    <div id="cp_wechat_qr" class="cp_qr_code_section" style="display: none;">
+                        <div class="cp_qr_container">
+                            <div class="cp_qr_header">
+                                <i class="fab fa-weixin"></i>
+                                <h3>微信支付</h3>
+                            </div>
+                            <img src="assets/WechatQRCode.jpg" alt="微信支付二維碼" class="cp_qr_image">
+                            <div class="cp_qr_instruction">
+                                <i class="fas fa-mobile-alt"></i>
+                                <p>請使用微信掃描二維碼完成支付</p>
+                            </div>
+                            <div class="cp_qr_amount">
+                                支付金額：<span id="cp_wechat_amount">HK$ 0.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="cp_summary_section">
+                <h2>訂單摘要</h2>
+                <div class="cp_summary_products" id="cp_summary_products">
+                    <!-- The product list will be dynamically generated by JavaScript. -->
+                </div>
+                <div class="cp_summary_totals">
+                    <div class="cp_summary_row">
+                        <span>小計：</span>
+                        <span id="cp_subtotal">HK$ 0.00</span>
+                    </div>
+                    <div class="cp_summary_row">
+                        <span>運費：</span>
+                        <span>免費</span>
+                    </div>
+                    <div class="cp_summary_row cp_total">
+                        <span>總計：</span>
+                        <span id="cp_total">HK$ 0.00</span>
+                    </div>
+                </div>
+                <button type="submit" form="cp_payment_form" class="cp_btn_complete">
+                    <i class="fas fa-lock"></i> 確認付款
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <div id="site-footer"></div>
+
+    <script src="js/app.js"></script>
+    <script src="js/checkout-payment.js"></script>
+    <script src="js/auth-modal.js"></script>
+    <script src="js/product-compare.js"></script>
+</body>
+</html>

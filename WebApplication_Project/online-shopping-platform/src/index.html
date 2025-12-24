@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Shopping Platform</title>
+    <title>線上購物平台</title>
     <link rel="stylesheet" href="css/styles.css">
-    <script src="js/app.js"></script>
+    <link rel="stylesheet" href="css/auth-modal.css">
+    <link rel="stylesheet" href="css/compare-details.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
     <div id="app">
@@ -14,18 +16,446 @@
         
         <!-- Slider Component -->
         <div id="slider"></div>
-
+        <!-- Limited Time Offer Component -->
+        <div id="limited-time-offer"></div>
         <!-- Product List Component -->
-        <div id="product-list"></div>
-        <!-- Hot Brand Component -->
-        <div id="hot-brand"></div>
+        <div id="latest_product"></div>
         
-        <!-- Cart Component -->
-        <div id="cart"></div>
+        <!-- Compare Panel Component -->
+        <div id="compare-panel-root"></div>
+
+        <!-- Hot Brand Component -->
+        <div id="hot_brand"></div>
 
         <!-- Footer Component -->
         <div id="footer"></div>
     </div>
 
+    <!-- Compare Panel -->
+    <div id="compare-panel" class="compare-panel">
+        <div class="compare-panel-header">
+            <h3 class="compare-panel-title">
+                產品比較
+                <span id="compare-count" class="compare-count">0</span>
+            </h3>
+            <button id="compare-panel-close" class="compare-panel-close">&times;</button>
+        </div>
+        <div class="compare-panel-body" id="compare-panel-body">
+            <div class="compare-empty">
+                <i class="fas fa-balance-scale"></i>
+                <p>選擇產品進行比較</p>
+            </div>
+        </div>
+        <div class="compare-panel-footer">
+            <button id="compare-now" class="compare-btn compare-btn-primary" disabled>
+                <i class="fas fa-eye"></i> 立即比較
+            </button>
+            <button id="clear-all-compare" class="compare-btn compare-btn-secondary">
+                <i class="fas fa-trash"></i> 清空
+            </button>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script src="js/auth-modal.js"></script>
+    <script src="js/product-compare.js"></script>
+    <script src="js/search.js"></script>
+    
+    <script>
+        // Initialize product modal functionality
+        function initProductModal() {
+            console.log('🔧 Initializing product modal functionality');
+            
+            // Product YouTube video mapping
+            const productVideos = {
+                'APPLE iPhone 17 Pro': 'h6CwwHyQxKI',
+                'APPLE iPhone 17 Pro Max': 'h6CwwHyQxKI',
+                'APPLE iPhone Air': 'M0au92yebLQ',
+                'APPLE Airpods Pro 3': 'EMmKs8vMKhU',
+                'APPLE Watch Ultra 3 GPS + Cellular': 'h6CwwHyQxKI',
+                'APPLE MacBook Pro 16吋 M3 Pro': 'h6CwwHyQxKI'
+            };
+
+            // Add click event to product images
+            const productImages = document.querySelectorAll('.product-image');
+            console.log(`🖼️ Found ${productImages.length} product images`);
+
+            productImages.forEach((image, index) => {
+                console.log(`🖼️ Binding event to image ${index + 1}:`, image.alt);
+                
+                // Add visual cue
+                image.style.cursor = 'pointer';
+                image.title = '點擊查看詳情';
+                
+                image.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('🖱️ 點擊了產品圖片:', this.alt);
+                    openProductModal(this, productVideos);
+                });
+            });
+
+            // Pop-up close event
+            const modal = document.getElementById('productModal');
+            const closeBtn = document.querySelector('.modal-close');
+            
+            if (closeBtn) {
+                closeBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    console.log('❌ 點擊關閉按鈕');
+                    closeProductModal();
+                });
+            }
+
+            // Click outside modal to close
+            if (modal) {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === modal) {
+                        console.log('❌ Clicked outside modal to close');
+                        closeProductModal();
+                    }
+                });
+            }
+
+            // ESC key to close modal
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && modal && modal.style.display === 'block') {
+                    console.log('❌ ESC key to close modal');
+                    closeProductModal();
+                }
+            });
+
+            console.log('✅ Product modal functionality initialized');
+        }
+
+        // Open product modal
+        function openProductModal(imageElement, productVideos) {
+            console.log('🔓 Opening product modal');
+            
+            try {
+                const productCard = imageElement.closest('.product-card');
+                if (!productCard) {
+                    console.error('❌ Product card not found');
+                    return;
+                }
+                
+                const productName = productCard.querySelector('h3')?.textContent;
+                const productPrice = productCard.querySelector('.price')?.textContent;
+                const productImage = imageElement.src;
+                const productSpecs = productCard.querySelector('.product-specs');
+                const colorOptions = productCard.querySelectorAll('.color-dot');
+                
+                console.log('📋 Product information:', { productName, productPrice, productImage });
+                
+                // Check necessary modal elements
+                const modalElements = {
+                    image: document.getElementById('modalProductImage'),
+                    name: document.getElementById('modalProductName'),
+                    price: document.getElementById('modalProductPrice'),
+                    colorOptions: document.getElementById('modalColorOptions'),
+                    specs: document.getElementById('modalProductSpecs'),
+                    video: document.getElementById('modalYouTubeVideo'),
+                    modal: document.getElementById('productModal')
+                };
+                
+                // Check if all elements exist
+                for (const [key, element] of Object.entries(modalElements)) {
+                    if (!element) {
+                        console.error(`❌ Modal element not found: ${key}`);
+                        return;
+                    }
+                }
+                
+                // Fill modal content
+                modalElements.image.src = productImage;
+                modalElements.image.alt = productName;
+                modalElements.name.textContent = productName;
+                modalElements.price.textContent = productPrice;
+                
+                // Handle color options
+                if (colorOptions.length > 0) {
+                    modalElements.colorOptions.innerHTML = '<h4>可選顏色：</h4>';
+                    colorOptions.forEach(colorDot => {
+                        const newColorDot = colorDot.cloneNode(true);
+                        newColorDot.addEventListener('click', function() {
+                            console.log('🎨 切換顏色:', this.dataset.image);
+                            modalElements.image.src = this.dataset.image;
+                        });
+                        modalElements.colorOptions.appendChild(newColorDot);
+                    });
+                } else {
+                    modalElements.colorOptions.innerHTML = '';
+                }
+                
+                // Processing product specifications
+                if (productSpecs) {
+                    const specLabels = {
+                        'cpu': '處理器',
+                        'ram': '記憶體',
+                        'storage': '儲存空間',
+                        'screen': '螢幕',
+                        'camera': '相機',
+                        'battery': '電池',
+                        'os': '作業系統',
+                        'sim': 'SIM卡'
+                    };
+                    
+                    let specsHTML = '<h4>產品規格：</h4>';
+                    Object.keys(specLabels).forEach(key => {
+                        const value = productSpecs.getAttribute(`data-${key}`);
+                        if (value && value !== '不適用' && value !== '無') {
+                            specsHTML += `
+                                <div class="spec-item">
+                                    <span class="spec-label">${specLabels[key]}：</span>
+                                    <span class="spec-value">${value}</span>
+                                </div>
+                            `;
+                        }
+                    });
+                    modalElements.specs.innerHTML = specsHTML;
+                } else {
+                    modalElements.specs.innerHTML = '<p>暫無詳細規格信息</p>';
+                }
+                
+                // Set YouTube video
+                const videoId = productVideos[productName] || 'h6CwwHyQxKI';
+                const youtubeEmbed = `https://www.youtube.com/embed/${videoId}?si=ZSrowG1T5BTEaztu&rel=0`;
+                modalElements.video.src = youtubeEmbed;
+                
+                // Show modal
+                modalElements.modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+                
+                console.log('✅ Modal displayed successfully');
+                
+            } catch (error) {
+                console.error('❌ Error opening modal:', error);
+            }
+        }
+
+        // Close product modal
+        function closeProductModal() {
+            console.log('🔒 Close product modal');
+            
+            try {
+                const modal = document.getElementById('productModal');
+                const iframe = document.getElementById('modalYouTubeVideo');
+                
+                if (modal) {
+                    modal.style.display = 'none';
+                }
+                
+                document.body.style.overflow = 'auto';
+                
+                // Stop YouTube video playback
+                if (iframe) {
+                    iframe.src = iframe.src;
+                }
+                
+                console.log('✅ Modal closed successfully');
+                
+            } catch (error) {
+                console.error('❌ Error closing modal:', error);
+            }
+        }
+    </script>
+
+    <style>
+    /* Home page compare panel styles */
+    .compare-panel {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 350px;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        border: 2px solid #667eea;
+        transform: translateY(100px);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        z-index: 1000;
+    }
+
+    .compare-panel.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .compare-panel-header {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        padding: 15px 20px;
+        border-radius: 13px 13px 0 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .compare-panel-title {
+        font-size: 16px;
+        font-weight: 700;
+        margin: 0;
+    }
+
+    .compare-panel-close {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+        padding: 0;
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .compare-panel-body {
+        padding: 20px;
+        max-height: 300px;
+        overflow-y: auto;
+    }
+
+    .compare-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 0;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .compare-item:last-child {
+        border-bottom: none;
+    }
+
+    .compare-item-image {
+        width: 50px;
+        height: 50px;
+        object-fit: contain;
+        border-radius: 8px;
+        background: #f8f9fa;
+        padding: 5px;
+    }
+
+    .compare-item-info {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .compare-item-name {
+        font-size: 14px;
+        font-weight: 600;
+        color: #333;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .compare-item-price {
+        font-size: 13px;
+        color: #e74c3c;
+        font-weight: 600;
+        margin-top: 2px;
+    }
+
+    .compare-item-remove {
+        background: none;
+        border: none;
+        color: #999;
+        cursor: pointer;
+        padding: 5px;
+        font-size: 16px;
+        transition: color 0.3s ease;
+    }
+
+    .compare-item-remove:hover {
+        color: #e74c3c;
+    }
+
+    .compare-panel-footer {
+        padding: 15px 20px;
+        border-top: 1px solid #f0f0f0;
+        display: flex;
+        gap: 10px;
+    }
+
+    .compare-btn {
+        flex: 1;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .compare-btn-primary {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+    }
+
+    .compare-btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    }
+
+    .compare-btn-primary:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+    }
+
+    .compare-btn-secondary {
+        background: white;
+        color: #666;
+        border: 1px solid #ddd;
+    }
+
+    .compare-btn-secondary:hover {
+        background: #f8f9fa;
+    }
+
+    .compare-count {
+        background: #e74c3c;
+        color: white;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: bold;
+        margin-left: 5px;
+    }
+
+    /* 空狀態 */
+    .compare-empty {
+        text-align: center;
+        padding: 30px 20px;
+        color: #999;
+    }
+
+    .compare-empty i {
+        font-size: 48px;
+        margin-bottom: 15px;
+        color: #ddd;
+    }
+
+    /* responsive */
+    @media (max-width: 768px) {
+        .compare-panel {
+            width: 90%;
+            right: 5%;
+            left: 5%;
+        }
+    }
+    </style>
 </body>
 </html>
