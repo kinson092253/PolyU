@@ -1,0 +1,13 @@
+flask==3.0.0
+flask-cors==4.0.0
+
+# Database
+psycopg2-binary==2.9.9
+flask-sqlalchemy==3.1.1
+
+# User Authentication
+flask-jwt-extended==4.6.0
+werkzeug==3.0.1
+
+# Environment Variables
+python-dotenv==1.0.0

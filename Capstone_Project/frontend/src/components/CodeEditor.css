@@ -1,0 +1,69 @@
+.code-editor {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #1e1e1e;
+  overflow: hidden;
+  direction: ltr;
+}
+
+.editor-header {
+  background: #2d2d2d;
+  padding: 12px 20px;
+  border-bottom: 1px solid #444;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.editor-header h3 {
+  margin: 0;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.editor-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.control-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.control-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.run-btn {
+  background: #10b981;
+  color: white;
+}
+
+.run-btn:hover:not(:disabled) {
+  background: #059669;
+}
+
+.reset-btn {
+  background: #555;
+  color: white;
+}
+
+.reset-btn:hover:not(:disabled) {
+  background: #666;
+}
+
+.editor-container {
+  flex: 1;
+  overflow: hidden;
+  direction: ltr;
+  unicode-bidi: normal;
+}

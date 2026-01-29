@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  # 前端 React 应用（纯静态部署）
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: python-learning-platform
+    ports:
+      - "3000:80"
+    restart: unless-stopped
+
+# 移除了数据库和后端服务（使用 Skulpt 浏览器内 Python）

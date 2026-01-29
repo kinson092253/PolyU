@@ -1,0 +1,34 @@
+# Python 緩存
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# 虛擬環境
+venv/
+env/
+ENV/
+
+# Flask
+instance/
+.webassets-cache
+
+# 測試
+.pytest_cache/
+.coverage
+htmlcov/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 臨時文件
+*.log
+*.tmp
+temp/
+
+# OS
+.DS_Store
+Thumbs.db
