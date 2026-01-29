@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect, forwardRef, useImperativeHandle } f
 import Editor from '@monaco-editor/react';
 import learningTracker from '../services/learningTracker';
 import aiHelper from '../services/aiHelper';
+import { API_BASE_URL } from '../config';
 import './CodeEditor.css';
 
 const CodeEditor = forwardRef(({ 
@@ -96,7 +97,7 @@ const CodeEditor = forwardRef(({
     const execStartTime = Date.now();
     
     try {
-      const response = await fetch('http://localhost:5000/api/files/execute-with-files', {
+      const response = await fetch(`${API_BASE_URL}/files/execute-with-files`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

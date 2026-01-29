@@ -1,5 +1,6 @@
 flask==3.0.0
 flask-cors==4.0.0
+requests==2.31.0
 
 # Database
 psycopg2-binary==2.9.9
@@ -11,3 +12,6 @@ werkzeug==3.0.1
 
 # Environment Variables
 python-dotenv==1.0.0
+
+# Additional dependencies
+gunicorn==21.2.0

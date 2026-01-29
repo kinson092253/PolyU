@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import FileManager from './FileManager';
+import { API_BASE_URL } from '../config';
 import './FileDemo.css';
 
 // 这是一个示例组件，展示如何将 FileManager 集成到你的应用中
@@ -17,7 +18,7 @@ const FileDemo = () => {
 
   const handleRunCode = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/files/execute-with-files', {
+      const response = await fetch(`${API_BASE_URL}/files/execute-with-files`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

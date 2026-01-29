@@ -1,4 +1,5 @@
 import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
+import { API_BASE_URL } from '../config';
 import './FileManager.css';
 
 const FileManager = forwardRef(({ userId, lessonId, onFileSelect, onFilesChange }, ref) => {
@@ -25,8 +26,8 @@ const FileManager = forwardRef(({ userId, lessonId, onFileSelect, onFilesChange 
     try {
       setLoading(true);
       const url = lessonId 
-        ? `http://localhost:5000/api/files/list/${userId}?lessonId=${lessonId}`
-        : `http://localhost:5000/api/files/list/${userId}`;
+        ? `${API_BASE_URL}/files/list/${userId}?lessonId=${lessonId}`
+        : `${API_BASE_URL}/files/list/${userId}`;
       
       const response = await fetch(url);
       const data = await response.json();
@@ -49,7 +50,7 @@ const FileManager = forwardRef(({ userId, lessonId, onFileSelect, onFilesChange 
     }
 
     try {
-      const response = await fetch('http://localhost:5000/api/files/create', {
+      const response = await fetch(`${API_BASE_URL}/files/create`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -105,7 +106,7 @@ const FileManager = forwardRef(({ userId, lessonId, onFileSelect, onFilesChange 
     if (!window.confirm('Are you sure you want to delete this file?')) return;
 
     try {
-      const response = await fetch(`http://localhost:5000/api/files/delete/${fileId}`, {
+      const response = await fetch(`${API_BASE_URL}/files/delete/${fileId}`, {
         method: 'DELETE'
       });
 
@@ -127,7 +128,7 @@ const FileManager = forwardRef(({ userId, lessonId, onFileSelect, onFilesChange 
     setSelectedFileId(file.file_id);
     
     try {
-      const response = await fetch(`http://localhost:5000/api/files/read/${file.file_id}`);
+      const response = await fetch(`${API_BASE_URL}/files/read/${file.file_id}`);
       const data = await response.json();
       
       if (data.success && onFileSelect) {
