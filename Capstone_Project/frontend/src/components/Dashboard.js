@@ -7,7 +7,7 @@ const Dashboard = ({ onBackToLearning, userId = 1 }) => {
   const [stats, setStats] = useState({
     overallProgress: 0,
     practicesCompleted: 0,
-    totalPractices: 32,
+    totalPractices: 31,
     testsPassed: 0,
     totalTests: 12,
     currentStreak: 0,
@@ -147,7 +147,7 @@ const Dashboard = ({ onBackToLearning, userId = 1 }) => {
             <BarChart data={chapterProgress}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="chapter" />
-              <YAxis />
+              <YAxis domain={[0, 100]} />
               <Tooltip />
               <Legend />
               <Bar dataKey="percentage" fill="#667eea" />

@@ -1,0 +1,9 @@
+# Cloudflare Pages 构建配置
+# 这个文件会被 Cloudflare Pages 自动识别
+
+[build]
+command = "npm run build"
+destination = "build"
+
+[build.environment]
+NODE_VERSION = "18"

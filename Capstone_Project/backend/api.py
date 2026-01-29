@@ -71,7 +71,7 @@ def get_dashboard(user_id):
         chapter_lesson_counts = {
             '1': 3,   # Chapter 1: 1.1, 1.2, 1.3
             '2': 3,   # Chapter 2: 2.1, 2.2, 2.3
-            '3': 3,   # Chapter 3: 3.1, 3.2, 3.3
+            '3': 2,   # Chapter 3: 3.1, 3.2
             '4': 4,   # Chapter 4: 4.1, 4.2, 4.3, 4.4
             '5': 3,   # Chapter 5: 5.1, 5.2, 5.3
             '6': 3,   # Chapter 6: 6.1, 6.2, 6.3
@@ -124,9 +124,9 @@ def get_dashboard(user_id):
         """, (user_id,))
         weak_points = cur.fetchall()
         
-        # 计算总体进度（假设32个practice）
+        # 计算总体进度（假设31个practice）
         practices_completed = stats.get('practices_completed', 0) or 0
-        overall_progress = round((practices_completed /32) * 100) if practices_completed > 0 else 0
+        overall_progress = round((practices_completed / 31) * 100) if practices_completed > 0 else 0
         
         cur.close()
         conn.close()
@@ -135,7 +135,7 @@ def get_dashboard(user_id):
             'stats': {
                 'overallProgress': overall_progress,
                 'practicesCompleted': practices_completed,
-                'totalPractices': 32,
+                'totalPractices': 31,
                 'testsPassed': stats.get('tests_passed', 0) or 0,
                 'totalTests': 2,
                 'currentStreak': streak_result.get('streak', 0) or 0,

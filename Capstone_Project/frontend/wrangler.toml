@@ -1,0 +1,9 @@
+# Cloudflare Pages 部署配置
+# 注意：Pages 部署不需要此文件，请在 Cloudflare Dashboard 中配置
+
+# 如果必须使用 wrangler CLI 部署，使用以下命令：
+# wrangler pages deploy build --project-name=python-learning-platform
+
+name = "python-learning-platform"
+compatibility_date = "2024-01-01"
+pages_build_output_dir = "build"
