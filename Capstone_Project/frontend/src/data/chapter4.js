@@ -443,7 +443,7 @@ while count < 10:
 5. **Comment complex logic** - explain why you're breaking or continuing
         `,
         test: {
-          question: "What will be the output of the following code?\n\n\`\`\`python\nfor i in range(5):\n    if i == 2:\n        continue\n    if i == 4:\n        break\n    print(i)\nelse:\n    print('Done')\n\`\`\`",
+          question: "What will be the output of the following code?\\n\\n```python\\nfor i in range(5):\\n    if i == 2:\\n        continue\\n    if i == 4:\\n        break\\n    print(i)\\nelse:\\n    print('Done')\\n```",
           options: [
             "0 1 3",
             "0 1 2 3",

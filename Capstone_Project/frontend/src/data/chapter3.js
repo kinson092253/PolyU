@@ -245,7 +245,7 @@ if age >= 21 and income >= 30000:
 5. **Consistent indentation** - Use 4 spaces per level
         `,
         test: {
-          question: "What will be the output of the following code?\n\n\`\`\`python\nage = 16\nhas_license = True\n\nif age >= 18:\n    if has_license:\n        print('Can drive')\n    else:\n        print('Need license')\nelse:\n    print('Too young')\n\`\`\`",
+          question: "What will be the output of the following code?\\n\\n```python\\nage = 16\\nhas_license = True\\n\\nif age >= 18:\\n    if has_license:\\n        print('Can drive')\\n    else:\\n        print('Need license')\\nelse:\\n    print('Too young')\\n```",
           options: [
             "Can drive",
             "Need license",

@@ -13,6 +13,7 @@ const FileManager = forwardRef(({ userId, lessonId, onFileSelect, onFilesChange 
 
   useEffect(() => {
     loadFiles();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId, lessonId]);
 
   // Expose loadFiles method to parent via ref

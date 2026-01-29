@@ -104,13 +104,6 @@ function App() {
     }
   };
 
-  // Handle AI hint reset
-  const handleResetHint = () => {
-    setHint(null);
-    setHintLevel(0);
-    setLoadingHint(false);
-  };
-
   // Handle code execution from Skulpt
   const handleRunCode = async (code, userInput = '', output = '') => {
     // Skulpt 直接返回输出结果

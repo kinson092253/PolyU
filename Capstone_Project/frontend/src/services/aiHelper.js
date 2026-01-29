@@ -42,4 +42,5 @@ class AIHelper {
   }
 }
 
-export default new AIHelper();
+const aiHelperInstance = new AIHelper();
+export default aiHelperInstance;
