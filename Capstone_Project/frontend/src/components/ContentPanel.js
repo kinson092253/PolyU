@@ -120,7 +120,7 @@ const ContentPanel = ({ lesson, isPracticeComplete, onNextLesson }) => {
         setShowResult(false);
       }
     }
-  }, [mode, currentQuestionIndex, lesson?.content?.test]);
+  }, [mode, currentQuestionIndex, lesson?.content?.test, answersState]);
 
   if (!lesson) {
     return (
