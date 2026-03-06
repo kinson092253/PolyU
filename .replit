@@ -1,0 +1,8 @@
+run = "cd Capstone_Project/backend && python api.py"
+
+[nix]
+channel = "stable-23_11"
+
+[deployment]
+run = ["sh", "-c", "cd Capstone_Project/backend && python api.py"]
+deploymentTarget = "cloudrun"
