@@ -200,7 +200,6 @@ function App() {
             setShowDashboard(true);
           }}
           onSettingsClick={() => setShowSettings(false)}
-          onAIAssistantClick={() => setShowAIModal(true)}
         />
         <div style={{ marginTop: '60px', padding: '40px', textAlign: 'center' }}>
           <h1>⚙️ Settings</h1>
@@ -233,7 +232,6 @@ function App() {
           setShowDashboard(true);
         }}
         onSettingsClick={() => setShowSettings(true)}
-        onAIAssistantClick={() => setShowAIModal(true)}
       />
       
       <div className="app-content">
@@ -275,6 +273,7 @@ function App() {
               setHint={setHint}
               setHintLevel={setHintLevel}
               setLoadingHint={setLoadingHint}
+              onAIAssistantClick={() => setShowAIModal(true)}
               key={`${selectedLesson?.id}-${refreshEditorKey}`}
             />
             <FileManager

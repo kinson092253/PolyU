@@ -13,6 +13,9 @@ Welcome to Lesson 5.3: List Comprehensions. This is one of Python's most elegant
 **配音**:
 List comprehension is a compact syntax for creating lists based on existing lists or ranges. Instead of writing multiple lines with loops and appends, you can create a new list in just one line. It's faster to write, easier to read, and often more efficient. List comprehensions are a hallmark of Pythonic code.
 
+For example, suppose we have a list that records students' scores, and we want to split it into three separate lists: one for excellent scores, one for passing scores, and one for failing scores — storing the corresponding scores in each list.
+If using the traditional approach, we would first create three empty lists, then use a for loop combined with if statements to check each score and append it to the appropriate list.
+But with list comprehension, we can achieve exactly the same result in just three simple lines of code.
 ---
 
 ## [场景 3: 基本语法] (30 秒)
@@ -41,12 +44,7 @@ The old way: create empty list, loop, append. Five lines.
 (运行)
 Same result in one line! Much cleaner.
 
-(打字: # Another example)
-(打字: numbers = [1, 2, 3, 4, 5])
-(打字: doubled = [n * 2 for n in numbers])
-(打字: print(doubled))
-(运行)
-Each number is doubled. Two, four, six, eight, ten!
+
 
 **操作时的代码**:
 ```python
@@ -60,10 +58,6 @@ print(squares)
 squares = [i ** 2 for i in range(1, 6)]
 print(squares)
 
-# Another example
-numbers = [1, 2, 3, 4, 5]
-doubled = [n * 2 for n in numbers]
-print(doubled)
 ```
 
 ---
@@ -75,11 +69,13 @@ Now let's add conditions to filter items.
 
 (打字: numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 (打字: evens = [n for n in numbers if n % 2 == 0])
-Only include if n mod two equals zero - that's even numbers.
+in this case, We have a list called numbers with values from 1 to 10. Now we create a new list called evens using list comprehension, Let's read it from left to right, The first n is means what gets added to the new list every time the condition is true. the second n is the loop part, we take each number from the numbers list, one by one, and temporarily call it n. and the third n is same value with second n, which is used to see is it the n match the if condition or not.
+
+
 
 (打字: print(evens))
 (运行)
-Two, four, six, eight, ten. Only even numbers!
+let's see the output, run the code, Two, four, six, eight, ten. Only even numbers!
 
 (打字: odds = [n for n in numbers if n % 2 != 0])
 (打字: print(odds))
@@ -122,15 +118,17 @@ print(squared_evens)
 ## [场景 6: 实际操作 - 字符串列表推导式] (70 秒)
 **画面**: 录屏操作
 **配音 - 操作讲解**:
-List comprehensions work great with strings too.
+List comprehensions also work great with strings too.
 
 (打字: words = ["hello", "world", "python", "code"])
 (打字: uppercase = [word.upper() for word in words])
-Convert all to uppercase.
+define a list named words which inlucde hello, world, python and code total 4 words. if you want a new list to store the same word with upper case inside. you can write like this. uppercase equal to word doc upper for word in words. which means every word will loop in the words list. and change it to uppercase and save in the new list.
+
 
 (打字: print(uppercase))
 (运行)
-All words are now uppercase!
+Run the code, now all words are now uppercase!
+
 
 (打字: lengths = [len(word) for word in words])
 Get the length of each word.

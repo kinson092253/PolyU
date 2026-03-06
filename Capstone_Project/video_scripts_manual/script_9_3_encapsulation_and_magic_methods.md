@@ -4,7 +4,7 @@
 ## [场景 1: 开场] (10 秒)
 **画面**: 标题卡 "9.3 Encapsulation and Magic Methods"
 **配音**:
-Welcome to Lesson 9.3: Encapsulation and Magic Methods. Learn how to protect data and add special behaviors to your classes. Let's explore advanced OOP techniques!
+Welcome to Lesson 9.3: Encapsulation. we will Learn how to protect data and add special behaviors to your classes. Let's explore advanced OOP techniques!
 
 ---
 
@@ -18,14 +18,14 @@ Encapsulation means hiding internal details and controlling access to data. In P
 ## [场景 3: 实际操作 - 公共、保护和私有属性] (90 秒)
 **画面**: 代码编辑器录屏
 **配音 - 操作讲解**:
-Understanding access levels.
+now, let's create it in code editor and see the different for access levels.
 
 (打字: class BankAccount:)
 (Tab, 打字:     def __init__(self, owner, balance):)
 (Tab*2, 打字:         self.owner = owner  # Public)
 (Tab*2, 打字:         self._account_number = "1234"  # Protected)
 (Tab*2, 打字:         self.__pin = "0000"  # Private)
-Single underscore is protected, double underscore is private!
+in this example, you can see owner is public attribute, account number have Single underscore here, it is protected attribute, and pin attribute with double underscore which is private!
 
 (打字: account = BankAccount("Alice", 1000))
 (打字: # Public - direct access)
@@ -51,7 +51,7 @@ Private attributes are name-mangled! They become underscore ClassName underscore
 class BankAccount:
     def __init__(self, owner, balance):
         self.owner = owner  # Public
-        self._account_number = "1234"  # Protected
+        self._accountNumber = "1234"  # Protected
         self.__pin = "0000"  # Private
 
 account = BankAccount("Alice", 1000)
@@ -60,7 +60,7 @@ account = BankAccount("Alice", 1000)
 print(account.owner)
 
 # Protected - can access but shouldn't
-print(account._account_number)
+print(account._accountNumber)
 
 # Private - name mangled
 # print(account.__pin)  # This would error!
@@ -133,7 +133,7 @@ person.set_age(-5)
 ## [场景 5: 实际操作 - Property 装饰器] (80 秒)
 **画面**: 录屏操作
 **配音 - 操作讲解**:
-Property decorator provides cleaner syntax.
+on the other hand, Property decorator provides cleaner syntax.
 
 (打字: class Person:)
 (Tab, 打字:     def __init__(self, name, age):)
@@ -248,19 +248,7 @@ v2 = Vector(3, 4)
 v3 = v1 + v2
 print(v3)
 
-class Money:
-    def __init__(self, amount):
-        self.amount = amount
-    
-    def __add__(self, other):
-        return Money(self.amount + other.amount)
-    
-    def __str__(self):
-        return f"${self.amount}"
 
-m1 = Money(10)
-m2 = Money(20)
-print(m1 + m2)
 ```
 
 ---

@@ -18,7 +18,8 @@ const CodeEditor = forwardRef(({
   loadingHint,
   setHint,
   setHintLevel,
-  setLoadingHint
+  setLoadingHint,
+  onAIAssistantClick
 }, ref) => {
   const editorRef = useRef(null);
   const [code, setCode] = useState('');
@@ -80,11 +81,22 @@ const CodeEditor = forwardRef(({
 
     const currentCode = editorRef.current.getValue();
     
-    // 检测是否包含文件操作
-    const hasFileOperations = /open\s*\(|with\s+open|csv\.|json\./i.test(currentCode);
+    // 检测是否包含交互式输入（必须在浏览器端执行）
+    const hasInput = /input\s*\(/.test(currentCode);
     
-    if (hasFileOperations) {
-      // 使用后端执行（支持文件操作）
+    // 检测是否需要后端执行
+    // 1. 包含文件操作
+    const hasFileOperations = /open\s*\(|with\s+open|csv\.|json\./i.test(currentCode);
+    // 2. 导入自定义模块（非标准库）- 检测 import 语句但排除常见标准库
+    const hasCustomImport = /import\s+(?!math|random|datetime|re|sys|os|time|json|csv)[\w]+|from\s+(?!math|random|datetime|re|sys|os|time|json|csv)[\w]+\s+import/i.test(currentCode);
+    // 3. FileManager 中有用户创建的文件
+    const hasUserFiles = fileManagerRef?.current && lessonId;
+    
+    // 如果包含 input()，强制使用浏览器执行
+    if (hasInput) {
+      await executeCodeInBrowser(currentCode);
+    } else if (hasFileOperations || hasCustomImport || hasUserFiles) {
+      // 使用后端执行（支持文件操作和自定义模块）
       await executeCodeWithFiles(currentCode);
     } else {
       // 使用 Skulpt 在浏览器端执行
@@ -116,9 +128,11 @@ const CodeEditor = forwardRef(({
         if (isSuccess) {
           wrappedOnRunCode(currentCode, '', output);
           
-          // Refresh file manager if new files were created
-          if (data.newFiles && data.newFiles.length > 0 && fileManagerRef?.current) {
-            console.log('New files created:', data.newFiles);
+          // Refresh file manager if new files were created or existing files were modified
+          if (fileManagerRef?.current && 
+              ((data.newFiles && data.newFiles.length > 0) || 
+               (data.modifiedFiles && data.modifiedFiles.length > 0))) {
+            console.log('Files changed - New:', data.newFiles, 'Modified:', data.modifiedFiles);
             fileManagerRef.current.refreshFiles();
           }
           
@@ -298,7 +312,17 @@ const CodeEditor = forwardRef(({
   return (
     <div className="code-editor">
       <div className="editor-header">
-        <h3>Python</h3>
+        <div className="editor-title-section">
+          <h3>Python</h3>
+          <button 
+            className="ask-ai-btn" 
+            onClick={onAIAssistantClick}
+            disabled={isRunning}
+            title="Get AI assistance for this code"
+          >
+            🤖 Ask AI
+          </button>
+        </div>
         <div className="editor-controls">
           <button 
             className="control-btn reset-btn" 

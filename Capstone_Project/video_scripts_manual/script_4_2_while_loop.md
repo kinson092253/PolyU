@@ -18,7 +18,7 @@ The while loop checks a condition before each iteration. As long as the conditio
 ## [场景 3: 实际操作 - 基本 while 循环] (80 秒)
 **画面**: 代码编辑器录屏
 **配音 - 操作讲解**:
-Let's create our first while loop.
+OK, Let's demo our first while loop in code editor.
 
 (打字: count = 0)
 Starting with count equals zero.
@@ -31,10 +31,9 @@ While count is less than 5.
 Print count, then increase it by 1.
 
 (运行)
-It prints 0, 1, 2, 3, 4, then stops because count becomes 5 and the condition is False.
+run the code, It prints 0, 1, 2, 3, 4, then stops because count becomes 5 and the condition is False.
 
-(打字: count += 1)
-By the way, count plus equals 1 is shorthand for count equals count plus 1.
+
 
 **操作时的代码**:
 ```python
@@ -124,7 +123,7 @@ while number <= 10:
 ## [场景 7: 无限循环警告] (40 秒)
 **画面**: 警告图示
 **配音**:
-Be careful! If the condition never becomes False, you create an infinite loop. Always make sure your loop variable changes in a way that will eventually make the condition False. If you accidentally create an infinite loop, you can stop it with Control C in most environments.
+on the other hand, Be careful to use while loop! If the condition never becomes False, you create an infinite loop. Always make sure your loop variable changes in a way that will eventually make the condition False. If you accidentally create an infinite loop, you can stop it with Control C in most environments.
 
 ---
 

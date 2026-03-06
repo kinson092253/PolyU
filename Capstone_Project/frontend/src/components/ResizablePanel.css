@@ -1,6 +1,6 @@
 .resizable-container {
   display: flex;
-  height: calc(100vh - 60px); /* 减去导航栏高度 */
+  height: calc(100vh - 64px);
   width: 100%;
   overflow: hidden;
   gap: 0;
@@ -31,28 +31,31 @@
 }
 
 .resizer {
-  background: #3e3e3e;
+  background: linear-gradient(135deg, #334155, #1e293b);
   position: relative;
   flex-shrink: 0;
-  transition: background 0.2s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   align-items: center;
   justify-content: center;
+  border-left: 1px solid rgba(148, 163, 184, 0.1);
+  border-right: 1px solid rgba(148, 163, 184, 0.1);
 }
 
 .resizer.horizontal {
-  width: 4px;
+  width: 6px;
   cursor: col-resize;
 }
 
 .resizer.vertical {
-  height: 4px;
+  height: 6px;
   width: 100%;
   cursor: row-resize;
 }
 
 .resizer:hover {
-  background: #10b981;
+  background: linear-gradient(135deg, #10b981, #059669);
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
 }
 
 .resizer:hover .resizer-line {
@@ -60,23 +63,24 @@
 }
 
 .resizer:active {
-  background: #059669;
+  background: linear-gradient(135deg, #059669, #047857);
+  box-shadow: 0 0 30px rgba(16, 185, 129, 0.7);
 }
 
 .resizer.horizontal .resizer-line {
-  width: 2px;
-  height: 40px;
-  background: #666;
-  border-radius: 2px;
-  transition: background 0.2s;
+  width: 3px;
+  height: 48px;
+  background: rgba(148, 163, 184, 0.4);
+  border-radius: 4px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .resizer.vertical .resizer-line {
-  height: 2px;
-  width: 40px;
-  background: #666;
-  border-radius: 2px;
-  transition: background 0.2s;
+  height: 3px;
+  width: 48px;
+  background: rgba(148, 163, 184, 0.4);
+  border-radius: 4px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* 當拖動時改變游標 */

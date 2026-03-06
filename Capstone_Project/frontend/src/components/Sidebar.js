@@ -3,6 +3,7 @@ import './Sidebar.css';
 
 const Sidebar = ({ lessons, onSelectLesson, selectedLessonId, isCollapsed, onToggle }) => {
   const [expandedChapters, setExpandedChapters] = useState([1]); // Default expand first chapter
+  const [searchTerm, setSearchTerm] = useState('');
 
   const toggleChapter = (chapterId) => {
     if (expandedChapters.includes(chapterId)) {
@@ -15,6 +16,30 @@ const Sidebar = ({ lessons, onSelectLesson, selectedLessonId, isCollapsed, onTog
   const collapseAll = () => {
     setExpandedChapters([]);
   };
+
+  // Filter lessons based on search term
+  const filteredLessons = lessons.map(lesson => {
+    if (!searchTerm.trim()) return lesson;
+    
+    const search = searchTerm.toLowerCase();
+    const matchesChapter = lesson.title.toLowerCase().includes(search) || 
+                           lesson.id.toString().includes(search);
+    
+    const filteredSubsections = lesson.subsections.filter(sub => 
+      sub.title.toLowerCase().includes(search) || 
+      sub.id.toLowerCase().includes(search)
+    );
+    
+    if (matchesChapter || filteredSubsections.length > 0) {
+      return { ...lesson, subsections: filteredSubsections.length > 0 ? filteredSubsections : lesson.subsections };
+    }
+    return null;
+  }).filter(Boolean);
+
+  // Auto-expand chapters when searching
+  const chaptersToShow = searchTerm.trim() 
+    ? filteredLessons.map(lesson => lesson.id)
+    : expandedChapters;
 
   return (
     <div className={`sidebar ${isCollapsed ? 'collapsed' : ''}`}>
@@ -29,19 +54,41 @@ const Sidebar = ({ lessons, onSelectLesson, selectedLessonId, isCollapsed, onTog
           ✕
         </button>
       </div>
+      
+      <div className="search-bar-container">
+        <div className="search-bar">
+          <span className="search-icon">🔍</span>
+          <input
+            type="text"
+            placeholder="Search chapters or topics... (e.g., 1.1 or Variables)"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="search-input"
+          />
+          {searchTerm && (
+            <button className="clear-search" onClick={() => setSearchTerm('')}>
+              ✕
+            </button>
+          )}
+        </div>
+        {searchTerm && filteredLessons.length === 0 && (
+          <div className="no-results">No results found</div>
+        )}
+      </div>
+      
       <div className="sidebar-content">
-        {lessons.map((lesson) => (
+        {filteredLessons.map((lesson) => (
           <div key={lesson.id} className="chapter">
             <div 
               className="chapter-title" 
               onClick={() => toggleChapter(lesson.id)}
             >
               <span className="chapter-icon">
-                {expandedChapters.includes(lesson.id) ? '▼' : '▶'}
+                {chaptersToShow.includes(lesson.id) ? '▼' : '▶'}
               </span>
               {lesson.title}
             </div>
-            {expandedChapters.includes(lesson.id) && (
+            {chaptersToShow.includes(lesson.id) && (
               <div className="subsections">
                 {lesson.subsections.map((subsection) => (
                   <div

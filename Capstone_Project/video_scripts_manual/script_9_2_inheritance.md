@@ -18,7 +18,7 @@ Inheritance allows a class to inherit attributes and methods from another class.
 ## [场景 3: 实际操作 - 基本继承] (90 秒)
 **画面**: 代码编辑器录屏
 **配音 - 操作讲解**:
-Let's create a class hierarchy.
+now, Let's see how to create a class hierarchy in code editor.
 
 (打字: # Parent class)
 (打字: class Animal:)
@@ -26,25 +26,25 @@ Let's create a class hierarchy.
 (Tab*2, 打字:         self.name = name)
 (Tab, 打字:     def speak(self):)
 (Tab*2, 打字:         print(f"{self.name} makes a sound"))
-Parent class with basic functionality.
+I create Parent class first with basic functionality. the class has name attribute,  speak method and eat method in the constructor.
 
 (打字: # Child class inherits from Animal)
 (打字: class Dog(Animal):)
 (Tab, 打字:     def speak(self):)
 (Tab*2, 打字:         print(f"{self.name} barks: Woof!"))
-Dog inherits from Animal - see the parentheses!
+after complete the parent class, i create child class named Dog, it inherits from Animal, and remind that if you want to inherit from parent class, remember input the parent class name in the parentheses like this!
 
 (打字: class Cat(Animal):)
 (Tab, 打字:     def speak(self):)
 (Tab*2, 打字:         print(f"{self.name} meows: Meow!"))
-Cat also inherits from Animal!
+then, i also create another child class named Cat, it also inherits from Animal too!
 
 (打字: dog = Dog("Buddy"))
 (打字: cat = Cat("Whiskers"))
 (打字: dog.speak())
 (打字: cat.speak())
 (运行)
-Both inherit from Animal but have their own speak method! This is method overriding!
+Both inherit from Animal, but they rewrite the speak method, run the code, you can see the output will show the rewrite version of speak method which define in each child class. This is method overriding! if the child class doesn't rewrite the method, when the object call this method, it will show the output that defined in the parent class.
 
 **操作时的代码**:
 ```python
@@ -77,7 +77,7 @@ cat.speak()
 ## [场景 4: 实际操作 - super() 函数] (90 秒)
 **画面**: 录屏操作
 **配音 - 操作讲解**:
-Use super to call parent class methods.
+moreover, let's introduce how to use super function to call parent class methods.
 
 (打字: class Animal:)
 (Tab, 打字:     def __init__(self, name, age):)
@@ -122,7 +122,7 @@ print(f"{dog.name} is a {dog.age} year old {dog.breed}")
 ## [场景 5: 实际操作 - 扩展父类功能] (80 秒)
 **画面**: 录屏操作
 **配音 - 操作讲解**:
-Child classes can add new methods.
+on the other hand, Child classes also can add new methods.
 
 (打字: class Animal:)
 (Tab, 打字:     def __init__(self, name):)
@@ -132,25 +132,22 @@ Child classes can add new methods.
 (打字: class Dog(Animal):)
 (Tab, 打字:     def fetch(self):)
 (Tab*2, 打字:         print(f"{self.name} is fetching the ball!"))
-Dog has a method that Animal doesn't have!
+in this example, we have parenet class animal with attribute name and eat method, then, Dog class inherit animal class, and dog class define a new method that Animal doesn't have!
 
 (打字: class Bird(Animal):)
 (Tab, 打字:     def fly(self):)
 (Tab*2, 打字:         print(f"{self.name} is flying!"))
-Bird has its own unique method!
+and create Bird class also interit animal class, it also has its own unique method!
 
 (打字: dog = Dog("Max"))
 (打字: bird = Bird("Tweety"))
 (打字: dog.eat())
-Inherited method!
-
 (打字: dog.fetch())
-Dog-specific method!
-
 (打字: bird.eat())
 (打字: bird.fly())
 (运行)
-Each subclass has parent methods plus its own!
+create dog and bird object, then call the method, you can see animal method can use by child method, they can call eat method, moreover, they also can call the new  method that created by each child class.
+run the code, see, Each subclass has parent methods plus its own!
 
 **操作时的代码**:
 ```python
@@ -237,7 +234,7 @@ print(issubclass(Animal, Dog))
 ## [场景 7: 实际操作 - 多级继承] (70 秒)
 **画面**: 录屏操作
 **配音 - 操作讲解**:
-Classes can inherit from subclasses.
+on the other hand, let's introduce Multi-level Inheritance.
 
 (打字: class Animal:)
 (Tab, 打字:     def breathe(self):)

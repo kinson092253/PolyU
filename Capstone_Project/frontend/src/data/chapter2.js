@@ -6,6 +6,7 @@ export const chapter2 = {
     {
       id: "2.1",
       title: "2.1 Arithmetic Operations",
+      videoUrl: "https://youtu.be/zYQ6IvqDTYk",
       content: {
         lecture: `
 # Arithmetic Operations
@@ -47,15 +48,27 @@ result = (2 + 3) * 4  # 20
 \`\`\`
         `,
         test: {
-          question: "What is the result of the following code?\n\nresult = 10 + 5 * 2",
-          options: [
-            "30",
-            "20",
-            "25",
-            "15"
-          ],
-          correctAnswer: 1,
-          explanation: "According to the order of operations, multiplication has priority over addition, so first calculate 5 * 2 = 10, then 10 + 10 = 20."
+          questions: [
+            {
+              type: "multiple-choice",
+              question: "What is the result of the following code?\n\nresult = 10 + 5 * 2",
+              options: [
+                "30",
+                "20",
+                "25",
+                "15"
+              ],
+              correctAnswer: 1,
+              explanation: "According to the order of operations, multiplication has priority over addition, so first calculate 5 * 2 = 10, then 10 + 10 = 20."
+            },
+            {
+              type: "drag-and-drop",
+              question: "Arrange the code blocks to calculate the expression: (10 + 5) * 2",
+              blocks: ["result", "=", "(", "10", "+", "5", ")", "*", "2"],
+              correctOrder: ["result", "=", "(", "10", "+", "5", ")", "*", "2"],
+              explanation: "The correct syntax is: result = (10 + 5) * 2 - parentheses ensure addition is performed first, then multiplication. The result is 30."
+            }
+          ]
         },
         practice: {
           description: `
@@ -89,6 +102,7 @@ print(area)`,
     {
       id: "2.2",
       title: "2.2 Comparison and Logical Operations",
+      videoUrl: "https://youtu.be/xBeUFBWQDWQ",
       content: {
         lecture: `
 # Comparison and Logical Operations
@@ -210,15 +224,27 @@ if temperature > 20 and is_sunny:
 \`\`\`
         `,
         test: {
-          question: "What will the following code output?\n\n```python\nx = 10\ny = 5\nif x > 5 and y < 10:\n    print('Yes')\nelse:\n    print('No')\n```",
-          options: [
-            "Yes",
-            "No",
-            "True",
-            "Error"
-          ],
-          correctAnswer: 0,
-          explanation: "Both conditions are true: x > 5 (10 > 5 is True) and y < 10 (5 < 10 is True). Since both conditions in the 'and' statement are True, it prints 'Yes'."
+          questions: [
+            {
+              type: "multiple-choice",
+              question: "What will the following code output?\n\n```python\nx = 10\ny = 5\nif x > 5 and y < 10:\n    print('Yes')\nelse:\n    print('No')\n```",
+              options: [
+                "Yes",
+                "No",
+                "True",
+                "Error"
+              ],
+              correctAnswer: 0,
+              explanation: "Both conditions are true: x > 5 (10 > 5 is True) and y < 10 (5 < 10 is True). Since both conditions in the 'and' statement are True, it prints 'Yes'."
+            },
+            {
+              type: "drag-and-drop",
+              question: "Arrange the code blocks to create a condition: age >= 18 or has_license",
+              blocks: ["age", ">=", "18", "or", "has_license"],
+              correctOrder: ["age", ">=", "18", "or", "has_license"],
+              explanation: "The correct syntax is: age >= 18 or has_license - this condition is True if either the person is 18 or older OR they have a license."
+            }
+          ]
         },
         practice: {
           description: `
@@ -257,6 +283,7 @@ else:
     {
       id: "2.3",
       title: "2.3 String Operations",
+      videoUrl: "https://youtu.be/7vIOY_yek_M",
       content: {
         lecture: `
 # String Operations
@@ -393,15 +420,27 @@ print("Path: C:\\\\Users\\\\Documents")
 \`\`\`
         `,
         test: {
-          question: "What will be the output of the following code?\n\n```python\ntext = 'Python Programming'\nprint(text[7:11])\n```",
-          options: [
-            "Prog",
-            "Programming",
-            "gram",
-            "ogra"
-          ],
-          correctAnswer: 0,
-          explanation: "String slicing [7:11] extracts characters from index 7 to 10 (11 is not included). In 'Python Programming', index 7 is 'P', and characters from 7 to 10 are 'Prog'."
+          questions: [
+            {
+              type: "multiple-choice",
+              question: "What will be the output of the following code?\n\n```python\ntext = 'Python Programming'\nprint(text[7:11])\n```",
+              options: [
+                "Prog",
+                "Programming",
+                "gram",
+                "ogra"
+              ],
+              correctAnswer: 0,
+              explanation: "String slicing [7:11] extracts characters from index 7 to 10 (11 is not included). In 'Python Programming', index 7 is 'P', and characters from 7 to 10 are 'Prog'."
+            },
+            {
+              type: "drag-and-drop",
+              question: "Arrange the code blocks to create a greeting message",
+              blocks: ["greeting", "=", '"Hello, "', "+", "name"],
+              correctOrder: ["greeting", "=", '"Hello, "', "+", "name"],
+              explanation: "The correct syntax is: greeting = \"Hello, \" + name - this concatenates the string \"Hello, \" with the variable name."
+            }
+          ]
         },
         practice: {
           description: `

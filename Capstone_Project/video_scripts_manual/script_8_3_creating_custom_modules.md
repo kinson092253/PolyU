@@ -18,7 +18,7 @@ Creating a module is simple - any Python file is a module! When you save functio
 ## [场景 3: 实际操作 - 创建第一个模块] (90 秒)
 **画面**: 代码编辑器录屏
 **配音 - 操作讲解**:
-Let's create our first custom module.
+Now，Let's create our first custom module in code editor.
 
 (创建新文件: mymath.py)
 I'm creating a new file called mymath dot py.
@@ -35,24 +35,25 @@ I'm creating a new file called mymath dot py.
 (Tab, 打字:     return sum(numbers) / len(numbers))
 (打字: # Module-level variable)
 (打字: PI = 3.14159)
-Save this file!
+next, open mymath file and import math module and write down some function named square, cube, average and pi, all functions except pi function mush input a parameter x when call it, then, to call different function will do the different calculation and return the result to user. OK, save this file!
 
 (创建新文件: main.py)
 Now create main dot py in the same directory.
 
 (打字: import mymath)
-Import our custom module!
+inside the main file, remember to import our custom module before you use it!
 
 (打字: print(mymath.square(5)))
 (打字: print(mymath.cube(3)))
 (打字: print(mymath.average([10, 20, 30, 40])))
-(打字: print(mymath.PI))
+(打字: print(mymath.pi))
 (运行)
-All our custom functions work! Twenty-five, twenty-seven, twenty-five, and pi!
+after that, we can call all custom functions from mymath module in main file here! and remind that, parameter can be different type like integer, float, string, list and etc. run the code, you can see the outputs are Twenty-five, twenty-seven, twenty-five, and value of pi 3.14!
 
 **操作时的代码 - mymath.py**:
 ```python
 # mymath.py - Custom math utilities
+import math
 
 def square(x):
     """Calculate square of a number"""
@@ -66,8 +67,9 @@ def average(numbers):
     """Calculate average of a list"""
     return sum(numbers) / len(numbers)
 
-# Module-level variable
-PI = 3.14159
+def pi():
+    """Return the value of pi"""
+    return math.pi
 ```
 
 **操作时的代码 - main.py**:
@@ -85,31 +87,31 @@ print(mymath.PI)
 ## [场景 4: 实际操作 - 不同导入方式] (70 秒)
 **画面**: 录屏操作，继续编辑 main.py
 **配音 - 操作讲解**:
-Use different import methods with custom modules.
+moreover, we have introduced several method to import the module before, these method also work with custom modules. let's see the example.
 
 (清空 main.py，打字: from mymath import square, cube)
-Import specific functions.
+first, we can import specific functions in the custom module.
 
 (打字: print(square(4)))
 (打字: print(cube(2)))
 (运行)
-Sixteen and eight! No need for module prefix!
+so when we call it, we are no need to input the module prefix. and we also can see the output, Sixteen and eight!
 
 (清空，打字: from mymath import average as avg)
-Import with alias.
+we also can import with alias if the function name is too long.
 
 (打字: numbers = [5, 10, 15, 20])
 (打字: print(f"Average: {avg(numbers)}"))
 (运行)
-Average is twelve point five!
+see, here we use the alias to call the function, Average is twelve point five!
 
 (清空，打字: import mymath as mm)
-Module alias.
+and Module also can save with alias.
 
 (打字: print(mm.square(7)))
 (打字: print(mm.PI))
 (运行)
-Forty-nine and pi! Same module, shorter name!
+and it is work, output is Forty-nine and value of pi!
 
 **操作时的代码**:
 ```python
@@ -138,7 +140,7 @@ print(mm.PI)
 ## [场景 5: 实际操作 - __name__ 变量] (80 秒)
 **画面**: 录屏操作
 **配音 - 操作讲解**:
-Special variable underscore underscore name underscore underscore.
+OK, let me introduce some Special variable which is useful when you define the module, the first one you can input underscore underscore name underscore underscore.
 
 (编辑 mymath.py，添加到底部:)
 (打字: def test_functions():)
@@ -147,16 +149,16 @@ Special variable underscore underscore name underscore underscore.
 (打字: if __name__ == "__main__":)
 (Tab, 打字:     print("Running mymath.py directly"))
 (Tab, 打字:     test_functions())
-This only runs when file is executed directly, not when imported!
+if you use this varible equal to underscore underscore main underscore underscore. This means the code only runs when file is executed directly, not when imported! let me show you the different.
 
 (运行 mymath.py)
-When we run mymath dot py directly, the test code executes!
+in this case, When we run mymath dot py directly, the test code executes!
 
 (切换到 main.py)
 (打字: import mymath)
 (打字: print(mymath.square(5)))
 (运行 main.py)
-When imported, the test code doesn't run! Only the import happens. This is the standard Python pattern!
+however, When imported in main dot py, since the underscore underscore main underscore underscore will change to module name my math, it is not match the condition so the test code doesn't run! the benefit is available to do some test in the module file directly and avoids unnecessary output when importing modules.
 
 **操作时的代码 - mymath.py (底部添加)**:
 ```python
@@ -174,7 +176,7 @@ if __name__ == "__main__":
 ## [场景 6: 实际操作 - 文档字符串] (60 秒)
 **画面**: 录屏操作
 **配音 - 操作讲解**:
-Add documentation to your module.
+next, we can Add documentation to our module.
 
 (编辑 mymath.py 顶部:)
 (打字: """mymath - Custom Mathematics Module)
@@ -184,21 +186,22 @@ Add documentation to your module.
 (打字: - cube(x): Returns x cubed)
 (打字: - average(numbers): Returns average of list)
 (打字: """)
-Module-level docstring explains what the module does.
+but it must use Module-level docstring to explain what the module does, pay attention that you cannot use hashtag to write the documentation comment.
 
 (在 main.py 中:)
 (打字: import mymath)
 (打字: print(mymath.__doc__))
 (运行)
-Our module documentation!
+so when you in other file, before you use module, you can call underscore underscore d o c underscore underscore to print out the module documentation!
 
 (打字: help(mymath.square))
 (运行)
-Help for individual function! Documentation makes your modules professional!
+and we also can use Help function for check specfic function description!
 
 **操作时的代码 - mymath.py (顶部)**:
 ```python
-"""mymath - Custom Mathematics Module
+"""
+mymath - Custom Mathematics Module
 
 This module provides basic math utilities:
 - square(x): Returns x squared
@@ -222,7 +225,7 @@ help(mymath.square)
 ## [场景 7: 实际操作 - 模块包结构] (60 秒)
 **画面**: 录屏操作
 **配音 - 操作讲解**:
-Organize modules into packages.
+on the other hand, we also can organize several modules in a package.
 
 (创建文件夹结构展示:)
 utilities/
@@ -232,7 +235,7 @@ utilities/
 
 (创建 utilities/__init__.py 文件，为空或写:)
 (打字: # This makes utilities a package)
-The underscore underscore init dot py makes this directory a package!
+we define a folder named utilities, and put modules file into this foloder, but pay attention that in the package, you must define a file named underscore underscore init underscore underscore dot py to makes this directory to a package! and this file can be empty.
 
 (创建 utilities/string_utils.py:)
 (打字: def reverse(text):)
@@ -245,7 +248,7 @@ The underscore underscore init dot py makes this directory a package!
 (打字: print(string_utils.reverse("hello")))
 (打字: print(string_utils.capitalize_words("python is awesome")))
 (运行)
-Packages let you organize multiple modules together!
+in this case, we have two modules in this pacakge, when we want to use specific module, we can input from package name import module name. then call specific function with module name dot function name to call it.
 
 **文件结构**:
 ```

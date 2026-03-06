@@ -1,8 +1,8 @@
 .dashboard {
-  padding: 30px;
-  padding-top: 90px; /* 给导航栏留空间 */
-  background: #f8f9fa;
-  height: calc(100vh - 60px); /* 减去navbar高度 */
+  padding: 32px;
+  padding-top: 96px;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  min-height: calc(100vh - 64px);
   overflow-y: auto;
 }
 
@@ -14,69 +14,91 @@
 }
 
 .dashboard-header h1 {
-  color: #333;
-  font-size: 32px;
+  font-size: 36px;
+  font-weight: 700;
   margin: 0;
+  color: #1e293b;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* 只对文字部分应用渐变效果 */
+.dashboard-header h1 span {
+  background: linear-gradient(135deg, #1e293b, #334155, #0f172a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .btn-back {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
   color: white;
   border: none;
-  padding: 12px 24px;
-  border-radius: 6px;
+  padding: 14px 28px;
+  border-radius: 12px;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
-  transition: all 0.3s;
-  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.4);
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .btn-back:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.6);
 }
 
 /* 统计卡片 */
 .stats-cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
-  margin-bottom: 30px;
+  gap: 24px;
+  margin-bottom: 32px;
 }
 
 .stat-card {
   background: white;
-  border-radius: 12px;
-  padding: 25px;
+  border-radius: 16px;
+  padding: 28px;
   display: flex;
   align-items: center;
   gap: 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(148, 163, 184, 0.1);
+  position: relative;
+  overflow: hidden;
 }
 
 .stat-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+  border-color: rgba(59, 130, 246, 0.3);
 }
 
 .stat-icon {
-  font-size: 48px;
+  font-size: 52px;
   line-height: 1;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
 }
 
 .stat-content h3 {
   margin: 0 0 8px 0;
-  font-size: 14px;
-  color: #666;
-  font-weight: 500;
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .stat-value {
-  font-size: 32px;
-  font-weight: 700;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  font-size: 36px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 50%, #1d4ed8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -86,15 +108,17 @@
 .charts-section {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+  gap: 24px;
   margin-bottom: 30px;
 }
 
 .chart-card {
   background: white;
-  border-radius: 12px;
-  padding: 25px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(148, 163, 184, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .chart-card-wide {
@@ -102,24 +126,37 @@
 }
 
 .chart-card h3 {
-  margin: 0 0 20px 0;
-  color: #333;
-  font-size: 18px;
+  margin: 0 0 24px 0;
+  color: #1e293b;
+  font-size: 20px;
+  font-weight: 700;
 }
 
 /* 薄弱环节 */
 .weak-points-section {
   background: white;
-  border-radius: 12px;
-  padding: 25px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
   margin-bottom: 30px;
+  border: 1px solid rgba(148, 163, 184, 0.1);
 }
 
 .weak-points-section h3 {
-  margin: 0 0 20px 0;
-  color: #333;
-  font-size: 20px;
+  margin: 0 0 24px 0;
+  color: #1e293b;
+  font-size: 22px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.weak-points-section h3 span {
+  background: linear-gradient(135deg, #1e293b, #334155);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .weak-points-list {
@@ -129,10 +166,12 @@
 }
 
 .weak-point-item {
-  padding: 15px;
-  background: #f8f9fa;
-  border-radius: 8px;
-  border-left: 4px solid #667eea;
+  padding: 20px;
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.05), rgba(248, 113, 113, 0.08));
+  border-radius: 12px;
+  border-left: 4px solid #ef4444;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.1);
 }
 
 .weak-point-header {
@@ -143,91 +182,114 @@
 }
 
 .weak-point-topic {
-  font-weight: 600;
-  color: #333;
-  font-size: 16px;
+  font-weight: 700;
+  color: #1e293b;
+  font-size: 17px;
 }
 
 .weak-point-accuracy {
-  font-weight: 700;
-  font-size: 16px;
+  font-weight: 800;
+  font-size: 17px;
+  color: #ef4444;
 }
 
 .weak-point-bar {
   width: 100%;
-  height: 8px;
-  background: #e0e0e0;
-  border-radius: 4px;
+  height: 10px;
+  background: rgba(226, 232, 240, 0.8);
+  border-radius: 10px;
   overflow: hidden;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
 }
 
 .weak-point-fill {
   height: 100%;
-  transition: width 0.3s ease;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  background: linear-gradient(90deg, #ef4444, #dc2626);
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
 }
 
 .weak-point-attempts {
-  font-size: 12px;
-  color: #666;
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 500;
 }
 
 /* 成就系统 */
 .achievements-section {
   background: white;
-  border-radius: 12px;
-  padding: 25px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(148, 163, 184, 0.1);
 }
 
 .achievements-section h3 {
-  margin: 0 0 20px 0;
-  color: #333;
-  font-size: 20px;
+  margin: 0 0 24px 0;
+  color: #1e293b;
+  font-size: 22px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.achievements-section h3 span {
+  background: linear-gradient(135deg, #1e293b, #334155);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .achievements-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 15px;
+  gap: 20px;
 }
 
 .achievement-badge {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
-  border-radius: 8px;
-  transition: all 0.3s;
+  padding: 24px;
+  border-radius: 12px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
 }
 
 .achievement-badge.earned {
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  background: linear-gradient(135deg, #ec4899 0%, #db2777 50%, #be185d 100%);
   color: white;
-  box-shadow: 0 4px 12px rgba(245, 87, 108, 0.3);
+  box-shadow: 0 8px 24px rgba(236, 72, 153, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .achievement-badge.earned:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 16px rgba(245, 87, 108, 0.4);
+  transform: scale(1.1) rotate(2deg);
+  box-shadow: 0 12px 32px rgba(236, 72, 153, 0.6);
 }
 
 .achievement-badge.locked {
-  background: #e0e0e0;
-  color: #999;
-  opacity: 0.6;
+  background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
+  color: #94a3b8;
+  opacity: 0.5;
+  border: 2px solid rgba(148, 163, 184, 0.2);
 }
 
 .badge-icon {
-  font-size: 40px;
-  margin-bottom: 8px;
+  font-size: 44px;
+  margin-bottom: 10px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
 }
 
 .badge-name {
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 700;
   text-align: center;
+  line-height: 1.4;
 }
 
 /* 响应式设计 */
@@ -254,5 +316,113 @@
     flex-direction: column;
     gap: 15px;
     align-items: flex-start;
+  }
+}
+
+/* 滚动条美化 */
+.dashboard::-webkit-scrollbar {
+  width: 10px;
+}
+
+.dashboard::-webkit-scrollbar-track {
+  background: rgba(148, 163, 184, 0.1);
+  border-radius: 10px;
+}
+
+.dashboard::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #3b82f6, #2563eb);
+  border-radius: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.dashboard::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #2563eb, #1d4ed8);
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+}
+
+/* 额外的动画效果 */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stat-card {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.stat-card:nth-child(1) { animation-delay: 0.1s; }
+.stat-card:nth-child(2) { animation-delay: 0.2s; }
+.stat-card:nth-child(3) { animation-delay: 0.3s; }
+.stat-card:nth-child(4) { animation-delay: 0.4s; }
+
+.chart-card {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* 为卡片添加微妙的背景图案 */
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* 悬停时的图表卡片效果 */
+.chart-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  border-color: rgba(59, 130, 246, 0.2);
+}
+
+/* 薄弱项悬停效果 */
+.weak-point-item:hover {
+  transform: translateX(4px);
+  box-shadow: 0 4px 16px rgba(239, 68, 68, 0.2);
+}
+
+/* 成就徽章闪光效果 */
+@keyframes shimmer {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.achievement-badge.earned::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: shimmer 3s infinite;
+  pointer-events: none;
+}
+
+/* 数据加载动画 */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
   }
 }

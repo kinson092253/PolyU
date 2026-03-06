@@ -6,6 +6,7 @@ export const chapter4 = {
     {
       id: "4.1",
       title: "4.1 for Loop",
+      videoUrl: "https://youtu.be/esdTMOMIhOM",
       content: {
         lecture: `
 # for Loop
@@ -110,15 +111,27 @@ print(f"Vowels: {count}")  # Vowels: 3
 \`\`\`
         `,
         test: {
-          question: "What will be the output of the following code?\n\n```python\nfor i in range(3, 7):\n    print(i, end=' ')\n```",
-          options: [
-            "3 4 5 6",
-            "3 4 5 6 7",
-            "4 5 6 7",
-            "3 4 5"
-          ],
-          correctAnswer: 0,
-          explanation: "range(3, 7) generates numbers from 3 to 6 (7 is not included). The end=' ' parameter makes print() add a space instead of a newline, so the output is: 3 4 5 6"
+          questions: [
+            {
+              type: "multiple-choice",
+              question: "What will be the output of the following code?\n\n```python\nfor i in range(3, 7):\n    print(i, end=' ')\n```",
+              options: [
+                "3 4 5 6",
+                "3 4 5 6 7",
+                "4 5 6 7",
+                "3 4 5"
+              ],
+              correctAnswer: 0,
+              explanation: "range(3, 7) generates numbers from 3 to 6 (7 is not included). The end=' ' parameter makes print() add a space instead of a newline, so the output is: 3 4 5 6"
+            },
+            {
+              type: "drag-and-drop",
+              question: "Arrange the code blocks to create a for loop that iterates from 0 to 4:",
+              blocks: ["for", "i", "in", "range(5)", ":"],
+              correctOrder: ["for", "i", "in", "range(5)", ":"],
+              explanation: "A for loop in Python uses the syntax: for variable in sequence:"
+            }
+          ]
         },
         practice: {
           description: `
@@ -158,6 +171,7 @@ print(total)`,
     {
       id: "4.2",
       title: "4.2 while Loop",
+      videoUrl: "https://youtu.be/DrQiUExfAw4",
       content: {
         lecture: `
 # while Loop
@@ -254,15 +268,27 @@ if not found:
 - You need more control over the loop
         `,
         test: {
-          question: "What will be the output of the following code?\n\n```python\ncount = 0\nwhile count < 3:\n    print(count)\n    count += 1\n```",
-          options: [
-            "0 1 2",
-            "1 2 3",
-            "0 1",
-            "0 1 2 3"
-          ],
-          correctAnswer: 0,
-          explanation: "The loop starts with count = 0. It prints 0, then increments to 1. Prints 1, increments to 2. Prints 2, increments to 3. Now count < 3 is False, so the loop stops. Output: 0 1 2"
+          questions: [
+            {
+              type: "multiple-choice",
+              question: "What will be the output of the following code?\n\n```python\ncount = 0\nwhile count < 3:\n    print(count)\n    count += 1\n```",
+              options: [
+                "0 1 2",
+                "1 2 3",
+                "0 1",
+                "0 1 2 3"
+              ],
+              correctAnswer: 0,
+              explanation: "The loop starts with count = 0. It prints 0, then increments to 1. Prints 1, increments to 2. Prints 2, increments to 3. Now count < 3 is False, so the loop stops. Output: 0 1 2"
+            },
+            {
+              type: "drag-and-drop",
+              question: "Arrange the code blocks to create a while loop that continues until count reaches 10:",
+              blocks: ["while", "count", "<", "10", ":"],
+              correctOrder: ["while", "count", "<", "10", ":"],
+              explanation: "A while loop continues as long as the condition is True. The syntax is: while condition:"
+            }
+          ]
         },
         practice: {
           description: `
@@ -296,6 +322,7 @@ while count > 0:
     {
       id: "4.3",
       title: "4.3 Loop Control Statements",
+      videoUrl: "https://youtu.be/SPRA3nuiQdU",
       content: {
         lecture: `
 # Loop Control Statements
@@ -443,15 +470,39 @@ while count < 10:
 5. **Comment complex logic** - explain why you're breaking or continuing
         `,
         test: {
-          question: "What will be the output of the following code?\\n\\n```python\\nfor i in range(5):\\n    if i == 2:\\n        continue\\n    if i == 4:\\n        break\\n    print(i)\\nelse:\\n    print('Done')\\n```",
-          options: [
-            "0 1 3",
-            "0 1 2 3",
-            "0 1 3 Done",
-            "0 1 Done"
-          ],
-          correctAnswer: 0,
-          explanation: "When i=0, prints 0. When i=1, prints 1. When i=2, continue skips the print. When i=3, prints 3. When i=4, break exits the loop. The else clause does NOT run because of the break. Output: 0 1 3"
+          questions: [
+            {
+              type: "multiple-choice",
+              question: "What will be the output of the following code?\\n\\n```python\\nfor i in range(5):\\n    if i == 2:\\n        continue\\n    if i == 4:\\n        break\\n    print(i)\\nelse:\\n    print('Done')\\n```",
+              options: [
+                "0 1 3",
+                "0 1 2 3",
+                "0 1 3 Done",
+                "0 1 Done"
+              ],
+              correctAnswer: 0,
+              explanation: "When i=0, prints 0. When i=1, prints 1. When i=2, continue skips the print. When i=3, prints 3. When i=4, break exits the loop. The else clause does NOT run because of the break. Output: 0 1 3"
+            },
+            {
+              type: "drag-and-drop",
+              question: "Arrange the code blocks to break out of a loop when target is found:",
+              multiLine: true,
+              lines: [
+                {
+                  label: "Line 1 (if statement):",
+                  blocks: ["if", "num", "==", "target", ":"],
+                  correctOrder: ["if", "num", "==", "target", ":"]
+                },
+                {
+                  label: "Line 2 (break - indented):",
+                  blocks: ["break"],
+                  correctOrder: ["break"],
+                  indent: true
+                }
+              ],
+              explanation: "The break statement must be on a separate line, indented under the if statement. This exits the loop when the condition is true."
+            }
+          ]
         },
         practice: {
           description: `## Exercise: Search for a Number
@@ -495,6 +546,7 @@ else:
     {
       id: "4.4",
       title: "4.4 Nested Loops",
+      videoUrl: "https://youtu.be/cf3MVLHY4SU",
       content: {
         lecture: `
 # Nested Loops
@@ -667,15 +719,40 @@ for i in range(5):
 \`\`\`
         `,
         test: {
-          question: "How many times will 'Hello' be printed?\n\n```python\nfor i in range(2):\n    for j in range(3):\n        print('Hello')\n```",
-          options: [
-            "5",
-            "6",
-            "2",
-            "3"
-          ],
-          correctAnswer: 1,
-          explanation: "The outer loop runs 2 times, and for each iteration, the inner loop runs 3 times. So 'Hello' is printed 2 × 3 = 6 times."
+          questions: [
+            {
+              type: "multiple-choice",
+              question: "How many times will 'Hello' be printed?\n\n```python\nfor i in range(2):\n    for j in range(3):\n        print('Hello')\n```",
+              options: [
+                "5",
+                "6",
+                "2",
+                "3"
+              ],
+              correctAnswer: 1,
+              explanation: "The outer loop runs 2 times, and for each iteration, the inner loop runs 3 times. So 'Hello' is printed 2 × 3 = 6 times."
+            },
+            {
+              type: "drag-and-drop",
+              question: "Arrange the code blocks to create a nested loop structure (outer loop iterates 3 times, inner loop iterates 2 times):",
+              multiLine: true,
+              sharedBlocks: false,
+              lines: [
+                {
+                  label: "Line 1 (outer loop):",
+                  blocks: ["for", "i", "in", "range(3)", ":"],
+                  correctOrder: ["for", "i", "in", "range(3)", ":"]
+                },
+                {
+                  label: "Line 2 (inner loop - indented):",
+                  blocks: ["for", "j", "in", "range(2)", ":"],
+                  correctOrder: ["for", "j", "in", "range(2)", ":"],
+                  indent: true
+                }
+              ],
+              explanation: "Nested loops have one loop inside another. The inner loop completes all iterations for each iteration of the outer loop. Total iterations: 3 × 2 = 6"
+            }
+          ]
         },
         practice: {
           description: `

@@ -6,6 +6,7 @@ export const chapter5 = {
     {
       id: "5.1",
       title: "5.1 List Basics",
+      videoUrl: "https://youtu.be/_-EauEW0xyQ",
       content: {
         lecture: `
 # List Basics
@@ -135,15 +136,27 @@ print(repeated)  # [1, 2, 3, 1, 2, 3, 1, 2, 3]
 \`\`\`
         `,
         test: {
-          question: "What will be the output of the following code?\n\n```python\nfruits = ['apple', 'banana', 'cherry', 'date']\nprint(fruits[1:3])\n```",
-          options: [
-            "['banana', 'cherry']",
-            "['apple', 'banana', 'cherry']",
-            "['banana', 'cherry', 'date']",
-            "['apple', 'banana']"
-          ],
-          correctAnswer: 0,
-          explanation: "List slicing [1:3] extracts elements from index 1 to index 2 (3 is not included). So fruits[1] is 'banana' and fruits[2] is 'cherry', resulting in ['banana', 'cherry']."
+          questions: [
+            {
+              type: "multiple-choice",
+              question: "What will be the output of the following code?\n\n```python\nfruits = ['apple', 'banana', 'cherry', 'date']\nprint(fruits[1:3])\n```",
+              options: [
+                "['banana', 'cherry']",
+                "['apple', 'banana', 'cherry']",
+                "['banana', 'cherry', 'date']",
+                "['apple', 'banana']"
+              ],
+              correctAnswer: 0,
+              explanation: "List slicing [1:3] extracts elements from index 1 to index 2 (3 is not included). So fruits[1] is 'banana' and fruits[2] is 'cherry', resulting in ['banana', 'cherry']."
+            },
+            {
+              type: "drag-and-drop",
+              question: "Arrange the code blocks to access elements from index 2 to 4 (not including 4) from the list:",
+              blocks: ["fruits", "[", "2", ":", "4", "]"],
+              correctOrder: ["fruits", "[", "2", ":", "4", "]"],
+              explanation: "List slicing uses the syntax: list[start:end] where end is not included. So fruits[2:4] gets elements at index 2 and 3."
+            }
+          ]
         },
         practice: {
           description: `
@@ -192,6 +205,7 @@ print(numbers[-1])`,
     {
       id: "5.2",
       title: "5.2 List Methods",
+      videoUrl: "https://youtu.be/4cXJNhlhIY4",
       content: {
         lecture: `
 # List Methods
@@ -360,15 +374,27 @@ print(copied)    # [1, 2, 3, 4]
 | copy() | Create a copy | No |
         `,
         test: {
-          question: "What will be the output of the following code?\n\n```python\nnumbers = [3, 1, 4, 1, 5]\nnumbers.append(2)\nnumbers.sort()\nprint(numbers)\n```",
-          options: [
-            "[1, 1, 2, 3, 4, 5]",
-            "[3, 1, 4, 1, 5, 2]",
-            "[2, 1, 1, 3, 4, 5]",
-            "[1, 2, 3, 4, 5]"
-          ],
-          correctAnswer: 0,
-          explanation: "First, append(2) adds 2 to the end: [3, 1, 4, 1, 5, 2]. Then sort() arranges them in ascending order: [1, 1, 2, 3, 4, 5]."
+          questions: [
+            {
+              type: "multiple-choice",
+              question: "What will be the output of the following code?\n\n```python\nnumbers = [3, 1, 4, 1, 5]\nnumbers.append(2)\nnumbers.sort()\nprint(numbers)\n```",
+              options: [
+                "[1, 1, 2, 3, 4, 5]",
+                "[3, 1, 4, 1, 5, 2]",
+                "[2, 1, 1, 3, 4, 5]",
+                "[1, 2, 3, 4, 5]"
+              ],
+              correctAnswer: 0,
+              explanation: "First, append(2) adds 2 to the end: [3, 1, 4, 1, 5, 2]. Then sort() arranges them in ascending order: [1, 1, 2, 3, 4, 5]."
+            },
+            {
+              type: "drag-and-drop",
+              question: "Arrange the code blocks to add 'orange' to the end of the fruits list:",
+              blocks: ["fruits", ".", "append", "(", "'orange'", ")"],
+              correctOrder: ["fruits", ".", "append", "(", "'orange'", ")"],
+              explanation: "The append() method adds an element to the end of the list. Syntax: list.append(item)"
+            }
+          ]
         },
         practice: {
           description: `
@@ -424,6 +450,7 @@ print(shopping_list)`,
     {
       id: "5.3",
       title: "5.3 List Comprehension",
+      videoUrl: "https://youtu.be/xsy9W8Srax0",
       content: {
         lecture: `
 # List Comprehension
@@ -580,15 +607,27 @@ for i in range(1000):
 - You need to handle errors for each item
         `,
         test: {
-          question: "What will be the output of the following code?\n\n```python\nnumbers = [1, 2, 3, 4, 5]\nresult = [x * 2 for x in numbers if x > 2]\nprint(result)\n```",
-          options: [
-            "[6, 8, 10]",
-            "[2, 4, 6, 8, 10]",
-            "[3, 4, 5]",
-            "[4, 6, 8, 10]"
-          ],
-          correctAnswer: 0,
-          explanation: "The list comprehension filters numbers greater than 2 (which are 3, 4, 5) and then multiplies each by 2. So: 3*2=6, 4*2=8, 5*2=10, resulting in [6, 8, 10]."
+          questions: [
+            {
+              type: "multiple-choice",
+              question: "What will be the output of the following code?\n\n```python\nnumbers = [1, 2, 3, 4, 5]\nresult = [x * 2 for x in numbers if x > 2]\nprint(result)\n```",
+              options: [
+                "[6, 8, 10]",
+                "[2, 4, 6, 8, 10]",
+                "[3, 4, 5]",
+                "[4, 6, 8, 10]"
+              ],
+              correctAnswer: 0,
+              explanation: "The list comprehension filters numbers greater than 2 (which are 3, 4, 5) and then multiplies each by 2. So: 3*2=6, 4*2=8, 5*2=10, resulting in [6, 8, 10]."
+            },
+            {
+              type: "drag-and-drop",
+              question: "Arrange the code blocks to create a list [1, 2, 3, 4, 5] using range:",
+              blocks: ["list(", "range(", "1,", "6", "))"],
+              correctOrder: ["list(", "range(", "1,", "6", "))"],
+              explanation: "The list() function converts a range object to a list: list(range(1, 6)) creates [1, 2, 3, 4, 5]"
+            }
+          ]
         },
         practice: {
           description: `

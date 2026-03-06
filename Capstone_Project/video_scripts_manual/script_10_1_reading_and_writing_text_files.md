@@ -18,7 +18,7 @@ Files allow programs to store data permanently. Python makes file operations eas
 ## [场景 3: 实际操作 - 写入文件] (90 秒)
 **画面**: 代码编辑器录屏
 **配音 - 操作讲解**:
-Let's write to a file.
+now, Let's write something to a file through code.
 
 (打字: # Writing to a file)
 (打字: file = open("sample.txt", "w"))
@@ -72,7 +72,7 @@ print("File 2 written!")
 ## [场景 4: 实际操作 - 读取文件] (90 秒)
 **画面**: 录屏操作
 **配音 - 操作讲解**:
-Now let's read files.
+on the other hand, let's see how to read files through code.
 
 (打字: # Read entire file)
 (打字: with open("sample.txt", "r") as file:)
@@ -126,7 +126,8 @@ with open("sample.txt", "r") as file:
 # Read lines into a list
 with open("sample.txt", "r") as file:
     lines = file.readlines()
-    print(f"Total lines: {len(lines)}")
+    print(lines)
+    print(lines[0])
 ```
 
 ---
@@ -134,7 +135,7 @@ with open("sample.txt", "r") as file:
 ## [场景 5: 实际操作 - 追加模式] (70 秒)
 **画面**: 录屏操作
 **配音 - 操作讲解**:
-Append adds to existing files without erasing.
+on the other hand, if you want to add new content but you don't want to cover the old content, you can use Append method that adds to existing files without erasing.
 
 (打字: # Create initial file)
 (打字: with open("log.txt", "w") as file:)

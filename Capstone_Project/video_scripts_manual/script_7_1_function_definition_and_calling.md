@@ -25,25 +25,25 @@ Functions start with the def keyword, followed by the function name, parentheses
 ## [场景 4: 实际操作 - 第一个函数] (80 秒)
 **画面**: 代码编辑器录屏
 **配音 - 操作讲解**:
-Let's create our first function.
+OK, Let's create our first function in code editor.
 
 (打字: def greet():)
 (Tab, 打字:     print("Hello, World!"))
-Define a function called greet. It prints a message.
+Define a function called greet. remember start with d e f, and add parentheses and a colon. if call this function, it will prints a message hello world.
 
 (打字: # Call the function)
 (打字: greet())
 (运行)
-Hello, World! The function executed!
+then, after complete the function definition, call the function, and run the code. you can see output is Hello, World! The function executed!
 
 (打字: greet())
-Call it again.
-
 (打字: greet())
-And again!
+and you can call it more than one time.
 
 (运行)
-See? We can use it as many times as we want!
+run the code again. See? We can use it as many times as we want!
+
+
 
 (打字: # Function with multiple statements)
 (打字: def welcome():)
@@ -80,31 +80,20 @@ welcome()
 ## [场景 5: 实际操作 - 函数命名] (70 秒)
 **画面**: 录屏操作
 **配音 - 操作讲解**:
-Good function names are important.
+on the other hand, Good function names are important when you create the function.
 
 (打字: # Good function names - descriptive and clear)
 (打字: def calculate_total():)
 (Tab, 打字:     print("Calculating total..."))
-Clear what it does.
-
-(打字: def get_user_info():)
-(Tab, 打字:     print("Getting user info..."))
-Descriptive verb-noun pattern.
+the name should be meaningful and clear what it does. and you can use Descriptive verb-noun pattern as the function name. if the name is more than one word, you can use underscore to seperate it.
 
 (打字: def is_valid():)
 (Tab, 打字:     print("Checking validity..."))
-Boolean functions often start with 'is'.
+one more tips, if you create Boolean functions. it is often start with 'is'. like this is valid example.
 
-(打字: calculate_total())
-(打字: get_user_info())
-(打字: is_valid())
-(运行)
-All functions have clear purposes from their names!
 
-(打字: # Bad examples (don't do this):)
-(打字: # def x(): pass  # Not descriptive)
-(打字: # def DoSomething(): pass  # Should use snake_case)
-I'm showing these as comments because they're bad practices!
+
+
 
 **操作时的代码**:
 ```python
@@ -132,21 +121,21 @@ is_valid()
 ## [场景 6: 实际操作 - 函数调用函数] (80 秒)
 **画面**: 录屏操作
 **配音 - 操作讲解**:
-Functions can call other functions.
+moreover, Functions also can call other functions.
 
 (打字: def print_line():)
 (Tab, 打字:     print("-" * 30))
-Helper function to print a line.
+first, we define a print line function to help function to print a line.
 
 (打字: def print_header():)
 (Tab, 打字:     print_line())
 (Tab, 打字:     print("Welcome to My Program"))
 (Tab, 打字:     print_line())
-This function calls print_line twice!
+then, This function calls print line twice!
 
 (打字: print_header())
 (运行)
-See? print_header uses print_line to create a nice border!
+run the code. See? print header uses print line to create a nice border!
 
 (打字: def show_menu():)
 (Tab, 打字:     print_header())
@@ -187,7 +176,8 @@ show_menu()
 ## [场景 7: 实际操作 - 函数的作用域] (70 秒)
 **画面**: 录屏操作
 **配音 - 操作讲解**:
-Variables inside functions are local.
+and then, pay attention that if variables defined inside functions, it only can call by this function only. 
+you cannot call this variable in the outside directly. if call it will output the error message.
 
 (打字: def my_function():)
 (Tab, 打字:     message = "Hello from inside")
@@ -278,7 +268,7 @@ main()
 ## [场景 9: 结尾] (10 秒)
 **画面**: 总结卡片
 **配音**:
-Excellent! You've learned to define and call functions. Next, we'll add parameters and return values to make functions even more powerful. See you there!
+Great! You've learned to define and call functions. Next, we'll add parameters and return values to make functions even more powerful. See you there!
 
 ---
 

@@ -6,6 +6,7 @@ export const chapter8 = {
     {
       id: "8.1",
       title: "8.1 Importing Modules",
+      videoUrl: "https://youtu.be/X_MXiiniNGg",
       content: {
         lecture: `
 # Importing Modules
@@ -214,15 +215,27 @@ import math
 \`\`\`
         `,
         test: {
-          question: "What is the correct way to use the sqrt function after this import statement?\n\n```python\nimport math\n```",
-          options: [
-            "sqrt(16)",
-            "math.sqrt(16)",
-            "import.sqrt(16)",
-            "python.sqrt(16)"
-          ],
-          correctAnswer: 1,
-          explanation: "When you import a module with 'import math', you must use the module name followed by a dot to access its functions: math.sqrt(16)."
+          questions: [
+            {
+              type: "multiple-choice",
+              question: "What is the correct way to use the sqrt function after this import statement?\n\n```python\nimport math\n```",
+              options: [
+                "sqrt(16)",
+                "math.sqrt(16)",
+                "import.sqrt(16)",
+                "python.sqrt(16)"
+              ],
+              correctAnswer: 1,
+              explanation: "When you import a module with 'import math', you must use the module name followed by a dot to access its functions: math.sqrt(16)."
+            },
+            {
+              type: "drag-and-drop",
+              question: "Arrange the code blocks to import the math module:",
+              blocks: ["import", "math"],
+              correctOrder: ["import", "math"],
+              explanation: "The import statement is used to load a module: import module_name"
+            }
+          ]
         },
         practice: {
           description: `
@@ -271,6 +284,7 @@ print(round(area, 2))`,
     {
       id: "8.2",
       title: "8.2 Common Standard Libraries",
+      videoUrl: "https://youtu.be/gk9s_w3EMEY",
       content: {
         lecture: `
 # Common Standard Libraries
@@ -578,15 +592,27 @@ print(f"Countdown: {days} days, {hours} hours, {minutes} minutes")
 \`\`\`
         `,
         test: {
-          question: "What will be the range of possible outputs from this code?\n\n```python\nimport random\nx = random.randint(5, 10)\nprint(x)\n```",
-          options: [
-            "5, 6, 7, 8, 9",
-            "5, 6, 7, 8, 9, 10",
-            "6, 7, 8, 9, 10",
-            "5.0 to 10.0 (decimal numbers)"
-          ],
-          correctAnswer: 1,
-          explanation: "random.randint(5, 10) returns a random integer between 5 and 10, inclusive. So possible values are: 5, 6, 7, 8, 9, or 10."
+          questions: [
+            {
+              type: "multiple-choice",
+              question: "What will be the range of possible outputs from this code?\n\n```python\nimport random\nx = random.randint(5, 10)\nprint(x)\n```",
+              options: [
+                "5, 6, 7, 8, 9",
+                "5, 6, 7, 8, 9, 10",
+                "6, 7, 8, 9, 10",
+                "5.0 to 10.0 (decimal numbers)"
+              ],
+              correctAnswer: 1,
+              explanation: "random.randint(5, 10) returns a random integer between 5 and 10, inclusive. So possible values are: 5, 6, 7, 8, 9, or 10."
+            },
+            {
+              type: "drag-and-drop",
+              question: "Arrange the code blocks to generate a random number from 1 to 100:",
+              blocks: ["random.randint(", "1,", "100", ")"],
+              correctOrder: ["random.randint(", "1,", "100", ")"],
+              explanation: "The randint() function generates a random integer: random.randint(start, end) includes both endpoints"
+            }
+          ]
         },
         practice: {
           checkOutput: false,
@@ -660,6 +686,7 @@ else:
     {
       id: "8.3",
       title: "8.3 Creating Your Own Modules",
+      videoUrl: "https://youtu.be/plsMcZG2tJY",
       content: {
         lecture: `
 # Creating Your Own Modules
@@ -996,67 +1023,85 @@ print(text_tools.reverse_text(text))    # dlroW olleH
 \`\`\`
         `,
         test: {
-          question: "You create a module file named 'helpers.py' with a function 'greet()'. What is the correct way to use this function in another file?\n\n```python\n# helpers.py\ndef greet():\n    print('Hello!')\n```",
-          options: [
-            "greet()",
-            "import greet\ngreet()",
-            "import helpers\nhelpers.greet()",
-            "from helpers import *\nhelpers.greet()"
-          ],
-          correctAnswer: 2,
-          explanation: "To use a function from a custom module, you need to import the module first, then use module_name.function_name(). So: import helpers, then helpers.greet()."
+          questions: [
+            {
+              type: "multiple-choice",
+              question: "You create a module file named 'helpers.py' with a function 'greet()'. What is the correct way to use this function in another file?\n\n```python\n# helpers.py\ndef greet():\n    print('Hello!')\n```",
+              options: [
+                "greet()",
+                "import greet\ngreet()",
+                "import helpers\nhelpers.greet()",
+                "from helpers import *\nhelpers.greet()"
+              ],
+              correctAnswer: 2,
+              explanation: "To use a function from a custom module, you need to import the module first, then use module_name.function_name(). So: import helpers, then helpers.greet()."
+            },
+            {
+              type: "drag-and-drop",
+              question: "Arrange the code blocks to import the greet function from helpers module:",
+              blocks: ["from", "helpers", "import", "greet"],
+              correctOrder: ["from", "helpers", "import", "greet"],
+              explanation: "The 'from...import' statement imports specific items from a module: from module_name import item_name"
+            }
+          ]
         },
         practice: {
           description: `
-## Exercise: Create a Temperature Converter Module
+## Exercise: Create Your Own Math Module
 
-**Task**: 
-Create a simple temperature converter module:
-1. Imagine you have a file called \`temp_converter.py\` with these functions:
-   - \`celsius_to_fahrenheit(c)\`: converts Celsius to Fahrenheit (F = C × 9/5 + 32)
-   - \`fahrenheit_to_celsius(f)\`: converts Fahrenheit to Celsius (C = (F - 32) × 5/9)
-2. In your main code, import the module
-3. Convert 25°C to Fahrenheit
-4. Convert 77°F to Celsius
-5. Print both results
+**Real Module Creation!** 
+Now you can create an actual Python module file using the File Manager below!
 
-**Hints**:
-- Since we can't create multiple files here, define the functions directly
-- Formula for C to F: \`c * 9/5 + 32\`
-- Formula for F to C: \`(f - 32) * 5/9\`
-- Format output with f-strings
+**Step 1: Create the Module File**
+1. Click the **File Manager** below (expand with ▶)
+2. Click the **➕** button to create a new file
+3. Name it: \`mymath.py\`
+4. Add this content:
+
+\`\`\`python
+"""My Math Module - Basic math utilities"""
+
+def square(x):
+    return x ** 2
+
+def cube(x):
+    return x ** 3
+
+def average(numbers):
+    return sum(numbers) / len(numbers)
+
+PI = 3.14159
+\`\`\`
+
+**Step 2: Import and Use Your Module**
+In the code editor above, write code to:
+1. Import your \`mymath\` module
+2. Calculate the square of 5
+3. Calculate the cube of 3
+4. Calculate the average of [10, 20, 30, 40, 50]
+5. Print the value of PI from your module
+
+**Expected behavior:**
+- Use \`import mymath\` to import your module
+- Use \`mymath.function_name()\` to call functions
+- Access \`mymath.PI\` for the constant
+
+**Tip**: After creating the file, you can click ✏️ to edit it anytime!
           `,
-          starterCode: `# Define the conversion functions
-def celsius_to_fahrenheit(c):
-    # Your code here
-    pass
-
-def fahrenheit_to_celsius(f):
-    # Your code here
-    pass
-
-# Test the functions
-
+          starterCode: `# Step 1: First create mymath.py in File Manager (see instructions above)
+# Step 2: Write your code here to import and use the module
 
 
 `,
-          solution: `# Define the conversion functions
-def celsius_to_fahrenheit(c):
-    return c * 9/5 + 32
-
-def fahrenheit_to_celsius(f):
-    return (f - 32) * 5/9
+          solution: `# Import your custom module
+import mymath
 
 # Test the functions
-celsius = 25
-fahrenheit = 77
-
-f_result = celsius_to_fahrenheit(celsius)
-c_result = fahrenheit_to_celsius(fahrenheit)
-
-print(f"{celsius}°C = {f_result}°F")
-print(f"{fahrenheit}°F = {c_result}°C")`,
-          expectedOutput: "25°C = 77.0°F\n77°F = 25.0°C"
+print(mymath.square(5))
+print(mymath.cube(3))
+print(mymath.average([10, 20, 30, 40, 50]))
+print(mymath.PI)`,
+          expectedOutput: "25\n27\n30.0\n3.14159"
         }
       }
     }

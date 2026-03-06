@@ -18,7 +18,7 @@ CSV stands for Comma-Separated Values - a simple format for tabular data like sp
 ## [场景 3: 实际操作 - 写入 CSV] (90 秒)
 **画面**: 代码编辑器录屏
 **配音 - 操作讲解**:
-Let's work with CSV files.
+OK, Let's write something into CSV files first.
 
 (打字: import csv)
 Import the csv module!
@@ -84,7 +84,7 @@ print("CSV 2 written!")
 ## [场景 4: 实际操作 - 读取 CSV] (90 秒)
 **画面**: 录屏操作
 **配音 - 操作讲解**:
-Read CSV files.
+next, Read CSV files. also similar to read file.
 
 (打字: import csv)
 (打字: # Read CSV file)
@@ -196,7 +196,7 @@ with open("students_dict.csv", "r") as file:
 ## [场景 6: 实际操作 - 写入 JSON] (80 秒)
 **画面**: 录屏操作
 **配音 - 操作讲解**:
-Now let's work with JSON.
+Now let's work with Json.
 
 (打字: import json)
 (打字: # Python data structure)
@@ -261,7 +261,7 @@ with open("student_pretty.json", "r") as file:
 ## [场景 7: 实际操作 - 读取 JSON] (70 秒)
 **画面**: 录屏操作
 **配音 - 操作讲解**:
-Read JSON files.
+next, let's see how to Read JSON files.
 
 (打字: import json)
 (打字: # Read JSON file)

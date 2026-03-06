@@ -25,16 +25,16 @@ Dictionaries are created using curly braces with key-colon-value pairs. Keys are
 ## [场景 4: 实际操作 - 创建和访问字典] (90 秒)
 **画面**: 代码编辑器录屏
 **配音 - 操作讲解**:
-Let's create our first dictionary.
+now, Let's demo our first dictionary in code editor.
 
 (打字: student = {"name": "Alice", "age": 20, "grade": "A"})
-A dictionary with three key-value pairs.
+define a dictionary named student, to create dictionary, remember to use curly braces to create dictionary, then use key-value pair to setup data, if more then one key-value pair, use comma to seperate each other. in this example, you can see the first key is name with value alice. the second key is age with value 20. the third key is grade with value A. print the dictionary.
 
 (打字: print(student))
 (运行)
-See the curly braces? That's a dictionary!
+run the code, you can see the output will display all key value pair within the curly braces. That's a dictionary!
 
-(打字: print(student["name"]))
+(打字:  )
 Access value using square brackets with the key.
 
 (运行)
@@ -78,33 +78,35 @@ print(student.get("email", "Not found"))
 ## [场景 5: 实际操作 - 添加和修改] (80 秒)
 **画面**: 录屏操作
 **配音 - 操作讲解**:
-Dictionaries are mutable. Let's modify them.
+on the other hand, Dictionaries are mutable. Let's modify them.
 
 (打字: student = {"name": "Alice", "age": 20})
 (打字: print(student))
 (运行)
-Starting dictionary with two items.
+this student dictionary have name and age two key with value alice and 20. right?
+run the code, the dictionary show  two key-value pair. 
 
 (打字: student["grade"] = "A")
-Add a new key-value pair.
+now i add a new key-value pair grade equal to A in student dictionary.
 
 (打字: print(student))
 (运行)
-Grade is added!
+run the code again, you can see the grade is added in student dictionary.
 
 (打字: student["age"] = 21)
-Modify an existing value.
+moreover, if the key is exist, we can modify an existing value. here i set student age equal to 21
 
 (打字: print(student))
 (运行)
-Age changed from twenty to twenty-one!
+run the code again, Age changed from twenty to twenty-one!
 
 (打字: student["courses"] = ["Math", "Physics", "CS"])
-Values can be lists!
+finally, regarding the value type, it also can be lists!
+we add the courses in dictionary with list include math, physics and CS.
 
 (打字: print(student))
 (运行)
-Now student has a list of courses!
+run the code, Now student has a list of courses!
 
 **操作时的代码**:
 ```python
@@ -126,37 +128,38 @@ print(student)
 ## [场景 6: 实际操作 - 删除元素] (70 秒)
 **画面**: 录屏操作
 **配音 - 操作讲解**:
-Let's remove items from dictionaries.
+OK, Let's demo how to remove items from dictionaries.
 
 (打字: student = {"name": "Alice", "age": 20, "grade": "A"})
 (打字: print(student))
 (运行)
-Three items.
+
+there are three key-value pair in the dictionary. let's print the dictionary first to see the output.
+run the code, three key-value pair is printed.
 
 (打字: del student["grade"])
-Del removes a key-value pair.
+now i want to delete the grade in the dictionary, input d,e,l student grade, to removes a key-value pair.
 
 (打字: print(student))
 (运行)
-Grade is gone!
+run the code again, you can see only two key-value pair in the dictionary now. Grade is gone!
+
 
 (打字: age = student.pop("age"))
-Pop removes and returns the value.
+moreover, we also can use Pop method removes and returns the value.
 
 (打字: print(f"Removed age: {age}"))
 (打字: print(student))
 (运行)
-Age is removed and we captured it!
 
-(打字: student["major"] = "CS")
-(打字: student["gpa"] = 3.8)
-(打字: print(student))
+run the code, see, Age is also removed!
+
 (打字: student.clear())
-Clear removes everything.
+if you want to clear all data in dictionary, you can use clear method.
 
 (打字: print(student))
 (运行)
-Empty dictionary!
+run the code, here you can see empty dictionary!
 
 **操作时的代码**:
 ```python
@@ -183,12 +186,14 @@ print(student)
 ## [场景 7: 实际操作 - 字典方法] (80 秒)
 **画面**: 录屏操作
 **配音 - 操作讲解**:
-Let's explore dictionary methods.
+in the last part, Let's explore several useful dictionary methods.
 
 (打字: student = {"name": "Alice", "age": 20, "grade": "A"})
 (打字: keys = student.keys())
-Get all keys.
-
+when we have a dictionary, if you want to print the key data only, you can use key method to g  et all data of keys.
+Similarly, if you want to obtain all data of values.
+if you want to see all key-value pair data, you can use items method
+one more tips, you also can save the key and values and item in the list, just add list before the variable like this. so the output will be convert to list. 
 (打字: print(list(keys)))
 (运行)
 Name, age, grade.

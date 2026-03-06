@@ -486,27 +486,38 @@ def execute_with_files():
             conn = get_db_connection()
             cur = conn.cursor(cursor_factory=RealDictCursor)
             
+            # 修改查询：获取用户所有文件（不限制 lesson_id）
             cur.execute("""
-                SELECT file_name, file_content
+                SELECT file_name, file_content, lesson_id
                 FROM user_files
-                WHERE user_id = %s AND (lesson_id = %s OR lesson_id IS NULL)
-            """, (user_id, lesson_id))
+                WHERE user_id = %s
+                ORDER BY created_at DESC
+            """, (user_id,))
             
             files = cur.fetchall()
             
-            # 记录原始文件名
+            # 打印调试信息
+            print(f"📂 [DEBUG] Found {len(files)} files for user {user_id}")
+            for file in files:
+                print(f"   - {file['file_name']} (lesson: {file.get('lesson_id', 'None')})")
+            
+            # 记录原始文件名和内容
             original_files = {file['file_name'] for file in files}
+            original_file_contents = {file['file_name']: file['file_content'] for file in files}
             
             # 在临时目录创建文件
             for file in files:
                 file_path = os.path.join(temp_dir, file['file_name'])
                 with open(file_path, 'w', encoding='utf-8') as f:
                     f.write(file['file_content'])
+                print(f"✅ [DEBUG] Created file: {file['file_name']}")
             
             # 创建代码文件
             code_file = os.path.join(temp_dir, 'main.py')
             with open(code_file, 'w', encoding='utf-8') as f:
                 f.write(code)
+            print(f"✅ [DEBUG] Created main.py in {temp_dir}")
+            print(f"📁 [DEBUG] Files in temp dir: {os.listdir(temp_dir)}")
             
             # 执行代码
             result = subprocess.run(
@@ -517,16 +528,20 @@ def execute_with_files():
                 timeout=5
             )
             
+            print(f"🔍 [DEBUG] Execution completed with return code: {result.returncode}")
+            
             output = result.stdout
             if result.stderr:
                 output += '\n' + result.stderr
             
-            # 检查新创建的文件
+            # 检查新创建的文件和修改的文件
             new_files_saved = []
-            if result.returncode == 0:  # 只在成功执行时保存新文件
+            modified_files_saved = []
+            if result.returncode == 0:  # 只在成功执行时保存文件
                 current_files = set(os.listdir(temp_dir))
                 new_file_names = current_files - original_files - {'main.py'}
                 
+                # 保存新创建的文件
                 for new_file_name in new_file_names:
                     try:
                         file_path = os.path.join(temp_dir, new_file_name)
@@ -553,8 +568,39 @@ def execute_with_files():
                     except Exception as e:
                         print(f"Error saving new file {new_file_name}: {e}")
                 
-                if new_files_saved:
+                # 检查并保存修改的文件（append mode）
+                for original_file_name in original_files:
+                    try:
+                        file_path = os.path.join(temp_dir, original_file_name)
+                        
+                        # 读取当前文件内容
+                        if os.path.exists(file_path):
+                            with open(file_path, 'r', encoding='utf-8') as f:
+                                current_content = f.read()
+                            
+                            # 比较内容是否改变
+                            if current_content != original_file_contents[original_file_name]:
+                                # 确定文件类型
+                                ext = original_file_name.split('.')[-1].lower() if '.' in original_file_name else ''
+                                file_type_map = {'txt': 'text', 'csv': 'csv', 'json': 'json', 'py': 'python'}
+                                file_type = file_type_map.get(ext, 'text')
+                                
+                                # 更新数据库
+                                cur.execute("""
+                                    UPDATE user_files
+                                    SET file_content = %s, updated_at = NOW()
+                                    WHERE user_id = %s AND file_name = %s
+                                """, (current_content, user_id, original_file_name))
+                                
+                                modified_files_saved.append(original_file_name)
+                                print(f"✅ [DEBUG] Modified file saved: {original_file_name}")
+                        
+                    except Exception as e:
+                        print(f"Error checking modified file {original_file_name}: {e}")
+                
+                if new_files_saved or modified_files_saved:
                     conn.commit()
+                    print(f"💾 [DEBUG] Saved {len(new_files_saved)} new files, {len(modified_files_saved)} modified files")
             
             cur.close()
             conn.close()
@@ -563,7 +609,8 @@ def execute_with_files():
                 'success': True,
                 'output': output,
                 'returnCode': result.returncode,
-                'newFiles': new_files_saved
+                'newFiles': new_files_saved,
+                'modifiedFiles': modified_files_saved
             })
             
         finally:

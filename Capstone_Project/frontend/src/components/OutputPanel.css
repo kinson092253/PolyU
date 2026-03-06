@@ -2,38 +2,42 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  background: #282828;
+  background: #0f172a;
   overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
 }
 
 .output-tabs {
   display: flex;
-  background: #1e1e1e;
-  border-bottom: 1px solid #3e3e3e;
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+  backdrop-filter: blur(12px);
 }
 
 .tab-btn {
-  padding: 12px 24px;
+  padding: 14px 28px;
   background: transparent;
   border: none;
-  color: #9ca3af;
+  color: #94a3b8;
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
-  border-bottom: 2px solid transparent;
-  transition: all 0.2s;
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
 }
 
 .tab-btn:hover {
-  color: #fff;
-  background: #2a2a2a;
+  color: #f1f5f9;
+  background: rgba(96, 165, 250, 0.1);
 }
 
 .tab-btn.active {
-  color: #fff;
+  color: #f1f5f9;
   border-bottom-color: #10b981;
+  background: rgba(16, 185, 129, 0.1);
 }
 
 .output-content-wrapper {
@@ -45,7 +49,7 @@
   display: grid;
   grid-template-columns: 1fr 1px 1fr;
   height: 100%;
-  background: #1e1e1e;
+  background: #0f172a;
 }
 
 .output-section {
@@ -55,16 +59,17 @@
 }
 
 .output-section-header {
-  padding: 10px 16px;
-  background: #2a2a2a;
-  color: #9ca3af;
-  font-size: 12px;
-  font-weight: 500;
-  border-bottom: 1px solid #3e3e3e;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  color: #94a3b8;
+  font-size: 13px;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 50px;
+  min-height: 52px;
+  backdrop-filter: blur(12px);
 }
 
 .output-section-header-text {
@@ -73,21 +78,23 @@
 
 .result-indicator {
   font-size: 18px;
-  font-weight: bold;
-  padding: 2px 8px;
-  border-radius: 4px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 8px;
   animation: fadeIn 0.3s ease-in;
   flex-shrink: 0;
 }
 
 .result-indicator.correct {
   color: #10b981;
-  background: rgba(16, 185, 129, 0.1);
+  background: rgba(16, 185, 129, 0.2);
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
 }
 
 .result-indicator.incorrect {
   color: #ef4444;
-  background: rgba(239, 68, 68, 0.1);
+  background: rgba(239, 68, 68, 0.2);
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
 }
 
 @keyframes fadeIn {
@@ -109,16 +116,20 @@
 
 .output-section-content pre {
   margin: 0;
-  color: #e5e7eb;
-  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-  font-size: 13px;
-  line-height: 1.6;
+  color: #e2e8f0;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.7;
   white-space: pre-wrap;
   word-wrap: break-word;
 }
 
 .output-section-content pre.error {
-  color: #ef4444;
+  color: #fca5a5;
+  background: rgba(239, 68, 68, 0.1);
+  padding: 12px;
+  border-radius: 8px;
+  border-left: 4px solid #ef4444;
 }
 
 .output-divider {
@@ -133,16 +144,20 @@
 
 .console-output pre {
   margin: 0;
-  color: #e5e7eb;
-  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-  font-size: 13px;
-  line-height: 1.6;
+  color: #e2e8f0;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.7;
   white-space: pre-wrap;
   word-wrap: break-word;
 }
 
 .console-output pre.error {
-  color: #ef4444;
+  color: #fca5a5;
+  background: rgba(239, 68, 68, 0.1);
+  padding: 12px;
+  border-radius: 8px;
+  border-left: 4px solid #ef4444;
 }
 
 .empty-message {
@@ -154,21 +169,24 @@
 /* 滾動條美化 - 深色主題 */
 .output-section-content::-webkit-scrollbar,
 .console-output::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 
 .output-section-content::-webkit-scrollbar-track,
 .console-output::-webkit-scrollbar-track {
-  background: #1e1e1e;
+  background: rgba(148, 163, 184, 0.1);
+  border-radius: 10px;
 }
 
 .output-section-content::-webkit-scrollbar-thumb,
 .console-output::-webkit-scrollbar-thumb {
-  background: #4b5563;
-  border-radius: 4px;
+  background: linear-gradient(180deg, #10b981, #059669);
+  border-radius: 10px;
+  border: 2px solid rgba(0, 0, 0, 0.1);
 }
 
 .output-section-content::-webkit-scrollbar-thumb:hover,
 .console-output::-webkit-scrollbar-thumb:hover {
-  background: #6b7280;
+  background: linear-gradient(180deg, #059669, #047857);
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
 }

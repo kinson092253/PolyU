@@ -27,30 +27,30 @@ The range function is the key to for loops. Range with one argument generates nu
 ## [场景 4: 实际操作 - 基本 for 循环] (90 秒)
 **画面**: 代码编辑器录屏
 **配音 - 操作讲解**:
-Let's create our first for loop.
+OK, Let's try to use for loop in code editor.
 
 (打字: for i in range(5):)
-For i in range 5, colon. This will loop 5 times.
+the format is For i in range 5, colon. Remind that the parameter need to write it in parentheses. That means this will loop 5 times.
 
 (Tab, 打字:     print(i))
-Print i each time.
+then Print i each time.
 
 (运行)
-See? It prints 0, 1, 2, 3, 4. Five numbers starting from zero.
+let's run the code, See? It prints 0, 1, 2, 3, 4. Five numbers starting from zero.
 
 (打字: for i in range(1, 6):)
 (Tab, 打字:     print(i))
-Range with two arguments. From 1 to 6, but 6 is not included.
+now, let's change the range with two arguments. From 1 to 6, but 6 is not included.
 
 (运行)
-Now we get 1, 2, 3, 4, 5. Five numbers starting from 1.
+and run the code again, Now we get 1, 2, 3, 4, 5. Five numbers starting from 1.
 
 (打字: for i in range(0, 10, 2):)
 (Tab, 打字:     print(i))
-Range with step 2. Count by twos.
+easy right? let's change the range with three arguments. Count by twos.
 
 (运行)
-0, 2, 4, 6, 8. It skips every other number!
+and run the code to see the output, output is 0, 2, 4, 6, 8. It skips 2 between each number!
 
 **操作时的代码**:
 ```python
@@ -69,7 +69,7 @@ for i in range(0, 10, 2):
 ## [场景 5: 实际操作 - 循环中的计算] (80 秒)
 **画面**: 录屏操作
 **配音 - 操作讲解**:
-Let's do calculations inside a loop.
+on the other hand, let's do calculations inside a loop.
 
 (打字: total = 0)
 Initialize total to zero.
@@ -80,11 +80,11 @@ Initialize total to zero.
 Each iteration, we add i to total and show the progress.
 
 (运行)
-Watch the total grow: 1, 3, 6, 10, 15. We're calculating the sum of numbers 1 through 5!
+run the code to watch the total grow: 1, 3, 6, 10, 15. We're calculating the sum of numbers 1 through 5!
 
 (打字: print(f"Final total: {total}"))
 (运行)
-Final total is 15.
+the final total is 15.
 
 **操作时的代码**:
 ```python
@@ -100,7 +100,7 @@ print(f"Final total: {total}")
 ## [场景 6: 遍历列表] (40 秒)
 **画面**: 列表遍历图示
 **配音**:
-For loops aren't just for numbers. We can loop through lists, strings, and other collections. This is called iteration. Python makes it beautifully simple.
+For loops aren't just for numbers. We also can loop through lists, strings, and other collections. This is called iteration. Python makes it beautifully simple.
 
 ---
 
@@ -126,12 +126,14 @@ We can use the loop variable in any way.
 (运行)
 Now each fruit is in a sentence.
 
+
+Let's see the simple string for loop example
 (打字: for letter in "Python":)
 (Tab, 打字:     print(letter))
-We can even loop through strings! Each character is processed.
+We can loop through strings! Each character is processed.
 
 (运行)
-P, y, t, h, o, n. Each letter on a separate line.
+run the code, the output is P, y, t, h, o, n. Each letter on a separate line.
 
 **操作时的代码**:
 ```python

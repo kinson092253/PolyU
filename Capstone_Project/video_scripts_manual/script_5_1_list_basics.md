@@ -25,32 +25,26 @@ Lists are created using square brackets. You can create an empty list, a list of
 ## [场景 4: 实际操作 - 创建和访问列表] (90 秒)
 **画面**: 代码编辑器录屏
 **配音 - 操作讲解**:
-Let's create our first lists.
+Let's create our first lists in code editor.
 
 (打字: fruits = ["apple", "banana", "cherry"])
-I'm creating a list called fruits with three items.
+I'm creating a list called fruits with apple, banana, cherry three items. and print the fruits
 
 (打字: print(fruits))
 (运行)
-See? The entire list prints with square brackets.
+run the code, The entire list prints with square brackets.
 
 (打字: print(fruits[0]))
-To access a single item, use its index. Index zero gets the first item.
+and then, if i want to access a single item, use its index. Index zero gets the first item.
 
 (运行)
-Apple. Remember, Python starts counting from zero, not one.
+run the code again, output is Apple. Remember, index starts counting from zero, not one.
 
-(打字: print(fruits[1]))
-Index one gets the second item.
-
-(运行)
-Banana.
 
 (打字: print(fruits[-1]))
-Negative indices count from the end. Minus one gets the last item.
+the negative indices count from the end of list. Minus one can get the last item cherry. This is super useful when you don't know the list length!
 
-(运行)
-Cherry. This is super useful when you don't know the list length!
+
 
 **操作时的代码**:
 ```python
@@ -114,32 +108,34 @@ print(numbers[::2])
 ## [场景 6: 实际操作 - 修改列表] (70 秒)
 **画面**: 录屏操作
 **配音 - 操作讲解**:
-Lists are mutable, meaning we can change them.
+on the other hand, we know that Lists are mutable, that's mean we can change them. let me show you how to do it.
 
 (打字: fruits = ["apple", "banana", "cherry"])
 (打字: print(fruits))
 (运行)
-Original list.
+i also define fruits list with apple, banana and cherry
+and print the second item, the output is banana. right?
 
 (打字: fruits[1] = "blueberry")
-Change the second item to blueberry.
+now i want to change the second item. I am input fruits index 1 equal to blueberry. and let's print the fruits index 1 again.
 
 (打字: print(fruits))
 (运行)
-Banana is now blueberry!
+run the code, you can see that the original fruits index 1 is Banana and now is change to blueberry!
 
 (打字: print("apple" in fruits))
-Check if apple is in the list.
+moreover, if you want to know is it the item in the list, you can write down the item name as the string format then check in specific list. for example, this code is check if apple is in the fruits list or not.
 
 (运行)
-True. The word 'in' checks membership.
+the output is True. so The word in our list.
 
 (打字: print("orange" in fruits))
 (运行)
-False. Orange is not in our list.
+
+if return False. that means Orange is not in our fruits list.
 
 (打字: print(len(fruits)))
-Len function tells us how many items.
+and then Len function can tell us how many items. you just input l,e,n to call the function, and input the list name inside the brackets
 
 (运行)
 Three items in our list.

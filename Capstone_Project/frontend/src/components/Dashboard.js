@@ -76,7 +76,7 @@ const Dashboard = ({ onBackToLearning, userId = 1 }) => {
   return (
     <div className="dashboard">
       <div className="dashboard-header">
-        <h1>📊 Learning Dashboard</h1>
+        <h1>📊 <span>Learning Dashboard</span></h1>
         <button className="btn-back" onClick={onBackToLearning}>
           ← Back to Learning
         </button>
@@ -159,7 +159,7 @@ const Dashboard = ({ onBackToLearning, userId = 1 }) => {
 
       {/* 薄弱环节 */}
       <div className="weak-points-section">
-        <h3>📌 Areas for Improvement</h3>
+        <h3>📌 <span>Areas for Improvement</span></h3>
         <div className="weak-points-list">
           {weakPoints.map((point, index) => (
             <div key={index} className="weak-point-item">
@@ -188,7 +188,7 @@ const Dashboard = ({ onBackToLearning, userId = 1 }) => {
 
       {/* 成就徽章 */}
       <div className="achievements-section">
-        <h3>🏆 Achievements</h3>
+        <h3>🏆 <span>Achievements</span></h3>
         <div className="achievements-list">
           <div className="achievement-badge earned">
             <span className="badge-icon">🏆</span>

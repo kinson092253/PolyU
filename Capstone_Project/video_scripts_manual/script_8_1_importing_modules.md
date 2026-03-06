@@ -11,45 +11,46 @@ Welcome to Lesson 8.1: Importing Modules. Modules let you use pre-written code, 
 ## [场景 2: 模块介绍] (40 秒)
 **画面**: 模块概念动画 + 好处列表
 **配音**:
-A module is a file containing Python code - functions, classes, and variables that you can reuse. Python comes with a huge standard library of modules for everything from math to web requests. Modules provide code reusability, better organization, namespace management, and access to thousands of existing functions. Instead of reinventing the wheel, import what you need!
+A module is a file containing Python code - functions, classes, and variables that you can reuse. Python comes with a huge standard library of modules for everything from math to web requests. Modules provide code reusability, better organization, namespace management, and access to thousands of existing functions.
 
 ---
 
 ## [场景 3: 导入语法] (30 秒)
 **画面**: 导入语法图示
 **配音**:
-There are several ways to import. Import module loads everything. From module import specific loads only what you need. Import module as alias creates a shortcut. And from module import star loads everything directly, though this is not recommended due to potential naming conflicts.
+There are several ways to import modules. let me use math modules as the example, First, import math, which mean loads the entire module, when you call the module, it requires you to type module name dot function or class or variable name such as math doc sqrt. Second, from math import sqrt loads only what you need. so you allow to call the specific function without module name. and then, if the module name or function name is too long, for example, you can type import math as m to creates a shortcut for easier access.
+
 
 ---
 
 ## [场景 4: 实际操作 - 基本导入] (90 秒)
 **画面**: 代码编辑器录屏
 **配音 - 操作讲解**:
-Let's import our first module.
+now, Let's demo to import module in code editor.
 
 (打字: import math)
-Import the math module.
+in this example, Import the math module first.
 
 (打字: # Use module.function syntax)
 (打字: result = math.sqrt(16))
 (打字: print(result))
 (运行)
-Four! We used the square root function from math.
+after import the module, we used the square root function from math module, and we input 16 as the parameter, save the output in a variable named result, and print it. so the output is Four!
 
 (打字: print(math.pi))
 (运行)
-Pi constant from the math module!
+except square function, math module also can print the Pi constant!
 
 (打字: print(math.pow(2, 3)))
 (运行)
-Eight! Two to the power of three.
+and power function to count the Two to the power of three. output is Eight!
 
 (打字: # Import multiple modules)
 (打字: import random)
 (打字: import datetime)
 (打字: print(random.randint(1, 10)))
 (运行)
-Random number between one and ten!
+python also have lots of useful modules like ramdom, datetime, etc. to know more details, you can find it in the python official website.
 
 (打字: print(datetime.date.today()))
 (运行)
@@ -79,18 +80,19 @@ print(datetime.date.today())
 ## [场景 5: 实际操作 - 导入特定项] (80 秒)
 **画面**: 录屏操作
 **配音 - 操作讲解**:
-Import only what you need.
+on the other hand, let's se how to Import only what you need.
 
 (打字: from math import sqrt, pi)
-Import specific functions - no need for math dot prefix!
+input from math Import sqrt, pi for specific functions, so you can call this function no need for math dot prefix! and then, if import more then one specific function, remember to use comma to seperate it.
 
 (打字: print(sqrt(25)))
 (运行)
-Five! Direct access, no module prefix needed.
+see, without math doc before the square function, run the code, the output is Five!
 
 (打字: print(pi))
 (运行)
-Pi directly!
+and also print the Pi directly!
+
 
 (打字: from math import sqrt, pow, pi, e)
 Import multiple items.
@@ -132,14 +134,14 @@ print(math.ceil(4.3))
 ## [场景 6: 实际操作 - 别名导入] (80 秒)
 **画面**: 录屏操作
 **配音 - 操作讲解**:
-Use aliases to shorten long module names.
+finally, let's see how to Use aliases to shorten long module names.
 
 (打字: import math as m)
 Create alias 'm' for math.
 
 (打字: print(m.sqrt(36)))
 (运行)
-Six! Using the alias.
+then, when i use square function, i don't need to input m a t h doc square, just input m doc square is ok. but remind that the shortform should meanningful so we can know what module we use now. run the code. the output is Six! Using the alias of math is work.
 
 (打字: print(m.pi))
 (运行)
@@ -181,18 +183,18 @@ print(dt.date.today())
 ## [场景 7: 实际操作 - 探索模块] (70 秒)
 **画面**: 录屏操作
 **配音 - 操作讲解**:
-Discover what's in a module.
+one more useful tips, if you want to discover what's in a module.
 
 (打字: import math)
 (打字: # Use dir() to see all functions)
 (打字: print(dir(math)))
 (运行)
-A list of everything in the math module! Lots of functions!
+after import the module, you can use d i r function for specific module! which mean show the directory of module. after run the code, you can see what functions can use in this module!
 
 (打字: # Get help on a function)
 (打字: help(math.sqrt))
 (运行)
-Detailed documentation! Help explains what the function does!
+on the other hand, if you want to know the details of specific function. you also can use help function to see its description. in this example, you can know what is the s q r t function meaning and how to use it.
 
 (打字: # Access module documentation)
 (打字: print(math.__doc__[:100]))

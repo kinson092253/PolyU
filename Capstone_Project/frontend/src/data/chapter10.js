@@ -6,6 +6,7 @@ export const chapter10 = {
     {
       id: "10.1",
       title: "10.1 Reading and Writing Text Files",
+      videoUrl: "https://youtu.be/ZdqrQ6Zph_Q",
       content: {
         lecture: `
 # Reading and Writing Text Files
@@ -200,15 +201,27 @@ with open("data.txt", "r") as file:
 \`\`\`
         `,
         test: {
-          question: "What does the 'w' mode do when opening a file?\n\n```python\nwith open('data.txt', 'w') as file:\n    file.write('Hello')\n```",
-          options: [
-            "Reads the file",
-            "Appends to the end of the file",
-            "Creates new file or overwrites existing file",
-            "Raises an error if file doesn't exist"
-          ],
-          correctAnswer: 2,
-          explanation: "Mode 'w' (write) creates a new file if it doesn't exist, or completely overwrites the existing file if it does exist."
+          questions: [
+            {
+              type: "multiple-choice",
+              question: "What does the 'w' mode do when opening a file?\n\n```python\nwith open('data.txt', 'w') as file:\n    file.write('Hello')\n```",
+              options: [
+                "Reads the file",
+                "Appends to the end of the file",
+                "Creates new file or overwrites existing file",
+                "Raises an error if file doesn't exist"
+              ],
+              correctAnswer: 2,
+              explanation: "Mode 'w' (write) creates a new file if it doesn't exist, or completely overwrites the existing file if it does exist."
+            },
+            {
+              type: "drag-and-drop",
+              question: "Arrange the code blocks to open a file for reading:",
+              blocks: ["with", "open(", "'file.txt',", "'r'", ")", "as", "f", ":"],
+              correctOrder: ["with", "open(", "'file.txt',", "'r'", ")", "as", "f", ":"],
+              explanation: "The with statement ensures proper file handling: with open(filename, mode) as variable:"
+            }
+          ]
         },
         practice: {
           description: `
@@ -274,6 +287,7 @@ with open("data.txt", "r") as file:
     {
       id: "10.2",
       title: "10.2 CSV and JSON Processing",
+      videoUrl: "https://youtu.be/IMuYS0ZQboU",
       content: {
         lecture: `
 # CSV and JSON Processing
@@ -591,15 +605,27 @@ with open("products.csv", "w", newline='') as file:
 \`\`\`
         `,
         test: {
-          question: "What is the result of the following code?\n\n```python\nimport json\n\ndata = {'name': 'Alice', 'age': 25}\njson_string = json.dumps(data)\nprint(type(json_string))\n```",
-          options: [
-            "<class 'dict'>",
-            "<class 'str'>",
-            "<class 'json'>",
-            "<class 'list'>"
-          ],
-          correctAnswer: 1,
-          explanation: "json.dumps() converts a Python dictionary to a JSON-formatted string, so the type is 'str'."
+          questions: [
+            {
+              type: "multiple-choice",
+              question: "What is the result of the following code?\n\n```python\nimport json\n\ndata = {'name': 'Alice', 'age': 25}\njson_string = json.dumps(data)\nprint(type(json_string))\n```",
+              options: [
+                "<class 'dict'>",
+                "<class 'str'>",
+                "<class 'json'>",
+                "<class 'list'>"
+              ],
+              correctAnswer: 1,
+              explanation: "json.dumps() converts a Python dictionary to a JSON-formatted string, so the type is 'str'."
+            },
+            {
+              type: "drag-and-drop",
+              question: "Arrange the code blocks to convert a dictionary to JSON string:",
+              blocks: ["json_str", "=", "json.dumps(", "data", ")"],
+              correctOrder: ["json_str", "=", "json.dumps(", "data", ")"],
+              explanation: "json.dumps() serializes a Python object to a JSON formatted string: json.dumps(python_object)"
+            }
+          ]
         },
         practice: {
           description: `
@@ -670,6 +696,7 @@ with open("book.json", "r") as file:
     {
       id: "10.3",
       title: "10.3 Exception Handling (try-except)",
+      videoUrl: "https://youtu.be/BJpMp-kBsK4",
       content: {
         lecture: `
 # Exception Handling (try-except)
@@ -991,15 +1018,40 @@ Use exception handling when:
 - Dictionary/list access (key/index might not exist)
         `,
         test: {
-          question: "What will be the output of the following code?\n\n```python\ntry:\n    result = 10 / 2\nexcept ZeroDivisionError:\n    print('Error')\nelse:\n    print('Success')\nfinally:\n    print('Done')\n```",
-          options: [
-            "Error",
-            "Success",
-            "Success\nDone",
-            "Error\nDone"
-          ],
-          correctAnswer: 2,
-          explanation: "Since 10/2 doesn't raise an exception, the else block runs printing 'Success', then finally always runs printing 'Done'."
+          questions: [
+            {
+              type: "multiple-choice",
+              question: "What will be the output of the following code?\n\n```python\ntry:\n    result = 10 / 2\nexcept ZeroDivisionError:\n    print('Error')\nelse:\n    print('Success')\nfinally:\n    print('Done')\n```",
+              options: [
+                "Error",
+                "Success",
+                "Success\nDone",
+                "Error\nDone"
+              ],
+              correctAnswer: 2,
+              explanation: "Since 10/2 doesn't raise an exception, the else block runs printing 'Success', then finally always runs printing 'Done'."
+            },
+            {
+              type: "drag-and-drop",
+              question: "Arrange the code blocks to handle a division by zero error:",
+              multiLine: true,
+              sharedBlocks: false,
+              lines: [
+                {
+                  label: "Line 1 (try block):",
+                  blocks: ["try", ":"],
+                  correctOrder: ["try", ":"]
+                },
+                {
+                  label: "Line 2 (except block):",
+                  blocks: ["except", "ZeroDivisionError", ":"],
+                  correctOrder: ["except", "ZeroDivisionError", ":"],
+                  indent: false
+                }
+              ],
+              explanation: "Exception handling uses try-except blocks. The try block contains code that might raise an exception, and except catches specific exceptions."
+            }
+          ]
         },
         practice: {
           description: `

@@ -18,35 +18,28 @@ A set is an unordered collection that cannot have duplicate values. Think of it 
 ## [场景 3: 实际操作 - 创建集合] (80 秒)
 **画面**: 代码编辑器录屏
 **配音 - 操作讲解**:
-Let's create sets.
+Let's see how to create set in code editor.
 
 (打字: # Create set with curly braces)
 (打字: fruits = {"apple", "banana", "cherry"})
 (打字: print(fruits))
 (打字: print(type(fruits)))
 (运行)
-Notice the curly braces! Type is set.
+please remember to use curly braces to create set. you can see the output that the Type is set here.
 
 (打字: # Duplicates are automatically removed)
 (打字: numbers = {1, 2, 3, 2, 4, 3, 5})
 (打字: print(numbers))
 (运行)
-Only unique values! Duplicates are gone.
-
-(打字: # Create from list using set())
-(打字: list_with_duplicates = [1, 2, 2, 3, 3, 3, 4])
-(打字: unique = set(list_with_duplicates))
-(打字: print(unique))
-(运行)
-Easy way to remove duplicates from a list!
+and one of the most powerful features of a set is that it automatically removes all duplicates for you!
+No matter how many times you try to add the same number (or any value), the set will only keep one copy of it. Duplicates simply disappear.
 
 (打字: # Empty set - must use set())
 (打字: empty = set())
 (打字: print(empty))
 (打字: print(type(empty)))
 (运行)
-Empty curly braces would create a dictionary, so use set()!
-
+one more tips, if you want to create empty set, you must use set function to create, since empty curly braces would create a dictionary! you also can use this function to convert list to set too.
 **操作时的代码**:
 ```python
 # Create set with curly braces
@@ -55,18 +48,18 @@ print(fruits)
 print(type(fruits))
 
 # Duplicates are automatically removed
-numbers = {1, 2, 3, 2, 4, 3, 5}
+numbers = {1, 2, 2, 3, 3, 4, 5}
 print(numbers)
-
-# Create from list using set()
-list_with_duplicates = [1, 2, 2, 3, 3, 3, 4]
-unique = set(list_with_duplicates)
-print(unique)
 
 # Empty set - must use set()
 empty = set()
 print(empty)
 print(type(empty))
+
+# Create from list using set()
+list_with_duplicates = [1, 2, 2, 3, 3, 3, 4]
+unique = set(list_with_duplicates)
+print(unique)
 ```
 
 ---
@@ -74,41 +67,37 @@ print(type(empty))
 ## [场景 4: 实际操作 - 添加和删除] (80 秒)
 **画面**: 录屏操作
 **配音 - 操作讲解**:
-Let's modify sets.
+now Let's try to modify sets.
 
 (打字: fruits = {"apple", "banana"})
 (打字: print(fruits))
 (运行)
-Starting with two fruits.
+we create the set and start with two fruits. run the code, output is two fruits, right?
 
 (打字: fruits.add("cherry"))
-Add method adds one item.
+and then, let's use add method adds one item in the set.
 
 (打字: print(fruits))
 (运行)
-Cherry is added!
+run the code again, you can see cherry is added!
 
-(打字: fruits.add("apple"))
-(打字: print(fruits))
-(运行)
-Apple already exists, so nothing changes!
 
 (打字: fruits.update(["date", "elderberry", "fig"]))
-Update adds multiple items.
+we also can use Update function to add multiple items in the set too.
 
 (打字: print(fruits))
 (运行)
-All new fruits added!
+you can see the set show that all new fruits added here!
 
 (打字: fruits.remove("banana"))
-Remove deletes an item.
+if you want to delete element in the set, you can use Remove function to delete an item in the set. now i want to delete banana.
 
 (打字: print(fruits))
 (运行)
-Banana is gone!
+in the output, banana is gone!
 
 (打字: fruits.discard("orange"))
-Discard is safer - no error if item doesn't exist.
+but if you remove element which not exist in the set, it will output the error. However,you also can use Discard function to remove element in the set, it is safer than remove function since there are no error although item doesn't exist in the set.
 
 (打字: print(fruits))
 (运行)
@@ -120,9 +109,6 @@ fruits = {"apple", "banana"}
 print(fruits)
 
 fruits.add("cherry")
-print(fruits)
-
-fruits.add("apple")
 print(fruits)
 
 fruits.update(["date", "elderberry", "fig"])
@@ -140,46 +126,46 @@ print(fruits)
 ## [场景 5: 实际操作 - 集合运算] (100 秒)
 **画面**: 录屏操作
 **配音 - 操作讲解**:
-Sets support mathematical operations.
+moreover, Sets also support mathematical operations.
 
 (打字: set1 = {1, 2, 3, 4, 5})
 (打字: set2 = {4, 5, 6, 7, 8})
 (打字: print(f"Set 1: {set1}"))
 (打字: print(f"Set 2: {set2}"))
 (运行)
-Two sets with some overlap.
+define two sets with overlap 4 and 5.
 
 (打字: # Union - all items from both sets)
 (打字: union = set1 | set2)
-Pipe symbol for union.
+then we use Pipe symbol for union.
 
 (打字: print(f"Union: {union}"))
 (运行)
-All items from both sets, no duplicates!
+run the code, we can see in the union set, all items from both sets, and no duplicates!
 
 (打字: # Intersection - items in both sets)
 (打字: intersection = set1 & set2)
-Ampersand for intersection.
+if we use Ampersand syntax, it is for intersection.
 
 (打字: print(f"Intersection: {intersection}"))
 (运行)
-Only four and five appear in both!
+so the output show that only four and five appear in both!
 
 (打字: # Difference - items in set1 but not in set2)
 (打字: difference = set1 - set2)
-Minus for difference.
+if use Minus syntax, in this case, you can find the different elements in set 1 but not in set 2. if change to set 2 minus set 1 that means find the elements in set 2 but not in set 1.
 
 (打字: print(f"Difference: {difference}"))
 (运行)
-One, two, three. Items only in set1!
+so the output is One, two, three. Items only in set1! six, seven, eight. items only in set 2.
 
 (打字: # Symmetric difference - items in either but not both)
 (打字: sym_diff = set1 ^ set2)
-Caret for symmetric difference.
+and Caret syntax for symmetric difference. it can combine set 1 and set 2 except the repeat part
 
 (打字: print(f"Symmetric difference: {sym_diff}"))
 (运行)
-Items that appear in only one set!
+you can see the output without 4 and 5 since it is appear in two set so removed. other unique elements are group in a set. 
 
 **操作时的代码**:
 ```python

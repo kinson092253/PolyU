@@ -134,7 +134,7 @@ print(divide_numbers(10, "two"))
 ## [场景 5: 实际操作 - Else 和 Finally] (90 秒)
 **画面**: 录屏操作
 **配音 - 操作讲解**:
-Else and finally clauses.
+now, let's see Else and finally clauses.
 
 (打字: def process_file(filename):)
 (Tab, 打字:     try:)

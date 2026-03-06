@@ -6,6 +6,7 @@ export const chapter7 = {
     {
       id: "7.1",
       title: "7.1 Function Definition and Calling",
+      videoUrl: "https://youtu.be/L_uqqWwKpns",
       content: {
         lecture: `
 # Function Definition and Calling
@@ -171,15 +172,27 @@ def calculate_area():
 \`\`\`
         `,
         test: {
-          question: "What will be the output of the following code?\n\n```python\ndef display():\n    print('A')\n    print('B')\n\ndisplay()\nprint('C')\n```",
-          options: [
-            "A B C",
-            "A C B",
-            "C A B",
-            "Error"
-          ],
-          correctAnswer: 0,
-          explanation: "First, display() is called which prints 'A' then 'B'. After the function completes, print('C') executes. The output is A, B, C (each on a new line)."
+          questions: [
+            {
+              type: "multiple-choice",
+              question: "What will be the output of the following code?\n\n```python\ndef display():\n    print('A')\n    print('B')\n\ndisplay()\nprint('C')\n```",
+              options: [
+                "A B C",
+                "A C B",
+                "C A B",
+                "Error"
+              ],
+              correctAnswer: 0,
+              explanation: "First, display() is called which prints 'A' then 'B'. After the function completes, print('C') executes. The output is A, B, C (each on a new line)."
+            },
+            {
+              type: "drag-and-drop",
+              question: "Arrange the code blocks to define a function named 'greet':",
+              blocks: ["def", "greet", "(", ")", ":"],
+              correctOrder: ["def", "greet", "(", ")", ":"],
+              explanation: "A function is defined using the def keyword followed by the function name, parentheses, and a colon: def function_name():"
+            }
+          ]
         },
         practice: {
           description: `
@@ -219,6 +232,7 @@ print_greeting()`,
     {
       id: "7.2",
       title: "7.2 Parameters and Return Values",
+      videoUrl: "https://youtu.be/P7s9QKZKlds",
       content: {
         lecture: `
 # Parameters and Return Values
@@ -467,15 +481,40 @@ print(calculate_total(price=50, quantity=4, discount=15))  # 170.0
 \`\`\`
         `,
         test: {
-          question: "What will be the output of the following code?\n\n```python\ndef multiply(x, y=2):\n    return x * y\n\nresult1 = multiply(5)\nresult2 = multiply(5, 3)\nprint(result1 + result2)\n```",
-          options: [
-            "25",
-            "30",
-            "15",
-            "35"
-          ],
-          correctAnswer: 0,
-          explanation: "multiply(5) uses default y=2, so 5*2=10. multiply(5, 3) gives 5*3=15. Total: 10+15=25."
+          questions: [
+            {
+              type: "multiple-choice",
+              question: "What will be the output of the following code?\n\n```python\ndef multiply(x, y=2):\n    return x * y\n\nresult1 = multiply(5)\nresult2 = multiply(5, 3)\nprint(result1 + result2)\n```",
+              options: [
+                "25",
+                "30",
+                "15",
+                "35"
+              ],
+              correctAnswer: 0,
+              explanation: "multiply(5) uses default y=2, so 5*2=10. multiply(5, 3) gives 5*3=15. Total: 10+15=25."
+            },
+            {
+              type: "drag-and-drop",
+              question: "Arrange the code blocks to create a function that returns the sum of a and b:",
+              multiLine: true,
+              sharedBlocks: false,
+              lines: [
+                {
+                  label: "Line 1 (function definition):",
+                  blocks: ["def", "add", "(", "a,", "b", ")", ":"],
+                  correctOrder: ["def", "add", "(", "a,", "b", ")", ":"]
+                },
+                {
+                  label: "Line 2 (return statement - indented):",
+                  blocks: ["return", "a", "+", "b"],
+                  correctOrder: ["return", "a", "+", "b"],
+                  indent: true
+                }
+              ],
+              explanation: "A complete function definition includes: 1) def keyword with function name and parameters, 2) indented return statement to send back the result."
+            }
+          ]
         },
         practice: {
           description: `
@@ -519,6 +558,7 @@ print(area)`,
     {
       id: "7.3",
       title: "7.3 Variable Scope and Lambda Functions",
+      videoUrl: "https://youtu.be/Rm2-rqpFbRk",
       content: {
         lecture: `
 # Variable Scope and Lambda Functions
@@ -786,15 +826,27 @@ squared = list(map(square, numbers))
 \`\`\`
         `,
         test: {
-          question: "What will be the output of the following code?\n\n```python\nnumbers = [1, 2, 3, 4, 5]\nresult = list(filter(lambda x: x > 2, numbers))\nprint(result)\n```",
-          options: [
-            "[3, 4, 5]",
-            "[1, 2]",
-            "[2, 3, 4, 5]",
-            "[1, 2, 3, 4, 5]"
-          ],
-          correctAnswer: 0,
-          explanation: "The filter() function with lambda x: x > 2 keeps only numbers greater than 2. So it filters out 1 and 2, returning [3, 4, 5]."
+          questions: [
+            {
+              type: "multiple-choice",
+              question: "What will be the output of the following code?\n\n```python\nnumbers = [1, 2, 3, 4, 5]\nresult = list(filter(lambda x: x > 2, numbers))\nprint(result)\n```",
+              options: [
+                "[3, 4, 5]",
+                "[1, 2]",
+                "[2, 3, 4, 5]",
+                "[1, 2, 3, 4, 5]"
+              ],
+              correctAnswer: 0,
+              explanation: "The filter() function with lambda x: x > 2 keeps only numbers greater than 2. So it filters out 1 and 2, returning [3, 4, 5]."
+            },
+            {
+              type: "drag-and-drop",
+              question: "Arrange the code blocks to create a lambda function that doubles a number:",
+              blocks: ["lambda", "n:", "n", "*", "2"],
+              correctOrder: ["lambda", "n:", "n", "*", "2"],
+              explanation: "Lambda functions are small anonymous functions. Syntax: lambda parameter: expression. This creates a function that doubles n: lambda n: n * 2"
+            }
+          ]
         },
         practice: {
           description: `

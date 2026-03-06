@@ -18,25 +18,27 @@ Object-Oriented Programming, or OOP, organizes code around objects and classes. 
 ## [场景 3: 实际操作 - 第一个类] (90 秒)
 **画面**: 代码编辑器录屏
 **配音 - 操作讲解**:
-Let's create our first class.
+OK, Let's see how to cerate class and object in code editor first.
 
 (打字: class Dog:)
 (Tab, 打字:     pass)
-Simplest class - just uses pass as placeholder.
-
+We define a class named Dog, and inside it we simply use pass as a placeholder, pass meaning the class has no functionality yet
 (打字: # Create an object)
 (打字: my_dog = Dog())
 (打字: print(my_dog))
 (打字: print(type(my_dog)))
 (运行)
-We created an object! Type shows it's a Dog instance!
+Next, we create an object — that is, an instance of this class. The way to create an object is similar to assigning a variable. input object name equal to class name, and we must remember to add the parentheses after the class name. These parentheses are what actually call the class and produce the instance. When we print the object, we see something like this, This tells us it’s a Dog object and shows its memory address. Then, we also check its type and show that my dog is an instance of the Dog class.
 
 (打字: # Real class with __init__)
 (打字: class Dog:)
 (Tab, 打字:     def __init__(self, name, age):)
 (Tab*2, 打字:         self.name = name)
 (Tab*2, 打字:         self.age = age)
-Underscore underscore init is the constructor - it runs when creating objects!
+OK, now let's learn how to define methods inside a class. The most important special method input underscore underscore i n i t underscore underscore, it is Python's constructor, constructor runs automatically the moment when you create a new object. and then, in constructor or any method you define, the first parameter must input self, self refers to the object that is just being created, after self parameter, you can add any other parameters you want. in this case, we add name and age two parameter in the constructor. which mean the object need two parameter to define. self is not a meaningful parameter but is must input in the parentheses. moreover, inside the constructor, why do we write self dot name equal to name and self dot age equal to age? Because we want to save the values that were passed in as attributes of the object itself. for example, self name dot name means Take the name value you gave me, and attach it to this object as its own name property. in here we define dog one object with two parameter buddy and 3. so in this object, name is buddy, age is 3. you can call the object to print the attribute too.
+
+
+
 
 (打字: dog1 = Dog("Buddy", 3))
 (打字: dog2 = Dog("Lucy", 5))
@@ -47,13 +49,13 @@ Buddy and five! Each object has its own data!
 
 **操作时的代码**:
 ```python
-class Dog:
-    pass
+    class Dog:
+        pass
 
-# Create an object
-my_dog = Dog()
-print(my_dog)
-print(type(my_dog))
+    # Create an object
+    my_dog = Dog()
+    print(my_dog)
+    print(type(my_dog))
 
 # Real class with __init__
 class Dog:
@@ -81,24 +83,17 @@ Add methods to classes.
 (Tab*2, 打字:         self.age = age)
 (Tab, 打字:     def bark(self):)
 (Tab*2, 打字:         print(f"{self.name} says Woof!"))
-Instance method - first parameter is always self!
+except constructor, we also can define other instance method in the class, but remember each method that the first parameter is always self!
 
-(Tab, 打字:     def get_info(self):)
-(Tab*2, 打字:         return f"{self.name} is {self.age} years old")
+in this case, we define bark method, and remind that, all methods can use the attribute that define before. so here i can get the name value.
+
 (打字: dog = Dog("Max", 4))
 (打字: dog.bark())
 (运行)
-Max says Woof!
+define an object with name equal to max and age equal to 4. then call the method bark. run the code, see, the output is Max says woof.
 
-(打字: print(dog.get_info()))
-(运行)
-Max is four years old! Methods can access object's data through self!
 
-(打字: dog2 = Dog("Bella", 2))
-(打字: dog2.bark())
-(打字: print(dog2.get_info()))
-(运行)
-Different object, different data!
+
 
 **操作时的代码**:
 ```python
@@ -127,7 +122,7 @@ print(dog2.get_info())
 ## [场景 5: 实际操作 - 修改属性] (70 秒)
 **画面**: 录屏操作
 **配音 - 操作讲解**:
-Object attributes can be modified.
+on the other hand, Object attributes also can be modified. let's see how to do it.
 
 (打字: class Student:)
 (Tab, 打字:     def __init__(self, name, grade):)
@@ -139,7 +134,7 @@ Object attributes can be modified.
 (打字: student = Student("Alice", 85))
 (打字: print(f"Initial grade: {student.grade}"))
 (运行)
-Eighty-five!
+we define a constructor first, it include two parameters name and grade. then, define a method named improve grade, it accept a parameter points. then we create an object with name alice and grade 85, after that we call improve grade method with point 10, so the point will add into the grade and update it. so we can see the grade is updated from 85 to 95. moreover, we also can input class name dot attribute name to update the value directly like this, the output is change to 100.  
 
 (打字: student.improve_grade(10))
 (运行)
@@ -271,7 +266,7 @@ print(book2)
 ## [场景 8: 实际应用] (60 秒)
 **画面**: 录屏操作
 **配音 - 操作讲解**:
-Real-world example: BankAccount class.
+finally, let's see an bank account practice
 
 (打字: class BankAccount:)
 (Tab, 打字:     def __init__(self, owner, balance=0):)
@@ -291,7 +286,9 @@ Real-world example: BankAccount class.
 (打字: account.withdraw(300))
 (打字: account.withdraw(2000))
 (运行)
-Complete bank account simulation!
+i create a class named bank account, inside the class, i create a constructor with two parameter, remember the constructor name must underscore underscore i n i t underscore underscore, and the first parameter must self, then input onwer and balance in the parentheses, and the balance default is 0. in the constructor, save the value that passed when create object. then define two methods named depostit and withdraw with a parameter amount, if call the deposit method, the balance will add the amounnt, if call withdraw method, the balance will deduct the amount, after that will print out how many amount is added or deducted, an show the new balance too. moreover, we also need to set a if condition inside withdraw method, if amount is greater than the balance will print the error message. otherwase the action is accepted.
+
+after complete the class, let's create an object, the object name is account and owner is alice and balance is 1000, and remind that, since we set the balance is 1000, so the default value 0 will be coverd. it will use when we without set the banalce value. then we first deposit 500 from account, after that, withdraw 300 and 2000 in account, let's see the output. we can see the account balance is 1500 when deposit 500, then update to 1200 after withdraw 300. however, the error message printed since the amount 2000 is greater than the latest balance 1200.
 
 **操作时的代码**:
 ```python
@@ -322,7 +319,7 @@ account.withdraw(2000)
 ## [场景 9: 结尾] (10 秒)
 **画面**: 总结卡片
 **配音**:
-Great work! You've learned to create classes and objects. Next, we'll explore inheritance - reusing code through class hierarchies. See you there!
+Excellent! You've learned to create classes and objects. Next, we'll explore inheritance - reusing code through class hierarchies. See you there!
 
 ---
 

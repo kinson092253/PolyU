@@ -6,6 +6,7 @@ export const chapter9 = {
     {
       id: "9.1",
       title: "9.1 Classes and Objects",
+      videoUrl: "https://youtu.be/mgq1cYbRN78",
       content: {
         lecture: `
 # Classes and Objects
@@ -15,11 +16,11 @@ Object-Oriented Programming (OOP) is a way to organize code using **objects** th
 ## What are Classes and Objects?
 
 **Class**: A blueprint or template for creating objects  
-**Object**: An instance of a class (具体的实例)
+**Object**: An instance of a class
 
 Think of it like:
-- **Class** = Cookie cutter (模具)
-- **Object** = The actual cookie (实际的饼干)
+- **Class** = Cookie cutter
+- **Object** = The actual cookie
 
 ## Defining a Class
 
@@ -232,15 +233,40 @@ print(account.get_balance())  # Current balance: $1300
 | Created once | Can create many |
         `,
         test: {
-          question: "What will be the output of the following code?\n\n```python\nclass Car:\n    def __init__(self, brand):\n        self.brand = brand\n\ncar1 = Car('Toyota')\ncar2 = Car('Honda')\nprint(car1.brand)\nprint(car2.brand)\n```",
-          options: [
-            "Toyota\nToyota",
-            "Honda\nHonda",
-            "Toyota\nHonda",
-            "Error"
-          ],
-          correctAnswer: 2,
-          explanation: "Each object (car1 and car2) has its own instance variable 'brand'. car1.brand is 'Toyota' and car2.brand is 'Honda'."
+          questions: [
+            {
+              type: "multiple-choice",
+              question: "What will be the output of the following code?\n\n```python\nclass Car:\n    def __init__(self, brand):\n        self.brand = brand\n\ncar1 = Car('Toyota')\ncar2 = Car('Honda')\nprint(car1.brand)\nprint(car2.brand)\n```",
+              options: [
+                "Toyota\nToyota",
+                "Honda\nHonda",
+                "Toyota\nHonda",
+                "Error"
+              ],
+              correctAnswer: 2,
+              explanation: "Each object (car1 and car2) has its own instance variable 'brand'. car1.brand is 'Toyota' and car2.brand is 'Honda'."
+            },
+            {
+              type: "drag-and-drop",
+              question: "Arrange the code blocks to define a simple class named 'Dog':",
+              multiLine: true,
+              sharedBlocks: false,
+              lines: [
+                {
+                  label: "Line 1 (class definition):",
+                  blocks: ["class", "Dog", ":"],
+                  correctOrder: ["class", "Dog", ":"]
+                },
+                {
+                  label: "Line 2 (class body - indented):",
+                  blocks: ["pass"],
+                  correctOrder: ["pass"],
+                  indent: true
+                }
+              ],
+              explanation: "A class is defined using the class keyword, followed by the class name and colon. The class body (even if empty with pass) must be indented."
+            }
+          ]
         },
         practice: {
           description: `
@@ -295,6 +321,7 @@ person.introduce()`,
     {
       id: "9.2",
       title: "9.2 Inheritance",
+      videoUrl: "https://youtu.be/TXIGlZlZ0ec",
       content: {
         lecture: `
 # Inheritance
@@ -597,15 +624,27 @@ mgr.hold_meeting()   # Bob is holding a meeting
 - Just to reuse a few methods
         `,
         test: {
-          question: "What will be the output of the following code?\n\n```python\nclass Animal:\n    def sound(self):\n        return 'Generic sound'\n\nclass Dog(Animal):\n    def sound(self):\n        return 'Bark'\n\ndog = Dog()\nprint(dog.sound())\n```",
-          options: [
-            "Generic sound",
-            "Bark",
-            "Generic sound Bark",
-            "Error"
-          ],
-          correctAnswer: 1,
-          explanation: "The Dog class overrides the sound() method from Animal, so when dog.sound() is called, it executes Dog's version and returns 'Bark'."
+          questions: [
+            {
+              type: "multiple-choice",
+              question: "What will be the output of the following code?\n\n```python\nclass Animal:\n    def sound(self):\n        return 'Generic sound'\n\nclass Dog(Animal):\n    def sound(self):\n        return 'Bark'\n\ndog = Dog()\nprint(dog.sound())\n```",
+              options: [
+                "Generic sound",
+                "Bark",
+                "Generic sound Bark",
+                "Error"
+              ],
+              correctAnswer: 1,
+              explanation: "The Dog class overrides the sound() method from Animal, so when dog.sound() is called, it executes Dog's version and returns 'Bark'."
+            },
+            {
+              type: "drag-and-drop",
+              question: "Arrange the code blocks to create a class Cat that inherits from Animal:",
+              blocks: ["class", "Cat", "(", "Animal", ")", ":"],
+              correctOrder: ["class", "Cat", "(", "Animal", ")", ":"],
+              explanation: "Inheritance syntax: class ChildClass(ParentClass): - The parent class name goes in parentheses"
+            }
+          ]
         },
         practice: {
           description: `
@@ -675,6 +714,7 @@ print(f"Area: {rect.area()}")`,
     {
       id: "9.3",
       title: "9.3 Encapsulation and Magic Methods",
+      videoUrl: "https://youtu.be/LEWy-kR7Msc",
       content: {
         lecture: `
 # Encapsulation and Magic Methods
@@ -1044,15 +1084,27 @@ print(account.withdraw(5000, 1234))     # Insufficient funds!
 - Overcomplicate simple classes
         `,
         test: {
-          question: "What is the purpose of using double underscores (__) before an attribute name in Python?\n\n```python\nclass Account:\n    def __init__(self, balance):\n        self.__balance = balance\n```",
-          options: [
-            "It makes the attribute completely inaccessible",
-            "It applies name mangling to make the attribute harder to access from outside the class",
-            "It makes the attribute read-only",
-            "It has no special meaning"
-          ],
-          correctAnswer: 1,
-          explanation: "Double underscores trigger name mangling in Python, which changes the attribute name to _ClassName__attributeName, making it harder (but not impossible) to access from outside the class. This is Python's way of implementing 'private' attributes."
+          questions: [
+            {
+              type: "multiple-choice",
+              question: "What is the purpose of using double underscores (__) before an attribute name in Python?\n\n```python\nclass Account:\n    def __init__(self, balance):\n        self.__balance = balance\n```",
+              options: [
+                "It makes the attribute completely inaccessible",
+                "It applies name mangling to make the attribute harder to access from outside the class",
+                "It makes the attribute read-only",
+                "It has no special meaning"
+              ],
+              correctAnswer: 1,
+              explanation: "Double underscores trigger name mangling in Python, which changes the attribute name to _ClassName__attributeName, making it harder (but not impossible) to access from outside the class. This is Python's way of implementing 'private' attributes."
+            },
+            {
+              type: "drag-and-drop",
+              question: "Arrange the code blocks to create a private attribute __age:",
+              blocks: ["self.__age", "=", "25"],
+              correctOrder: ["self.__age", "=", "25"],
+              explanation: "Private attributes in Python are denoted by double underscores: self.__attribute_name. This triggers name mangling for encapsulation."
+            }
+          ]
         },
         practice: {
           description: `
@@ -1132,6 +1184,7 @@ print(temp)                    # Temperature: 100°C`,
     {
       id: "9.4",
       title: "9.4 Polymorphism",
+      videoUrl: "https://youtu.be/hylBNvknq6k",
       content: {
         lecture: `
 # Polymorphism
@@ -1495,15 +1548,27 @@ Polymorphism allows:
 - Clean, maintainable code architecture
         `,
         test: {
-          question: "What will be the output of the following code?\n\n```python\nclass Animal:\n    def sound(self):\n        return 'Generic'\n\nclass Dog(Animal):\n    def sound(self):\n        return 'Bark'\n\nclass Cat(Animal):\n    def sound(self):\n        return 'Meow'\n\nanimals = [Dog(), Cat()]\nfor a in animals:\n    print(a.sound())\n```",
-          options: [
-            "Generic\nGeneric",
-            "Bark\nMeow",
-            "Dog\nCat",
-            "Error"
-          ],
-          correctAnswer: 1,
-          explanation: "This demonstrates polymorphism. Although both Dog and Cat inherit from Animal, each overrides the sound() method with its own implementation. The loop calls sound() on each object, and each returns its specific implementation: 'Bark' for Dog and 'Meow' for Cat."
+          questions: [
+            {
+              type: "multiple-choice",
+              question: "What will be the output of the following code?\n\n```python\nclass Animal:\n    def sound(self):\n        return 'Generic'\n\nclass Dog(Animal):\n    def sound(self):\n        return 'Bark'\n\nclass Cat(Animal):\n    def sound(self):\n        return 'Meow'\n\nanimals = [Dog(), Cat()]\nfor a in animals:\n    print(a.sound())\n```",
+              options: [
+                "Generic\nGeneric",
+                "Bark\nMeow",
+                "Dog\nCat",
+                "Error"
+              ],
+              correctAnswer: 1,
+              explanation: "This demonstrates polymorphism. Although both Dog and Cat inherit from Animal, each overrides the sound() method with its own implementation. The loop calls sound() on each object, and each returns its specific implementation: 'Bark' for Dog and 'Meow' for Cat."
+            },
+            {
+              type: "drag-and-drop",
+              question: "Arrange the code blocks to iterate through a list of objects and call their method:",
+              blocks: ["for", "obj", "in", "objects", ":", "obj.method()"],
+              correctOrder: ["for", "obj", "in", "objects", ":", "obj.method()"],
+              explanation: "Polymorphism allows different objects to respond to the same method call in their own way: for obj in objects: obj.method()"
+            }
+          ]
         },
         practice: {
           description: `

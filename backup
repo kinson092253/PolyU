@@ -29,27 +29,15 @@ print("Hello, World!")
 This is the classic first program, used to output text on the screen.
         `,
         test: {
-          questions: [
-            {
-              type: "multiple-choice",
-              question: "Which of the following is NOT a feature of Python?",
-              options: [
-                "Easy to learn",
-                "Must be compiled before execution",
-                "Cross-platform",
-                "Has rich libraries"
-              ],
-              correctAnswer: 1,
-              explanation: "Python is an interpreted language and does not need to be compiled before execution. Compiled languages like C and C++ need to be compiled into machine code before execution, while Python can run directly."
-            },
-            {
-              type: "drag-and-drop",
-              question: "Arrange the following code blocks in the correct order to print 'Hello, World!'",
-              blocks: ["print", "(", '"Hello, World!"', ")"],
-              correctOrder: ["print", "(", '"Hello, World!"', ")"],
-              explanation: "The correct syntax is: print(\"Hello, World!\") - the print function requires parentheses, and the text must be in quotes."
-            }
-          ]
+          question: "Which of the following is NOT a feature of Python?",
+          options: [
+            "Easy to learn",
+            "Must be compiled before execution",
+            "Cross-platform",
+            "Has rich libraries"
+          ],
+          correctAnswer: 1,
+          explanation: "Python is an interpreted language and does not need to be compiled before execution. Compiled languages like C and C++ need to be compiled into machine code before execution, while Python can run directly."
         },
         practice: {
           description: `
@@ -173,27 +161,15 @@ import_data = 100
 \`\`\`
         `,
         test: {
-          questions: [
-            {
-              type: "multiple-choice",
-              question: "Which of the following variable names is legal?",
-              options: [
-                "2nd_place",
-                "user-name",
-                "user_name",
-                "for"
-              ],
-              correctAnswer: 2,
-              explanation: "user_name is a legal variable name. 2nd_place starts with a number (illegal), user-name contains a hyphen (illegal), for is a Python keyword (illegal)."
-            },
-            {
-              type: "drag-and-drop",
-              question: "Arrange the code blocks to create a variable called 'price' and assign it the value 19.99",
-              blocks: ["price", "=", "19.99"],
-              correctOrder: ["price", "=", "19.99"],
-              explanation: "The correct syntax is: price = 19.99 - variable name on the left, assignment operator =, and the value on the right."
-            }
-          ]
+          question: "Which of the following variable names is legal?",
+          options: [
+            "2nd_place",
+            "user-name",
+            "user_name",
+            "for"
+          ],
+          correctAnswer: 2,
+          explanation: "user_name is a legal variable name. 2nd_place starts with a number (illegal), user-name contains a hyphen (illegal), for is a Python keyword (illegal)."
         },
         practice: {
           description: `
@@ -304,27 +280,15 @@ print(age + 5)  # Works correctly
 \`\`\`
         `,
         test: {
-          questions: [
-            {
-              type: "multiple-choice",
-              question: "What will be the output of the following code?\n\n```python\nx = input()\ny = input()\nprint(x + y)\n```\n\nIf the user enters: 5 and 3",
-              options: [
-                "8",
-                "53",
-                "5 3",
-                "Error"
-              ],
-              correctAnswer: 1,
-              explanation: "The input() function returns strings, not numbers. So '5' + '3' concatenates the strings to give '53', not the mathematical sum 8. To get 8, you would need to use int(input())."
-            },
-            {
-              type: "drag-and-drop",
-              question: "Arrange the code blocks to correctly convert user input to an integer",
-              blocks: ["age", "=", "int", "(", 'input("Enter age: ")', ")"],
-              correctOrder: ["age", "=", "int", "(", 'input("Enter age: ")', ")"],
-              explanation: "The correct syntax is: age = int(input(\"Enter age: \")) - the input() function is wrapped by int() to convert the string to an integer."
-            }
-          ]
+          question: "What will be the output of the following code?\n\n```python\nx = input()\ny = input()\nprint(x + y)\n```\n\nIf the user enters: 5 and 3",
+          options: [
+            "8",
+            "53",
+            "5 3",
+            "Error"
+          ],
+          correctAnswer: 1,
+          explanation: "The input() function returns strings, not numbers. So '5' + '3' concatenates the strings to give '53', not the mathematical sum 8. To get 8, you would need to use int(input())."
         },
         practice: {
           description: `

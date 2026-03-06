@@ -6,6 +6,7 @@ export const chapter6 = {
     {
       id: "6.1",
       title: "6.1 Dictionary",
+      videoUrl: "https://youtu.be/zMLTlMFFqPA",
       content: {
         lecture: `
 # Dictionary
@@ -209,15 +210,27 @@ print(squares)  # {1: 1, 2: 4, 3: 9, 4: 16, 5: 25}
 \`\`\`
         `,
         test: {
-          question: "What will be the output of the following code?\n\n```python\ndata = {'a': 1, 'b': 2, 'c': 3}\ndata['b'] = 5\ndata['d'] = 4\nprint(len(data))\n```",
-          options: [
-            "4",
-            "3",
-            "5",
-            "Error"
-          ],
-          correctAnswer: 0,
-          explanation: "Initially, the dictionary has 3 items. Modifying data['b'] doesn't change the count. Adding data['d'] increases the count to 4. So len(data) returns 4."
+          questions: [
+            {
+              type: "multiple-choice",
+              question: "What will be the output of the following code?\n\n```python\ndata = {'a': 1, 'b': 2, 'c': 3}\ndata['b'] = 5\ndata['d'] = 4\nprint(len(data))\n```",
+              options: [
+                "4",
+                "3",
+                "5",
+                "Error"
+              ],
+              correctAnswer: 0,
+              explanation: "Initially, the dictionary has 3 items. Modifying data['b'] doesn't change the count. Adding data['d'] increases the count to 4. So len(data) returns 4."
+            },
+            {
+              type: "drag-and-drop",
+              question: "Arrange the code blocks to access the value of key 'name' from the student dictionary:",
+              blocks: ["student", "[", "'name'", "]"],
+              correctOrder: ["student", "[", "'name'", "]"],
+              explanation: "Dictionary values are accessed using square brackets with the key: dictionary[key]"
+            }
+          ]
         },
         practice: {
           description: `
@@ -272,6 +285,7 @@ print(len(student))`,
     {
       id: "6.2",
       title: "6.2 Tuple",
+      videoUrl: "https://youtu.be/v-KY0GMuLHo",
       content: {
         lecture: `
 # Tuple
@@ -471,15 +485,27 @@ print(nested[1][0])  # 3
 - Using list methods like append(), remove(), etc.
         `,
         test: {
-          question: "What will be the output of the following code?\n\n```python\ndata = (1, 2, 3, 4, 5)\nfirst, *middle, last = data\nprint(len(middle))\n```",
-          options: [
-            "3",
-            "2",
-            "4",
-            "5"
-          ],
-          correctAnswer: 0,
-          explanation: "The unpacking assigns first=1, last=5, and middle gets the remaining elements [2, 3, 4]. The length of middle is 3."
+          questions: [
+            {
+              type: "multiple-choice",
+              question: "What will be the output of the following code?\n\n```python\ndata = (1, 2, 3, 4, 5)\nfirst, *middle, last = data\nprint(len(middle))\n```",
+              options: [
+                "3",
+                "2",
+                "4",
+                "5"
+              ],
+              correctAnswer: 0,
+              explanation: "The unpacking assigns first=1, last=5, and middle gets the remaining elements [2, 3, 4]. The length of middle is 3."
+            },
+            {
+              type: "drag-and-drop",
+              question: "Arrange the code blocks to create a tuple with values 10, 20, 30:",
+              blocks: ["point", "=", "(", "10,", "20,", "30", ")"],
+              correctOrder: ["point", "=", "(", "10,", "20,", "30", ")"],
+              explanation: "Tuples are created using parentheses with comma-separated values: (value1, value2, value3)"
+            }
+          ]
         },
         practice: {
           description: `
@@ -527,6 +553,7 @@ print(total)`,
     {
       id: "6.3",
       title: "6.3 Set",
+      videoUrl: "https://youtu.be/IUyWyMCqnOA",
       content: {
         lecture: `
 # Set
@@ -768,15 +795,27 @@ print(has_duplicates(numbers))  # True
 \`\`\`
         `,
         test: {
-          question: "What will be the output of the following code?\n\n```python\nset1 = {1, 2, 3, 4}\nset2 = {3, 4, 5, 6}\nresult = set1 & set2\nprint(len(result))\n```",
-          options: [
-            "2",
-            "4",
-            "6",
-            "8"
-          ],
-          correctAnswer: 0,
-          explanation: "The & operator performs intersection, finding common elements. set1 and set2 both contain 3 and 4, so result = {3, 4}. The length is 2."
+          questions: [
+            {
+              type: "multiple-choice",
+              question: "What will be the output of the following code?\n\n```python\nset1 = {1, 2, 3, 4}\nset2 = {3, 4, 5, 6}\nresult = set1 & set2\nprint(len(result))\n```",
+              options: [
+                "2",
+                "4",
+                "6",
+                "8"
+              ],
+              correctAnswer: 0,
+              explanation: "The & operator performs intersection, finding common elements. set1 and set2 both contain 3 and 4, so result = {3, 4}. The length is 2."
+            },
+            {
+              type: "drag-and-drop",
+              question: "Arrange the code blocks to add the element 'apple' to the fruits set:",
+              blocks: ["fruits", ".", "add", "(", "'apple'", ")"],
+              correctOrder: ["fruits", ".", "add", "(", "'apple'", ")"],
+              explanation: "The add() method adds a single element to a set: set.add(element)"
+            }
+          ]
         },
         practice: {
           description: `

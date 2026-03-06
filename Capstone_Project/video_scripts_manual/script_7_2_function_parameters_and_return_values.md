@@ -18,35 +18,32 @@ Parameters are variables in the function definition that receive values when the
 ## [场景 3: 实际操作 - 基本参数] (90 秒)
 **画面**: 代码编辑器录屏
 **配音 - 操作讲解**:
-Let's add parameters to functions.
+Now, Let's see how to add parameters to functions in practicial.
 
 (打字: def greet(name):)
 (Tab, 打字:     print(f"Hello, {name}!"))
-Name is a parameter - it receives a value.
+let's define a function named greet, inside the bracket, name is a parameter, when call the function, it receives a value and use it in the function when call this parameter.
 
 (打字: greet("Alice"))
-Pass Alice as an argument.
-
 (运行)
-Hello, Alice!
+run the code, see, we pass Alice as an argument. so the output is hello alice.
 
 (打字: greet("Bob"))
 (打字: greet("Charlie"))
 (运行)
-Same function, different inputs!
+and then, same function also can use with different parameter input. like this.
+
 
 (打字: # Multiple parameters)
 (打字: def introduce(name, age):)
 (Tab, 打字:     print(f"I'm {name} and I'm {age} years old."))
-Two parameters!
+on the other hand, you can add more than one parameters in the function!
 
 (打字: introduce("Alice", 20))
 (运行)
-I'm Alice and I'm twenty years old!
+in this case, i have name parameter and age parameter in this function. when i call the function, alice is the name, 20 is the age. so you can see the output is I'm Alice and I'm twenty years old! and pay attention that when you call a function, you must enter the parameters in the order they appear.
 
-(打字: introduce("Bob", 25))
-(运行)
-Order matters! First argument goes to name, second to age.
+
 
 **操作时的代码**:
 ```python
@@ -70,42 +67,30 @@ introduce("Bob", 25)
 ## [场景 4: 实际操作 - 返回值] (90 秒)
 **画面**: 录屏操作
 **配音 - 操作讲解**:
-Functions can return values.
+moreover, Functions also can return values. but why we need to use return? because return statement has two primary roles, First, it returns a value or multiple values to the caller of the function. and caller can save it in a variable for further use. Second, it immediately stops the execution of the function. For instance, in an authentication check, if the first condition fails and a return is executed, the remaining code in the function will not run.
+
 
 (打字: def add(a, b):)
 (Tab, 打字:     return a + b)
-Return keyword sends back the result.
+let's see the demo, define an add function with a and b two parameters. inside the function, i return the result with a plus b.
 
 (打字: result = add(5, 3))
-Capture the returned value.
+so when i call this function, i create a variable result to capture the returned value.
+
+if result > 10:
+    print('your result is greater than 10')
+else:
+    print('your result is less than 10')
+
+After I obtain the results, I can use it for further comparison.
+
 
 (打字: print(result))
 (运行)
 Eight! The function returned the sum!
 
-(打字: print(add(10, 20)))
-(运行)
-Thirty! We can use the return value directly!
 
-(打字: def calculate_area(length, width):)
-(Tab, 打字:     area = length * width)
-(Tab, 打字:     return area)
-Calculate and return.
-
-(打字: room_area = calculate_area(10, 5))
-(打字: print(f"Room area: {room_area} square meters"))
-(运行)
-Fifty square meters!
-
-(打字: # Return multiple values)
-(打字: def get_min_max(numbers):)
-(Tab, 打字:     return min(numbers), max(numbers))
-Return a tuple!
-
-(打字: minimum, maximum = get_min_max([1, 5, 3, 9, 2]))
-(打字: print(f"Min: {minimum}, Max: {maximum}"))
-(运行)
-Functions can return multiple values!
+One more example to demonstrate return, We define a dictionary to store user information. Then we create a function to check the user's input. If the username does not exist in the database, it prints an error message and immediately returns False, terminating the function without checking the password. so the output is account does not exist.
 
 **操作时的代码**:
 ```python
@@ -113,23 +98,29 @@ def add(a, b):
     return a + b
 
 result = add(5, 3)
-print(result)
 
-print(add(10, 20))
 
-def calculate_area(length, width):
-    area = length * width
-    return area
+example2:
+user_database = {
+    "alice": "password123",
+    "bob": "qwerty",
+    "charlie": "letmein"
+}
 
-room_area = calculate_area(10, 5)
-print(f"Room area: {room_area} square meters")
+def check_login(username, password):
+    if username not in user_database:
+        print("account does not exist")
+        return False          
 
-# Return multiple values
-def get_min_max(numbers):
-    return min(numbers), max(numbers)
+    
+    if password != user_database[username]:
+        print("incorrect password")
+        return False          
+    
+    print("login successful")
+    return True               
 
-minimum, maximum = get_min_max([1, 5, 3, 9, 2])
-print(f"Min: {minimum}, Max: {maximum}")
+check_login("ken", "password123")
 ```
 
 ---
@@ -137,19 +128,20 @@ print(f"Min: {minimum}, Max: {maximum}")
 ## [场景 5: 实际操作 - 默认参数] (80 秒)
 **画面**: 录屏操作
 **配音 - 操作讲解**:
-Parameters can have default values.
+however, Parameters can set the default values when define it.
 
 (打字: def greet(name, greeting="Hello"):)
 (Tab, 打字:     print(f"{greeting}, {name}!"))
-Greeting has a default value of Hello.
+for example, define greet function with name parameter and greeting parameter. Greeting has a default value of Hello.
 
 (打字: greet("Alice"))
 (运行)
-Hello, Alice! Used the default greeting.
+then, i call the greet function and input name parameter to alice, although we don't input another parameters. the program also can run. run the code, Hello, Alice! Used the default greeting as the parameter.
 
 (打字: greet("Bob", "Hi"))
 (运行)
-Hi, Bob! We provided a custom greeting.
+but if you call the function that input all parameters. the program will use new parameter rather then use default parameter. you can see the output is Hi, Bob! 
+
 
 (打字: def create_profile(name, age=18, country="USA"):)
 (Tab, 打字:     print(f"{name}, {age} years old, from {country}"))

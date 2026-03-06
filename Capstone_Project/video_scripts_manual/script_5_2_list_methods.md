@@ -18,39 +18,42 @@ List methods are functions that belong to lists. They let you add items, remove 
 ## [场景 3: 实际操作 - 添加元素] (90 秒)
 **画面**: 代码编辑器录屏
 **配音 - 操作讲解**:
-Let's start by adding items to lists.
+OK, let's demo it in code editor, now i want to add items to lists first.
 
 (打字: fruits = ["apple", "banana"])
 (打字: print(fruits))
 (运行)
-Starting with two fruits.
+I define a fruits list which include apple and banana in the list. run the code, the output show taht the list include apple and banana. right?
 
 (打字: fruits.append("cherry"))
-Append adds an item to the end.
+but now, i want to add cherry in the list, so i use the append method to adds an item to the end of list. so i am input fruits doc append cherry.
 
 (打字: print(fruits))
 (运行)
-Cherry is now at the end!
+run the code again. And compare with the original list, you can see that Cherry is now at the end! and remember that, using append methods to add the item in the list always adds to the end of list.
 
-(打字: fruits.append("date"))
-(打字: print(fruits))
-(运行)
-Date is added. Append always adds to the end.
+
+
+
 
 (打字: fruits.insert(1, "blueberry"))
-Insert lets us add at a specific position. Position one, insert blueberry.
+However, if you want to add the item to specific position in the list, you can use Insert method. you can input fruits doc insert, there are two parameter inside the parentheses, first parameter to decide which index you want to insert, and the second parameter is decide what items you want to insert in this index position. this example show that i want to add the blueberry in the index 1 position.
 
 (打字: print(fruits))
 (运行)
-Blueberry is now the second item! Everything else shifted right.
+run the code, Blueberry is now the second item! Everything else shifted right.
+
+
+
 
 (打字: more_fruits = ["elderberry", "fig"])
 (打字: fruits.extend(more_fruits))
-Extend adds multiple items at once.
-
+and then one more method to add items in the list that using Extend method. which can use to combine two lists.
+now i create another list named more fruits which include elderberry and fig.
+then input fruits doc extend more fruits. and print the fruits list again.
 (打字: print(fruits))
 (运行)
-All items from more_fruits are now added!
+run the code, you can see all items from more_fruits are now added in the fruits list!
 
 **操作时的代码**:
 ```python
@@ -73,44 +76,48 @@ print(fruits)
 
 ---
 
+
 ## [场景 4: 实际操作 - 删除元素] (90 秒)
 **画面**: 录屏操作
 **配音 - 操作讲解**:
-Now let's remove items from lists.
+Now let's demo how to remove items from lists.
 
 (打字: numbers = [1, 2, 3, 4, 5, 3])
 (打字: print(numbers))
 (运行)
-Notice we have two threes in this list.
+define a list named numbers which include 1, 2, 3, 4, 5, 3. there are total 6 numbers. and notice we have double threes in this list.
 
 (打字: numbers.remove(3))
-Remove deletes the first occurrence of the value.
+now i want to remove repeat number in the list, so i use Remove method to delete the first occurrence of the value.
 
 (打字: print(numbers))
 (运行)
-The first three is gone, but the second three remains.
+print the list again and run the code, you can see the output is 1, 2, 4, 5, 3. and the first three is gone, but the second three remains.
+
+
 
 (打字: numbers.pop())
-Pop removes and returns the last item.
+and one more method to remove item in the list is use Pop, which can removes the last item in the list. just input numbers.pop, and print the numbers list again.
 
 (打字: print(numbers))
 (运行)
-The last item, three, is removed.
+run the code, you can see that the last item, 3, three, is removed.
 
 (打字: removed = numbers.pop(1))
-Pop with an index removes that specific position.
+but Pop method also can remove the item in specific position, just input the index as the parameter. i add 1 in the pop method to remove the item of index 1 and pring the numbers list again.
 
 (打字: print(f"Removed: {removed}"))
 (打字: print(numbers))
 (运行)
-We removed index one, which was two. And we captured it in a variable!
+run the code, We removed index one, which was two. And we captured it in a variable!
+
 
 (打字: numbers.clear())
-Clear removes everything.
+you also can use Clear method to removes everything in the list.
 
 (打字: print(numbers))
 (运行)
-Empty list. Everything is gone!
+run the code, see, Empty list. Everything is gone!
 
 **操作时的代码**:
 ```python
@@ -136,40 +143,39 @@ print(numbers)
 ## [场景 5: 实际操作 - 排序和反转] (70 秒)
 **画面**: 录屏操作
 **配音 - 操作讲解**:
-Let's sort and reverse lists.
+OK, Let's demo the sort and reverse method in the list.
 
 (打字: numbers = [5, 2, 8, 1, 9])
 (打字: print(numbers))
 (运行)
-Unsorted numbers.
+defines list named numbers with 5, 2, 8, 1, 9.
+print the nubmers and run the code.
+you can see that the numbers are unsorted in the list.
 
 (打字: numbers.sort())
-Sort arranges in ascending order.
-
 (打字: print(numbers))
-(运行)
-Now sorted from smallest to largest!
+now i want to sort the number, input numbers doc sort. print the numbers list again.
+run the code again, you can see the number are sorted from smallest to largest in the list.
+
+
+
 
 (打字: numbers.sort(reverse=True))
-Sort with reverse equals True sorts descending.
+however, if you want to sort the number from largest to smallest. you can use Sort with reverse equals True to sorts descending.
 
 (打字: print(numbers))
 (运行)
-Largest to smallest!
+see, the number sort from Largest to smallest!
+
+
 
 (打字: words = ["banana", "apple", "cherry"])
-(打字: words.sort())
+(打字: words.reverse())
 (打字: print(words))
 (运行)
-Words sort alphabetically.
+on the other hand, reverse method can flips all items in the list. let's see the example. define list named words with banana, apple, cherry. then input words doc reverse and print the words list. run the code. you can see the output is cherry, apple, banana. 
 
-(打字: numbers = [1, 2, 3, 4, 5])
-(打字: numbers.reverse())
-Reverse flips the order.
 
-(打字: print(numbers))
-(运行)
-Five, four, three, two, one!
 
 **操作时的代码**:
 ```python

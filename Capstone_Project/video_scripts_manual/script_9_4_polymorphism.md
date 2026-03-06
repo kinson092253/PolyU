@@ -18,7 +18,7 @@ Polymorphism enables objects of different classes to be treated through a common
 ## [场景 3: 实际操作 - 基本多态] (90 秒)
 **画面**: 代码编辑器录屏
 **配音 - 操作讲解**:
-Let's create polymorphic classes!
+now, Let's see how to create polymorphic classes in code editor!
 
 (打字: # Different classes, same method name)
 (打字: class Dog:)

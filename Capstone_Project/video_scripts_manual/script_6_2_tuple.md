@@ -18,29 +18,29 @@ A tuple is an ordered collection like a list, but you cannot change it after cre
 ## [场景 3: 实际操作 - 创建元组] (80 秒)
 **画面**: 代码编辑器录屏
 **配音 - 操作讲解**:
-Let's create tuples.
+now, Let's see how to create tuples in code editor.
 
 (打字: # Create tuple with parentheses)
 (打字: coordinates = (10, 20))
 (打字: print(coordinates))
 (打字: print(type(coordinates)))
 (运行)
-A tuple with two values. Type is tuple.
+please remember to create tuple with parentheses, in this tuple with two values 10 and 20. let's print the tuple and its data type. run the code, you can see the tuple data and its data type show that is tuple type.
 
 (打字: # Tuple without parentheses)
 (打字: point = 5, 10, 15)
 (打字: print(point))
 (打字: print(type(point)))
 (运行)
-Python recognizes this as a tuple! Parentheses are optional.
+and then, if you define multiple data in a variable without any bracket,  Python also recognizes this as a tuple! So Parentheses are optional if you define a tuple.
 
 (打字: # Single element tuple - need comma!)
 (打字: single = (5,))
 (打字: print(single))
 (打字: print(type(single)))
 (运行)
-The comma makes it a tuple!
-
+however, although you define a data in tuple, remember that the comma is necessary, which makes it a tuple! if without comma, in this example, it is a integer.
+and tuple same with list, also can hold different types in it.
 (打字: not_tuple = (5))
 (打字: print(type(not_tuple)))
 (运行)
@@ -82,20 +82,20 @@ print(mixed)
 ## [场景 4: 实际操作 - 访问元组元素] (70 秒)
 **画面**: 录屏操作
 **配音 - 操作讲解**:
-Accessing tuples works like lists.
+on the other hand, let's see how to Access tuples works like lists.
 
 (打字: colors = ("red", "green", "blue", "yellow"))
 (打字: print(colors[0]))
 (运行)
-Red. First element.
+it also same with list, use the index to access the element, for example in this case, print colors zero, the output is Red. it is the first element in this tuple.
 
 (打字: print(colors[-1]))
 (运行)
-Yellow. Last element.
+and then, colors minus one means the last element. so the output is Yellow.
 
 (打字: print(colors[1:3]))
 (运行)
-Slicing works! Green and blue.
+tuple also can do the slicing works! begin is 1 and end is 3, that means get first and second element that is Green and blue.
 
 (打字: # Unpacking tuples)
 (打字: x, y, z = (10, 20, 30))
@@ -134,27 +134,18 @@ print(f"a={a}, b={b}")
 ## [场景 5: 实际操作 - 元组不可变性] (60 秒)
 **画面**: 录屏操作
 **配音 - 操作讲解**:
-Tuples cannot be modified.
+moreover, Tuples cannot be modified after defined.
 
 (打字: numbers = (1, 2, 3, 4, 5))
 (打字: print(numbers))
 (运行)
-Original tuple.
+in this case, tuple named numbers with 1 2 3 4 5, print the tuple you can see the same output right?
 
 (打字: # This will cause error:)
 (打字: # numbers[0] = 10)
-I'm commenting this because it would crash!
+if i input number zero equal to 10 which mean i want to change the element of index zero from 1 change 1 to 10.
+run the code again. it is crash!
 
-(打字: # But we can create a new tuple)
-(打字: new_numbers = numbers + (6, 7))
-(打字: print(new_numbers))
-(运行)
-Concatenation creates a new tuple!
-
-(打字: repeated = numbers * 2)
-(打字: print(repeated))
-(运行)
-Repetition also creates a new tuple!
 
 (打字: # Convert to list if you need to modify)
 (打字: numbers_list = list(numbers))
@@ -162,7 +153,7 @@ Repetition also creates a new tuple!
 (打字: numbers = tuple(numbers_list))
 (打字: print(numbers))
 (运行)
-Convert to list, modify, convert back!
+but it has method to modify the element, you can convert tuple to list first, then modify the element, and it convert back!
 
 **操作时的代码**:
 ```python
@@ -191,28 +182,25 @@ print(numbers)
 ## [场景 6: 实际操作 - 元组方法] (50 秒)
 **画面**: 录屏操作
 **配音 - 操作讲解**:
-Tuples have fewer methods than lists.
+and then, Tuples also have fewer methods can use.
 
 (打字: numbers = (1, 2, 3, 2, 4, 2, 5))
 (打字: count = numbers.count(2))
-Count how many times two appears.
+Count method can count how many times the element appears. in this case, it counts how many time appear the number two. so the output is 3.
 
 (打字: print(f"2 appears {count} times"))
 (运行)
 Three times!
 
-(打字: index = numbers.index(4))
-Find the position of four.
+(打字: index = numbers.index(5))
+index method can tell us the index location with specific element. in this case, Find the index location for element 5. the output is 6. so 5 is in index 6.
 
-(打字: print(f"4 is at index {index}"))
-(运行)
-Index four!
 
 (打字: print(f"Length: {len(numbers)}")
 (打字: print(f"Max: {max(numbers)}")
 (打字: print(f"Min: {min(numbers)}")
 (运行)
-Built-in functions work too!
+other Built-in functions include l e n to know the length of tuple, max method to know the maximum number in tuple, min method to know the minimum number in tuple.
 
 **操作时的代码**:
 ```python
@@ -220,8 +208,8 @@ numbers = (1, 2, 3, 2, 4, 2, 5)
 count = numbers.count(2)
 print(f"2 appears {count} times")
 
-index = numbers.index(4)
-print(f"4 is at index {index}")
+index = numbers.index(5)
+print(f"5 is at index {index}")
 
 print(f"Length: {len(numbers)}")
 print(f"Max: {max(numbers)}")

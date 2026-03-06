@@ -11,14 +11,14 @@ Welcome to Lesson 4.4: Nested Loops. Today we'll learn how to put loops inside l
 ## [场景 2: 嵌套循环介绍] (30 秒)
 **画面**: 嵌套循环示意图
 **配音**:
-A nested loop is a loop inside another loop. The inner loop completes all its iterations for each iteration of the outer loop. This is perfect for creating patterns, multiplication tables, and working with 2D data.
+A nested loop is a loop inside another loop. it is same like the nested condition. but the inner loop completes all its iterations for each iteration of the outer loop. This is perfect for creating patterns, multiplication tables, and working with 2D data.
 
 ---
 
 ## [场景 3: 实际操作 - 基本嵌套循环] (80 秒)
 **画面**: 代码编辑器录屏
 **配音 - 操作讲解**:
-Let's start with a simple nested loop.
+Let's start with a simple nested loop in code editor.
 
 (打字: for i in range(3):)
 (Tab, 打字:     for j in range(2):)
@@ -26,7 +26,7 @@ Let's start with a simple nested loop.
 The outer loop runs 3 times. For each outer iteration, the inner loop runs 2 times.
 
 (运行)
-See how it prints all combinations: i goes from 0 to 2, and for each i, j goes from 0 to 1.
+then run the code to see how it prints all combinations: i goes from 0 to 2, and for each i, j goes from 0 to 1.
 
 (打字: # Calculate total iterations)
 (打字: outer = 3)
@@ -92,16 +92,19 @@ for i in range(1, 4):
 ## [场景 5: 实际操作 - 星形图案] (80 秒)
 **画面**: 录屏操作
 **配音 - 操作讲解**:
-Nested loops are great for creating patterns.
+One more demo, Let's use nested loops for creating patterns.
 
 (打字: for i in range(1, 6):)
 (Tab, 打字:     for j in range(i):)
 (Tab×2, 打字:         print("*", end=""))
 (Tab, 打字:     print())
-Create a triangle. The inner loop runs as many times as i.
+I want to use nested loops to create a simple pattern.
+The outer loop runs with variable i from 1 to 5, there are 5 lines in total.
+and the inner loop prints exactly i stars on each line.
+so the inner loop runs as many times as i.
 
 (运行)
-Beautiful triangle! Row 1 has 1 star, row 2 has 2 stars, etc.
+OK, let's run the code to see what pattern will be output. It is a triangle pattern! Row 1 has 1 star, row 2 has 2 stars, etc.
 
 (打字: # Number pyramid)
 (打字: for i in range(1, 6):)
@@ -205,6 +208,6 @@ for i in range(100):
 ## [场景 8: 结尾] (10 秒)
 **画面**: 总结卡
 **配音**:
-Excellent! You now know how to use nested loops for patterns, multiplication tables, and 2D data. Remember to think about performance with large datasets. See you in the next chapter!
+Excellent! You now know how to use nested loops. Remember to think about performance with large datasets. See you in the next chapter!
 
 ---

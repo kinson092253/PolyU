@@ -122,19 +122,37 @@
   white-space: nowrap;
 }
 
-.btn-delete-file {
-  background: transparent;
-  border: none;
-  color: #ff6b6b;
-  cursor: pointer;
-  font-size: 16px;
-  padding: 4px;
+.file-actions {
+  display: flex;
+  gap: 4px;
   opacity: 0;
   transition: opacity 0.2s;
 }
 
-.file-item:hover .btn-delete-file {
+.file-item:hover .file-actions {
   opacity: 1;
+}
+
+.btn-edit-file,
+.btn-delete-file {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 4px;
+  transition: transform 0.2s;
+}
+
+.btn-edit-file {
+  color: #667eea;
+}
+
+.btn-edit-file:hover {
+  transform: scale(1.2);
+}
+
+.btn-delete-file {
+  color: #ff6b6b;
 }
 
 .btn-delete-file:hover {

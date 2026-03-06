@@ -5,6 +5,9 @@ import './FileManager.css';
 const FileManager = forwardRef(({ userId, lessonId, onFileSelect, onFilesChange }, ref) => {
   const [files, setFiles] = useState([]);
   const [showCreateModal, setShowCreateModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [editingFile, setEditingFile] = useState(null);
+  const [editFileContent, setEditFileContent] = useState('');
   const [newFileName, setNewFileName] = useState('');
   const [newFileContent, setNewFileContent] = useState('');
   const [selectedFileId, setSelectedFileId] = useState(null);
@@ -124,6 +127,49 @@ const FileManager = forwardRef(({ userId, lessonId, onFileSelect, onFilesChange 
     }
   };
 
+  const handleEditFile = async (file) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/files/read/${file.file_id}`);
+      const data = await response.json();
+      
+      if (data.success) {
+        setEditingFile(data.file);
+        setEditFileContent(data.file.file_content);
+        setShowEditModal(true);
+      }
+    } catch (error) {
+      console.error('Error loading file for edit:', error);
+      alert('Failed to load file');
+    }
+  };
+
+  const handleSaveEdit = async () => {
+    if (!editingFile) return;
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/files/update/${editingFile.file_id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fileContent: editFileContent
+        })
+      });
+
+      const data = await response.json();
+      
+      if (data.success) {
+        setShowEditModal(false);
+        setEditingFile(null);
+        setEditFileContent('');
+        loadFiles();
+        alert('✅ File updated successfully!');
+      }
+    } catch (error) {
+      console.error('Error updating file:', error);
+      alert('Failed to update file');
+    }
+  };
+
   const handleFileClick = async (file) => {
     setSelectedFileId(file.file_id);
     
@@ -202,16 +248,28 @@ const FileManager = forwardRef(({ userId, lessonId, onFileSelect, onFilesChange 
             >
               <span className="file-icon">{getFileIcon(file.file_type)}</span>
               <span className="file-name">{file.file_name}</span>
-              <button
-                className="btn-delete-file"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleDeleteFile(file.file_id);
-                }}
-                title="Delete File"
-              >
-                🗑️
-              </button>
+              <div className="file-actions">
+                <button
+                  className="btn-edit-file"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleEditFile(file);
+                  }}
+                  title="Edit File"
+                >
+                  ✏️
+                </button>
+                <button
+                  className="btn-delete-file"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleDeleteFile(file.file_id);
+                  }}
+                  title="Delete File"
+                >
+                  🗑️
+                </button>
+              </div>
             </div>
           ))
         )}
@@ -311,6 +369,44 @@ const FileManager = forwardRef(({ userId, lessonId, onFileSelect, onFilesChange 
                 disabled={!newFileName.trim()}
               >
                 Create
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showEditModal && editingFile && (
+        <div className="modal-overlay" onClick={() => setShowEditModal(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <h3>✏️ Edit File: {editingFile.file_name}</h3>
+            
+            <div className="form-group">
+              <label>File Content:</label>
+              <textarea
+                value={editFileContent}
+                onChange={(e) => setEditFileContent(e.target.value)}
+                placeholder="Edit file content..."
+                rows="15"
+                style={{ fontFamily: 'monospace', fontSize: '14px' }}
+              />
+            </div>
+
+            <div className="modal-actions">
+              <button 
+                className="btn-cancel"
+                onClick={() => {
+                  setShowEditModal(false);
+                  setEditingFile(null);
+                  setEditFileContent('');
+                }}
+              >
+                Cancel
+              </button>
+              <button 
+                className="btn-confirm"
+                onClick={handleSaveEdit}
+              >
+                💾 Save Changes
               </button>
             </div>
           </div>

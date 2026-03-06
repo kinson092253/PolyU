@@ -1,0 +1,18 @@
+{
+  "name": "python-learning-backend",
+  "version": "1.0.0",
+  "description": "Python Learning Platform - Backend API",
+  "scripts": {
+    "start": "python api.py",
+    "dev": "python api.py",
+    "test": "echo \"No tests specified\" && exit 0"
+  },
+  "keywords": [
+    "python",
+    "learning",
+    "education",
+    "flask"
+  ],
+  "author": "",
+  "license": "ISC"
+}

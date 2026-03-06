@@ -7,6 +7,7 @@ export const chapter3 = {
     {
       id: "3.1",
       title: "3.1 if Statement",
+      videoUrl: "https://youtu.be/uGLDA5hrxpk",
       content: {
         lecture: `
 # Conditional Statements
@@ -58,15 +59,27 @@ else:
 - \`<=\` Less than or equal to
         `,
         test: {
-          question: "What will the following code output?\n\n```python\nx = 10\nif x > 5:\n    print('A')\nelif x > 8:\n    print('B')\nelse:\n    print('C')\n```",
-          options: [
-            "A",
-            "B",
-            "C",
-            "A and B"
-          ],
-          correctAnswer: 0,
-          explanation: "Although both x > 5 and x > 8 are true, the if-elif-else statement only executes the first true condition branch. Since x > 5 is checked first and is true, it outputs 'A' and does not check the subsequent elif."
+          questions: [
+            {
+              type: "multiple-choice",
+              question: "What will the following code output?\n\n```python\nx = 10\nif x > 5:\n    print('A')\nelif x > 8:\n    print('B')\nelse:\n    print('C')\n```",
+              options: [
+                "A",
+                "B",
+                "C",
+                "A and B"
+              ],
+              correctAnswer: 0,
+              explanation: "Although both x > 5 and x > 8 are true, the if-elif-else statement only executes the first true condition branch. Since x > 5 is checked first and is true, it outputs 'A' and does not check the subsequent elif."
+            },
+            {
+              type: "drag-and-drop",
+              question: "Arrange the code blocks to create an if statement that checks if score is at least 60",
+              blocks: ["if", "score", ">=", "60", ":"],
+              correctOrder: ["if", "score", ">=", "60", ":"],
+              explanation: "The correct syntax is: if score >= 60: - the if keyword, followed by the condition, and a colon at the end."
+            }
+          ]
         },
         practice: {
           description: `
@@ -102,6 +115,7 @@ else:
     {
       id: "3.2",
       title: "3.2 Nested Conditionals",
+      videoUrl: "https://youtu.be/Yenm1zgMAHM",
       content: {
         lecture: `
 # Nested Conditionals
@@ -245,15 +259,40 @@ if age >= 21 and income >= 30000:
 5. **Consistent indentation** - Use 4 spaces per level
         `,
         test: {
-          question: "What will be the output of the following code?\\n\\n```python\\nage = 16\\nhas_license = True\\n\\nif age >= 18:\\n    if has_license:\\n        print('Can drive')\\n    else:\\n        print('Need license')\\nelse:\\n    print('Too young')\\n```",
-          options: [
-            "Can drive",
-            "Need license",
-            "Too young",
-            "No output"
-          ],
-          correctAnswer: 2,
-          explanation: "Since age (16) is less than 18, the first condition 'age >= 18' is False. The program goes to the else block and prints 'Too young'. The inner nested conditions are never evaluated because the outer condition failed."
+          questions: [
+            {
+              type: "multiple-choice",
+              question: "What will be the output of the following code?\\n\\n```python\\nage = 16\\nhas_license = True\\n\\nif age >= 18:\\n    if has_license:\\n        print('Can drive')\\n    else:\\n        print('Need license')\\nelse:\\n    print('Too young')\\n```",
+              options: [
+                "Can drive",
+                "Need license",
+                "Too young",
+                "No output"
+              ],
+              correctAnswer: 2,
+              explanation: "Since age (16) is less than 18, the first condition 'age >= 18' is False. The program goes to the else block and prints 'Too young'. The inner nested conditions are never evaluated because the outer condition failed."
+            },
+            {
+              type: "drag-and-drop",
+              question: "Arrange the code blocks to create a nested if structure",
+              multiLine: true,
+              sharedBlocks: false,
+              lines: [
+                {
+                  label: "Line 1 (outer if):",
+                  blocks: ["if", "age", ">=", "18", ":"],
+                  correctOrder: ["if", "age", ">=", "18", ":"]
+                },
+                {
+                  label: "Line 2 (inner if - indented):",
+                  blocks: ["if", "has_license", ":"],
+                  correctOrder: ["if", "has_license", ":"],
+                  indent: true
+                }
+              ],
+              explanation: "The correct nested structure is:\nLine 1: if age >= 18:\nLine 2:     if has_license:\n\nEach line has its own code blocks to arrange. The second if is visually indented to show it's nested inside the first if statement."
+            }
+          ]
         },
         practice: {
           description: `## Exercise: Grade Calculator with Extra Credit

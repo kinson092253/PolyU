@@ -11,23 +11,23 @@ Welcome to Lesson 4.3: Loop Control Statements. Today we'll learn how to control
 ## [场景 2: 控制语句介绍] (35 秒)
 **画面**: break, continue, else 图示
 **配音**:
-Sometimes you need to exit a loop early or skip certain iterations. Break immediately exits the loop. Continue skips the rest of the current iteration and moves to the next one. And the else clause runs when a loop completes normally without hitting a break.
+In a loop, We can also include control statements inside a loop to manage its behavior more flexibly. The break statement immediately exits the entire loop, continue skips the remaining code in the current iteration and proceeds to the next one, and the else clause runs only if the loop finishes naturally without being interrupted by a break.
 
 ---
 
 ## [场景 3: 实际操作 - break 语句] (90 秒)
 **画面**: 代码编辑器录屏
 **配音 - 操作讲解**:
-Let's explore break.
+OK, Let's demo how the break use in loop statment first.
 
 (打字: for i in range(10):)
 (Tab, 打字:     if i == 5:)
 (Tab×2, 打字:         break)
 (Tab, 打字:     print(i))
-Loop from 0 to 9, but break when i equals 5.
+i define the for loop that for i in range 10, then add the if statement inside for statemnt, if it is true then execute the break. and print the output i when execute the for loop each time. this code will loop from 0 to 9, but break when i equals 5.
 
 (运行)
-0, 1, 2, 3, 4, then it stops! Break exited the loop immediately.
+let's run the code, the output is 0, 1, 2, 3, 4, then it stops! Break exited the loop immediately.
 
 (打字: # Finding a number in a list)
 (打字: numbers = [3, 7, 2, 9, 5, 1])
@@ -64,16 +64,17 @@ for num in numbers:
 ## [场景 4: 实际操作 - continue 语句] (80 秒)
 **画面**: 录屏操作
 **配音 - 操作讲解**:
-Now let's look at continue.
+Now let's look at continue statement.
 
 (打字: for i in range(10):)
 (Tab, 打字:     if i % 2 == 0:)
 (Tab×2, 打字:         continue)
 (Tab, 打字:     print(i))
-If i is even, skip it with continue.
+Define for loop iterates through numbers from 0 to 9 using for i in range 10. Inside the loop, it checks whether the current number i is even by using the condition if i mod 2 equal to 0. If the number is even, the continue statement is executed. This immediately skips the rest of the code inside the current loop iteration and jumps back to the beginning of the for loop to start the next iteration with the next value of i. otherwise, the if statement is false, then the i will print as the output.
+
 
 (运行)
-1, 3, 5, 7, 9. Only odd numbers! Continue skipped the print for even numbers.
+Let's run the code, the output is 1, 3, 5, 7, 9. Only odd numbers! Continue skipped the print for even numbers.
 
 (打字: # Skip negative numbers)
 (打字: numbers = [5, -3, 8, -1, 10, -7, 3])
@@ -106,16 +107,16 @@ for num in numbers:
 ## [场景 5: 实际操作 - else 子句] (80 秒)
 **画面**: 录屏操作
 **配音 - 操作讲解**:
-The else clause with loops is unique to Python.
+on the other hand, The else clause with loops is unique to Python. else clause is not only use in if statement, also can use in loop statement, let see the example
 
 (打字: for i in range(5):)
 (Tab, 打字:     print(i))
 (打字: else:)
 (Tab, 打字:     print("Loop completed normally"))
-Else runs when the loop finishes without break.
+it is a normal for loop to print the number from 0 to 4, and else runs when the loop finishes without break.
 
 (运行)
-0, 1, 2, 3, 4, then "Loop completed normally".
+let's see the output, 0, 1, 2, 3, 4, then "Loop completed normally".
 
 (打字: # With break)
 (打字: for i in range(5):)

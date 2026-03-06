@@ -1,11 +1,11 @@
 import React from 'react';
 import './Navbar.css';
 
-const Navbar = ({ onDashboardClick, onSettingsClick, onAIAssistantClick }) => {
+const Navbar = ({ onDashboardClick, onSettingsClick }) => {
   return (
     <nav className="navbar">
       <div className="navbar-brand">
-        <span className="navbar-logo">🐍</span>
+        <img src="/pythonlogo.png" alt="Python Logo" className="navbar-logo" />
         <span className="navbar-title">Python Learning Platform</span>
       </div>
       
@@ -13,11 +13,6 @@ const Navbar = ({ onDashboardClick, onSettingsClick, onAIAssistantClick }) => {
         <button className="navbar-btn" onClick={onDashboardClick}>
           <span className="btn-icon">📊</span>
           Dashboard
-        </button>
-        
-        <button className="navbar-btn" onClick={onAIAssistantClick} title="AI 編程助手">
-          <span className="btn-icon">🤖</span>
-          AI Assistant
         </button>
         
         <button className="navbar-btn">
