@@ -24,7 +24,7 @@ def get_db_connection():
             port=os.getenv('DB_PORT', '5432'),
             database=os.getenv('DB_NAME', 'python_learning'),
             user=os.getenv('DB_USER', 'postgres'),
-            password=os.getenv('DB_PASSWORD', '')
+            password=os.getenv('DB_PASSWORD', 'admin')
         )
 
 # ==================== Dashboard API ====================
@@ -39,11 +39,12 @@ def get_dashboard(user_id):
         # 获取总体统计
         cur.execute("""
             SELECT 
-                COALESCE(COUNT(DISTINCT CASE WHEN up.is_completed AND up.lesson_type = 'practice' THEN up.lesson_id END), 0) as practices_completed,
-                COALESCE(COUNT(DISTINCT CASE WHEN tr.is_correct THEN tr.lesson_id END), 0) as tests_passed
+                COALESCE(COUNT(DISTINCT CASE WHEN up.is_completed AND up.lesson_type = 'practice' AND up.lesson_id NOT LIKE 'test%%' THEN up.lesson_id END), 0) as practices_completed,
+                COALESCE(COUNT(DISTINCT CASE WHEN tr.is_correct THEN tr.lesson_id END), 0) + COALESCE(COUNT(DISTINCT CASE WHEN pa.is_correct AND pa.lesson_id LIKE 'test%%' THEN pa.lesson_id END), 0) as tests_passed
             FROM users u
             LEFT JOIN user_progress up ON u.user_id = up.user_id
             LEFT JOIN test_results tr ON u.user_id = tr.user_id
+            LEFT JOIN practice_attempts pa ON u.user_id = pa.user_id
             WHERE u.user_id = %s
         """, (user_id,))
         stats_result = cur.fetchone()
@@ -92,7 +93,9 @@ def get_dashboard(user_id):
                 SPLIT_PART(pa.lesson_id, '.', 1) as chapter,
                 COUNT(DISTINCT pa.lesson_id) as completed
             FROM practice_attempts pa
-            WHERE pa.user_id = %s AND pa.is_correct = true
+            WHERE pa.user_id = %s 
+                AND pa.is_correct = true
+                AND SPLIT_PART(pa.lesson_id, '.', 1) ~ '^[0-9]+$'
             GROUP BY SPLIT_PART(pa.lesson_id, '.', 1)
             ORDER BY SPLIT_PART(pa.lesson_id, '.', 1)::integer
         """, (user_id,))
@@ -682,6 +685,72 @@ def get_ai_hint():
         print(f"Error getting AI hint: {e}")
         return jsonify({'success': False, 'error': str(e)}), 500
 
+# ==================== Reset Database ====================
+
+@app.route('/api/reset-database', methods=['POST'])
+def reset_database():
+    """重置数据库所有学习记录（开发环境专用）"""
+    try:
+        conn = get_db_connection()
+        cur = conn.cursor()
+        
+        # 清空所有表
+        tables = [
+            'user_files',
+            'code_history',
+            'user_achievements',
+            'achievements',
+            'study_sessions',
+            'test_results',
+            'practice_attempts',
+            'user_progress'
+        ]
+        
+        deleted_counts = {}
+        for table in tables:
+            cur.execute(f"DELETE FROM {table}")
+            deleted_counts[table] = cur.rowcount
+        
+        # 重置序列
+        sequences = [
+            'users_user_id_seq',
+            'user_progress_progress_id_seq',
+            'practice_attempts_attempt_id_seq',
+            'test_results_result_id_seq',
+            'study_sessions_session_id_seq',
+            'achievements_achievement_id_seq',
+            'user_achievements_user_achievement_id_seq',
+            'code_history_history_id_seq',
+            'user_files_file_id_seq'
+        ]
+        
+        for seq_name in sequences:
+            try:
+                restart_val = 2 if seq_name == 'users_user_id_seq' else 1
+                cur.execute(f"ALTER SEQUENCE {seq_name} RESTART WITH {restart_val}")
+            except Exception as e:
+                print(f"Warning: Could not reset sequence {seq_name}: {e}")
+        
+        conn.commit()
+        
+        # 验证用户还在
+        cur.execute("SELECT COUNT(*) FROM users WHERE user_id = 1")
+        user_count = cur.fetchone()[0]
+        
+        cur.close()
+        conn.close()
+        
+        return jsonify({
+            'success': True,
+            'message': '数据库已重置',
+            'deleted': deleted_counts,
+            'users_preserved': user_count
+        })
+        
+    except Exception as e:
+        print(f"Error resetting database: {e}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+
 # ==================== Health Check ====================
 
 @app.route('/api/health', methods=['GET'])
@@ -696,9 +765,9 @@ def health_check():
 
 if __name__ == '__main__':
     print("\n" + "=" * 50)
-    print("🚀 Flask Server Starting...")
+    print("Flask Server Starting...")
     print("=" * 50)
-    print("📊 Dashboard: http://127.0.0.1:5000/api/dashboard/1")
-    print("❤️  Health: http://127.0.0.1:5000/api/health")
+    print("Dashboard: http://127.0.0.1:5000/api/dashboard/1")
+    print("Health: http://127.0.0.1:5000/api/health")
     print("=" * 50 + "\n")
     app.run(debug=True, port=5000, use_reloader=False)

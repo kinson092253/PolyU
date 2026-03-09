@@ -5,7 +5,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import './ContentPanel.css';
 
-const ContentPanel = ({ lesson, isPracticeComplete, onNextLesson }) => {
+const ContentPanel = ({ lesson, isPracticeComplete, onNextLesson, isChapterComplete }) => {
   const [mode, setMode] = useState('lecture'); // lecture, test, practice
   const [theme, setTheme] = useState('dark'); // light, dark
   const [fontSize, setFontSize] = useState('medium'); // small, medium, large
@@ -21,10 +21,20 @@ const ContentPanel = ({ lesson, isPracticeComplete, onNextLesson }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0); // 当前题目索引
   const [answersState, setAnswersState] = useState({}); // 所有题目的答案状态
   const contentRef = useRef(null); // 用于引用内容容器
+  
+  // 循序渐进学习流程状态
+  const [isScrolledToBottom, setIsScrolledToBottom] = useState(false); // 是否滚动到lecture底部
+  const [isTestCompleted, setIsTestCompleted] = useState(false); // test是否完成
+  const [isPracticeCompleted, setIsPracticeCompleted] = useState(false); // practice是否完成过（用于解锁mode tabs）
 
   // 當課程改變時，重置所有狀態並滾動到頂部
   useEffect(() => {
-    setMode('lecture');
+    // For project challenges without lecture/test, default to practice mode
+    if (lesson?.content && !lesson.content.lecture) {
+      setMode('practice');
+    } else {
+      setMode('lecture');
+    }
     setLearningMode('text'); // 默認顯示文字教學
     setSelectedAnswer(null);
     setShowResult(false);
@@ -36,12 +46,73 @@ const ContentPanel = ({ lesson, isPracticeComplete, onNextLesson }) => {
     setAvailableBlocksLines([]);
     setCurrentQuestionIndex(0);
     setAnswersState({});
+    setIsScrolledToBottom(false);
+    setIsTestCompleted(false);
+    setIsPracticeCompleted(false);
     
     // 滾動到頂部
     if (contentRef.current) {
       contentRef.current.scrollTop = 0;
     }
   }, [lesson?.id]); // 監聽課程 ID 變化
+
+  // 监听滚动事件，检测是否滚动到底部
+  useEffect(() => {
+    const handleScroll = () => {
+      if (contentRef.current && mode === 'lecture') {
+        const { scrollTop, scrollHeight, clientHeight } = contentRef.current;
+        // 距离底部20px以内就认为是滚动到底部
+        if (scrollHeight - scrollTop - clientHeight < 20) {
+          setIsScrolledToBottom(true);
+        }
+      }
+    };
+
+    const container = contentRef.current;
+    if (container) {
+      container.addEventListener('scroll', handleScroll);
+      // 延迟检查，确保内容已渲染
+      setTimeout(handleScroll, 100);
+    }
+
+    return () => {
+      if (container) {
+        container.removeEventListener('scroll', handleScroll);
+      }
+    };
+  }, [mode, lesson?.id]);
+
+  // 监听 practice 完成状态，一旦完成就解锁 mode tabs
+  useEffect(() => {
+    if (isPracticeComplete && mode === 'practice') {
+      setIsPracticeCompleted(true);
+    }
+  }, [isPracticeComplete, mode]);
+
+  // 检查所有测试问题是否都正确完成
+  useEffect(() => {
+    if (mode === 'test') {
+      const testContent = lesson.content.test;
+      if (testContent.questions) {
+        const totalQuestions = testContent.questions.length;
+        // 检查是否所有问题都正确回答
+        const allCorrect = Array.from({ length: totalQuestions }, (_, i) => i)
+          .every(index => answersState[index]?.isCorrect === true);
+        
+        console.log('Test completion check:', {
+          totalQuestions,
+          answersState,
+          allCorrect
+        });
+        
+        if (allCorrect && totalQuestions > 0) {
+          setIsTestCompleted(true);
+        } else {
+          setIsTestCompleted(false);
+        }
+      }
+    }
+  }, [answersState, mode, lesson?.id]);
 
   // 當切換到 test 模式或切換題目時，初始化當前題目
   useEffect(() => {
@@ -120,7 +191,7 @@ const ContentPanel = ({ lesson, isPracticeComplete, onNextLesson }) => {
         setShowResult(false);
       }
     }
-  }, [mode, currentQuestionIndex, lesson?.content?.test, answersState]);
+  }, [mode, currentQuestionIndex, lesson?.content?.test]);
 
   if (!lesson) {
     return (
@@ -136,6 +207,20 @@ const ContentPanel = ({ lesson, isPracticeComplete, onNextLesson }) => {
   const handleTestAnswer = (index) => {
     setSelectedAnswer(index);
     setShowResult(true);
+    
+    // 检查答案是否正确并记录
+    const testContent = lesson.content.test;
+    const currentQuestion = testContent.questions?.[currentQuestionIndex];
+    
+    if (currentQuestion && currentQuestion.type === 'multiple-choice') {
+      const isCorrect = index === currentQuestion.correctAnswer;
+      
+      // 记录答案状态（无论正确与否）
+      setAnswersState(prev => ({
+        ...prev,
+        [currentQuestionIndex]: { ...prev[currentQuestionIndex], isCorrect: isCorrect }
+      }));
+    }
   };
 
   const handleModeChange = (newMode) => {
@@ -173,6 +258,7 @@ const ContentPanel = ({ lesson, isPracticeComplete, onNextLesson }) => {
     setAnswersState(prev => ({
       ...prev,
       [currentQuestionIndex]: {
+        ...prev[currentQuestionIndex], // 保留之前的数据，包括 isCorrect
         selectedAnswer,
         showResult,
         draggedBlocks: [...draggedBlocks],
@@ -231,6 +317,30 @@ const ContentPanel = ({ lesson, isPracticeComplete, onNextLesson }) => {
 
   const handleCheckDragAnswer = () => {
     setShowResult(true);
+    
+    // 检查答案是否正确并记录
+    const testContent = lesson.content.test;
+    const currentQuestion = testContent.questions?.[currentQuestionIndex];
+    
+    if (currentQuestion && currentQuestion.type === 'drag-and-drop') {
+      let isCorrect = false;
+      
+      // 检查多行拖拽题
+      if (currentQuestion.multiLine && currentQuestion.lines) {
+        isCorrect = currentQuestion.lines.every((line, index) => 
+          JSON.stringify(draggedBlocksLines[index]) === JSON.stringify(line.correctOrder)
+        );
+      } else {
+        // 检查单行拖拽题
+        isCorrect = JSON.stringify(draggedBlocks) === JSON.stringify(currentQuestion.correctOrder);
+      }
+      
+      // 记录答案状态（无论正确与否）
+      setAnswersState(prev => ({
+        ...prev,
+        [currentQuestionIndex]: { ...prev[currentQuestionIndex], isCorrect: isCorrect }
+      }));
+    }
   };
 
   const handleResetDrag = () => {
@@ -360,6 +470,18 @@ const ContentPanel = ({ lesson, isPracticeComplete, onNextLesson }) => {
   };
 
   const renderLecture = () => {
+    // If no lecture content exists, show message
+    if (!lesson.content.lecture) {
+      return (
+        <div className="lecture-content">
+          <div className="info-message">
+            <h2>📖 Lecture Mode Not Available</h2>
+            <p>This is a comprehensive project challenge. Please use the Practice mode to complete the project.</p>
+          </div>
+        </div>
+      );
+    }
+
     // Convert YouTube URL to embed format
     const getYouTubeEmbedUrl = (url) => {
       if (!url) return null;
@@ -445,17 +567,31 @@ const ContentPanel = ({ lesson, isPracticeComplete, onNextLesson }) => {
           </ReactMarkdown>
         )}
 
-        <div className="action-buttons">
-          <button className="btn btn-test" onClick={() => handleModeChange('test')}>
-            📝 Start Test
-          </button>
-        </div>
+        {isScrolledToBottom && lesson.content.test && (
+          <div className="action-buttons">
+            <button className="btn btn-test" onClick={() => handleModeChange('test')}>
+              📝 Start Test
+            </button>
+          </div>
+        )}
       </div>
     );
   };
 
   const renderTest = () => {
     const test = lesson.content.test;
+
+    // If no test content exists (e.g., project challenges), show message
+    if (!test) {
+      return (
+        <div className="test-content">
+          <div className="info-message">
+            <h2>📝 Test Mode Not Available</h2>
+            <p>This is a comprehensive project challenge. Please use the Practice mode to complete the project.</p>
+          </div>
+        </div>
+      );
+    }
 
     // Multi-question format
     if (test.questions) {
@@ -588,12 +724,12 @@ const ContentPanel = ({ lesson, isPracticeComplete, onNextLesson }) => {
                     <button className="btn btn-retry" onClick={handleResetDrag}>
                       Retry Question
                     </button>
-                    {currentQuestionIndex < totalQuestions - 1 && (
+                    {allCorrect && currentQuestionIndex < totalQuestions - 1 && (
                       <button className="btn btn-next" onClick={handleNextQuestion}>
                         Next Question →
                       </button>
                     )}
-                    {currentQuestionIndex === totalQuestions - 1 && (
+                    {allCorrect && currentQuestionIndex === totalQuestions - 1 && (
                       <button className="btn btn-practice" onClick={() => handleModeChange('practice')}>
                         💻 Start Practice
                       </button>
@@ -717,12 +853,12 @@ const ContentPanel = ({ lesson, isPracticeComplete, onNextLesson }) => {
                   <button className="btn btn-retry" onClick={handleResetDrag}>
                     Retry Question
                   </button>
-                  {currentQuestionIndex < totalQuestions - 1 && (
+                  {isCorrect && currentQuestionIndex < totalQuestions - 1 && (
                     <button className="btn btn-next" onClick={handleNextQuestion}>
                       Next Question →
                     </button>
                   )}
-                  {currentQuestionIndex === totalQuestions - 1 && (
+                  {isCorrect && currentQuestionIndex === totalQuestions - 1 && isTestCompleted && (
                     <button className="btn btn-practice" onClick={() => handleModeChange('practice')}>
                       💻 Start Practice
                     </button>
@@ -818,12 +954,12 @@ const ContentPanel = ({ lesson, isPracticeComplete, onNextLesson }) => {
                   <button className="btn btn-retry" onClick={() => handleModeChange('test')}>
                     Retry Question
                   </button>
-                  {currentQuestionIndex < totalQuestions - 1 && (
+                  {isCorrect && currentQuestionIndex < totalQuestions - 1 && (
                     <button className="btn btn-next" onClick={handleNextQuestion}>
                       Next Question →
                     </button>
                   )}
-                  {currentQuestionIndex === totalQuestions - 1 && (
+                  {isCorrect && currentQuestionIndex === totalQuestions - 1 && isTestCompleted && (
                     <button className="btn btn-practice" onClick={() => handleModeChange('practice')}>
                       💻 Start Practice
                     </button>
@@ -1063,8 +1199,6 @@ const ContentPanel = ({ lesson, isPracticeComplete, onNextLesson }) => {
 
     return (
       <div className="practice-content">
-        <h2>💻 Coding Practice</h2>
-        
         {/* Task 部分 - 始終顯示 */}
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
@@ -1201,26 +1335,34 @@ const ContentPanel = ({ lesson, isPracticeComplete, onNextLesson }) => {
             </button>
           </div>
         </div>
-        <div className="mode-tabs">
-          <button 
-            className={`tab ${mode === 'lecture' ? 'active' : ''}`}
-            onClick={() => handleModeChange('lecture')}
-          >
-            📖 Lecture
-          </button>
-          <button 
-            className={`tab ${mode === 'test' ? 'active' : ''}`}
-            onClick={() => handleModeChange('test')}
-          >
-            📝 Test
-          </button>
-          <button 
-            className={`tab ${mode === 'practice' ? 'active' : ''}`}
-            onClick={() => handleModeChange('practice')}
-          >
-            💻 Practice
-          </button>
-        </div>
+        {(isPracticeCompleted || isChapterComplete) && (
+          <div className="mode-tabs">
+            {lesson.content.lecture && (
+              <button 
+                className={`tab ${mode === 'lecture' ? 'active' : ''}`}
+                onClick={() => handleModeChange('lecture')}
+              >
+                📖 Lecture
+              </button>
+            )}
+            {lesson.content.test && (
+              <button 
+                className={`tab ${mode === 'test' ? 'active' : ''}`}
+                onClick={() => handleModeChange('test')}
+              >
+                📝 Test
+              </button>
+            )}
+            {lesson.content.practice && (
+              <button 
+                className={`tab ${mode === 'practice' ? 'active' : ''}`}
+                onClick={() => handleModeChange('practice')}
+              >
+                💻 Practice
+              </button>
+            )}
+          </div>
+        )}
       </div>
       <div className="panel-body" ref={contentRef}>
         {mode === 'lecture' && renderLecture()}

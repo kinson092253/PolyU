@@ -1,124 +1,149 @@
-// Test 1: Comprehensive Test (Chapters 1-5)
+// Test 1: Comprehensive Project Challenge (Chapters 1-5)
 export const test1 = {
   id: "test1",
   title: "Test 1: Student Grade Manager",
   subsections: [
     {
       id: "test1.1",
-      title: "Test 1: Build a Student Grade Manager",
+      title: "Project Challenge: Student Grade Manager",
       content: {
-        lecture: `
-# 🎯 Comprehensive Test 1: Student Grade Manager
+        practice: {
+          checkOutput: true,
+          description: `
+# 🎯 Comprehensive Challenge: Build a Student Grade Manager!
 
-## Overview
+## 📊 Project Overview
 
-This test evaluates your understanding of **Chapters 1-5**. You will build a student grade management system that demonstrates your ability to integrate multiple Python concepts in a practical application.
+Welcome to your first comprehensive project challenge! This is **NOT** a regular lesson - it's a real-world project that tests everything you've learned from **Chapters 1-5**.
 
-## 📚 Knowledge Required
+Your mission: Build a complete student grade management system that processes student data, calculates statistics, and generates a detailed report!
 
-This test will assess your mastery of:
+---
 
-- ✅ **Chapter 1**: Variables, Data Types, Input/Output
-- ✅ **Chapter 2**: Arithmetic Operations, Comparison Operations
-- ✅ **Chapter 3**: Conditional Statements (if/elif/else)
-- ✅ **Chapter 4**: Loops (for loop and while loop)
-- ✅ **Chapter 5**: Lists (storing and processing data)
+## 📚 What You'll Use (Chapters 1-5)
+
+This project integrates ALL the skills you've learned:
+
+- ✅ **Chapter 1**: Variables, data types, input/output, type conversion
+- ✅ **Chapter 2**: Arithmetic operations, comparison operators
+- ✅ **Chapter 3**: if/elif/else statements for grading
+- ✅ **Chapter 4**: for loops to process multiple students
+- ✅ **Chapter 5**: Lists to store names and scores
+
+---
 
 ## 🎯 Project Requirements
 
-Create a grade management program that can:
+Build a grade management system that can:
 
-1. Get student names and scores through interactive input
-2. Store multiple students' data in lists
-3. Calculate average score
-4. Find highest and lowest scores
-5. Count how many students passed (score ≥ 60)
-6. Display all students with their grades and pass/fail status
-7. Show summary statistics
+### Core Features:
+1. **Store Student Data**: Use two parallel lists (names and scores)
+2. **Calculate Statistics**: Average, highest, lowest scores
+3. **Grade Assignment**: Convert scores to letter grades (A/B/C/D/F)
+4. **Pass/Fail Status**: Determine if each student passed (≥60)
+5. **Generate Report**: Display all students with grades and status
+6. **Summary Statistics**: Show overall class performance
 
-## 📋 Detailed Steps
+### Grading Scale:
+- **A**: 90-100
+- **B**: 80-89
+- **C**: 70-79
+- **D**: 60-69
+- **F**: 0-59
 
-### Step 1: Get Number of Students
-**Knowledge Used: Chapter 1.3 (Input), Chapter 1.2 (Type Conversion)**
+### Pass/Fail Criteria:
+- **PASS**: Score ≥ 60
+- **FAIL**: Score < 60
 
-Ask the user how many students they want to enter.
+---
 
-\`\`\`python
-num_students = int(input("How many students? "))
+## 📋 Expected Output
+
+\`\`\`
+=== Student Grade Manager ===
+
+Processing 5 students...
+
+==================================================
+Student Grade Report
+==================================================
+1. Alice: 92 points [Grade A] - PASS
+2. Bob: 78 points [Grade C] - PASS
+3. Charlie: 85 points [Grade B] - PASS
+4. David: 54 points [Grade F] - FAIL
+5. Emma: 88 points [Grade B] - PASS
+
+==================================================
+Summary Statistics
+==================================================
+Total Students: 5
+Average Score: 79.40
+Highest Score: 92
+Lowest Score: 54
+Passed: 4
+Failed: 1
+Pass Rate: 80.0%
 \`\`\`
 
-### Step 2: Create Empty Lists
-**Knowledge Used: Chapter 5.1 (List Basics)**
+---
 
-Create two lists to store student names and scores:
+## 💡 Step-by-Step Guide
 
-\`\`\`python
-names = []
-scores = []
-\`\`\`
+### Step 1: Prepare Student Data
+**Knowledge Used: Chapter 5.1 (Lists)**
 
-### Step 3: Input Student Data
-**Knowledge Used: Chapter 4.1 (for loop), Chapter 1.3 (Input), Chapter 5.2 (List Methods)**
-
-Use a for loop to get each student's name and score:
+Since we're in a browser environment, we'll use pre-defined lists instead of interactive input:
 
 \`\`\`python
-for i in range(num_students):
-    name = input(f"Enter student {i+1} name: ")
-    score = int(input(f"Enter {name}'s score: "))
-    names.append(name)
-    scores.append(score)
+# Student data (simulating database or CSV import)
+names = ["Alice", "Bob", "Charlie", "David", "Emma"]
+scores = [92, 78, 85, 54, 88]
 \`\`\`
 
-### Step 4: Calculate Statistics
-**Knowledge Used: Chapter 2.1 (Arithmetic), Chapter 4.1 (for loop)**
-
-Calculate important statistics:
-- Total score (use sum() or loop)
-- Average score (total / count)
-- Highest score (use max())
-- Lowest score (use min())
-- Pass count (scores >= 60)
+### Step 2: Calculate Basic Statistics
+**Knowledge Used: Chapter 2.1 (Arithmetic)**
 
 \`\`\`python
 average = sum(scores) / len(scores)
 highest = max(scores)
 lowest = min(scores)
+\`\`\`
 
-# Count passed students
+### Step 3: Count Passed Students
+**Knowledge Used: Chapter 4.1 (for loop), Chapter 3.1 (if statement)**
+
+\`\`\`python
 passed = 0
 for score in scores:
     if score >= 60:
         passed += 1
 \`\`\`
 
-### Step 5: Determine Grade Level
-**Knowledge Used: Chapter 3.1 & 3.2 (Conditional Statements)**
+### Step 4: Determine Letter Grade
+**Knowledge Used: Chapter 3.2 (if/elif/else)**
 
-Create a function logic to convert score to grade:
-- A: 90-100
-- B: 80-89
-- C: 70-79
-- D: 60-69
-- F: 0-59
+Create logic to convert score to letter grade:
 
 \`\`\`python
 if score >= 90:
     grade = "A"
 elif score >= 80:
     grade = "B"
-# ... and so on
+elif score >= 70:
+    grade = "C"
+elif score >= 60:
+    grade = "D"
+else:
+    grade = "F"
 \`\`\`
 
-### Step 6: Display Student List
-**Knowledge Used: Chapter 4.1 (for loop with index), Chapter 1.3 (Output), Chapter 2.3 (String formatting)**
-
-Display each student with their score, grade, and status:
+### Step 5: Display Student Report
+**Knowledge Used: Chapter 4.1 (for loop with range), Chapter 1.3 (print), Chapter 2.3 (String operations)**
 
 \`\`\`python
-print("\\n" + "="*50)
+print("=" * 50)
 print("Student Grade Report")
-print("="*50)
+print("=" * 50)
 
 for i in range(len(names)):
     name = names[i]
@@ -129,7 +154,12 @@ for i in range(len(names)):
         grade = "A"
     elif score >= 80:
         grade = "B"
-    # ... continue for other grades
+    elif score >= 70:
+        grade = "C"
+    elif score >= 60:
+        grade = "D"
+    else:
+        grade = "F"
     
     # Determine status
     status = "PASS" if score >= 60 else "FAIL"
@@ -137,15 +167,13 @@ for i in range(len(names)):
     print(f"{i+1}. {name}: {score} points [Grade {grade}] - {status}")
 \`\`\`
 
-### Step 7: Display Summary Statistics
-**Knowledge Used: Chapter 1.3 (Output), Chapter 2.1 (Arithmetic)**
-
-Show the summary:
+### Step 6: Display Summary
+**Knowledge Used: Chapter 1.3 (output formatting)**
 
 \`\`\`python
-print("\\n" + "="*50)
+print("\\n" + "=" * 50)
 print("Summary Statistics")
-print("="*50)
+print("=" * 50)
 print(f"Total Students: {len(names)}")
 print(f"Average Score: {average:.2f}")
 print(f"Highest Score: {highest}")
@@ -155,172 +183,250 @@ print(f"Failed: {len(names) - passed}")
 print(f"Pass Rate: {(passed/len(names)*100):.1f}%")
 \`\`\`
 
-## 🎨 Expected Program Flow
+---
 
-\`\`\`
-How many students? 3
-Enter student 1 name: Alice
-Enter Alice's score: 85
-Enter student 2 name: Bob
-Enter Bob's score: 92
-Enter student 3 name: Charlie
-Enter Charlie's score: 58
+## 💻 Important: Browser Environment Adaptation
 
-==================================================
-Student Grade Report
-==================================================
-1. Alice: 85 points [Grade B] - PASS
-2. Bob: 92 points [Grade A] - PASS
-3. Charlie: 58 points [Grade F] - FAIL
+**Note:** Since this runs in a browser, we use **pre-defined data lists** instead of interactive \`input()\`. This simulates loading student data from a file or database - a common real-world scenario!
 
-==================================================
-Summary Statistics
-==================================================
-Total Students: 3
-Average Score: 78.33
-Highest Score: 92
-Lowest Score: 58
-Passed: 2
-Failed: 1
-Pass Rate: 66.7%
-\`\`\`
+**Benefits of this approach:**
+- ✅ Demonstrates working with existing data (like CSV imports)
+- ✅ Easy to test with different datasets
+- ✅ Focuses on logic rather than input handling
+- ✅ Compatible with browser Python environment
 
-## 💡 Tips
+---
 
-1. **Start with Input**: First get the data correctly
-2. **Use Lists Parallel**: Keep names[i] and scores[i] aligned
-3. **Calculate Step by Step**: Do one calculation at a time
-4. **Test with Small Numbers**: Start with 2-3 students
-5. **Format Output**: Use f-strings for clean output
+## 🔍 Testing Checklist
 
-## ⚠️ Common Challenges
+Make sure your program:
+- ✅ Uses two parallel lists (names and scores)
+- ✅ Calculates average correctly
+- ✅ Finds highest and lowest scores
+- ✅ Assigns correct letter grades (A/B/C/D/F)
+- ✅ Counts passed students (score ≥ 60)
+- ✅ Displays formatted report for all students
+- ✅ Shows accurate summary statistics
 
-- **Index Management**: Make sure names[i] matches scores[i]
-- **Type Conversion**: Remember to convert score input to int
-- **Pass Counting**: Use a counter variable in a loop
-- **Grade Logic**: Use if/elif carefully for correct ranges
+---
+
+## 🎨 Bonus Challenges (Optional)
+
+If you finish early, try adding:
+- Find students with perfect scores (100)
+- Calculate grade distribution (how many A's, B's, etc.)
+- Identify students who need improvement (score < 70)
+- Display average as a letter grade
+- Add class rank for each student
+
+---
 
 ## 🌟 What This Tests
 
-This comprehensive exercise tests your ability to:
-- ✅ Handle user input and type conversion
-- ✅ Use lists to store related data
-- ✅ Implement loops for repetitive tasks
-- ✅ Apply conditional logic for grading
-- ✅ Perform calculations and comparisons
-- ✅ Format and display results professionally
+This comprehensive project tests your ability to:
+- ✅ Work with parallel lists to manage related data
+- ✅ Apply arithmetic operations for statistical calculations
+- ✅ Use conditional logic for categorization (grading)
+- ✅ Implement loops to process collections
+- ✅ Format output professionally
+- ✅ Combine multiple concepts into a cohesive program
 
-Good luck! 🚀
-        `,
-        test: {
-          question: "In the Student Grade Manager, which approach is best for storing student names and their corresponding scores?\n\n```python\noption_a = \"Alice,Bob,Charlie\" and \"85,92,58\"\noption_b = names = [\"Alice\", \"Bob\"], scores = [85, 92]\noption_c = students = \"Alice:85,Bob:92\"\n```",
-          options: [
-            "Two strings with comma-separated values (option_a)",
-            "Two separate lists with matching indices (option_b)",
-            "One combined string (option_c)",
-            "Multiple individual variables"
-          ],
-          correctAnswer: 1,
-          explanation: "Using two separate lists (option_b) is the best approach because: (1) names[i] and scores[i] naturally correspond to the same student, (2) lists allow easy addition of new students, (3) you can perform operations on scores separately (like sum, max, min), and (4) the code is clean and maintainable."
-        },
-        practice: {
-          checkOutput: false,
-          description: `
-## 🎯 Your Task: Build a Simplified Grade Manager
-
-Build a simplified version of the Student Grade Manager that demonstrates the core concepts. This practice focuses on the essential functionality without the full interactive menu.
-
-**Requirements:**
-
-1. Create two lists: \`names\` and \`scores\`
-2. Use \`input()\` to ask "How many students? "
-3. Use a for loop to get each student's name and score
-4. Calculate:
-   - Average score
-   - Number of students who passed (score >= 60)
-5. Display each student with their score and status (PASS/FAIL)
-6. Display summary: total students, average, and passed count
-
-**Example Interaction:**
-\`\`\`
-How many students? 3
-Enter student 1 name: Alice
-Enter score: 85
-Enter student 2 name: Bob  
-Enter score: 72
-Enter student 3 name: Charlie
-Enter score: 55
-
-=== Student Results ===
-Alice: 85 - PASS
-Bob: 72 - PASS
-Charlie: 55 - FAIL
-
-=== Summary ===
-Total Students: 3
-Average Score: 70.67
-Passed: 2
-\`\`\`
+**This is your chance to showcase everything you've learned! 🚀**
           `,
-          hints: `**Hints:**
+          hints: `
+## 💡 Progressive Hints
 
-- Use \`int(input())\` for numbers
-- Use \`for i in range(num_students):\` to loop  
-- Calculate average: \`sum(scores) / len(scores)\`
-- Use another loop to count passed students
-- Use \`for i in range(len(names)):\` to display results
-`,
-          starterCode: `# Step 1: Ask how many students
+### 🟢 Hint Level 1: Structure
+Your program needs four main parts:
+1. **Data Setup**: Create names and scores lists
+2. **Statistics Calculation**: Calculate average, max, min, pass count
+3. **Student Report**: Loop through students, determine grade and status
+4. **Summary Display**: Show overall class statistics
 
+### 🟡 Hint Level 2: Code Skeleton
+\`\`\`python
+# Student data
+names = ["Alice", "Bob", "Charlie", "David", "Emma"]
+scores = [92, 78, 85, 54, 88]
 
-# Step 2: Create empty lists for names and scores
+print("=== Student Grade Manager ===")
+print(f"\\nProcessing {len(names)} students...")
 
+# Calculate statistics
+# (average, highest, lowest, passed)
 
-# Step 3: Loop to get student data
+# Display student report
+print("\\n" + "=" * 50)
+print("Student Grade Report")
+print("=" * 50)
+# Loop through each student
 
+# Display summary
+print("\\n" + "=" * 50)
+print("Summary Statistics")
+print("=" * 50)
+# Print all statistics
+\`\`\`
 
-# Step 4: Calculate statistics
+### 🟠 Hint Level 3: Key Code Blocks
 
-
-# Step 5: Display results
-
-
-# Step 6: Display summary
-
-`,
-          solution: `# Step 1: Ask how many students
-num_students = int(input("How many students? "))
-
-# Step 2: Create empty lists for names and scores
-names = []
-scores = []
-
-# Step 3: Loop to get student data
-for i in range(num_students):
-    name = input(f"Enter student {i+1} name: ")
-    score = int(input("Enter score: "))
-    names.append(name)
-    scores.append(score)
-
-# Step 4: Calculate statistics
+**Calculate statistics:**
+\`\`\`python
 average = sum(scores) / len(scores)
+highest = max(scores)
+lowest = min(scores)
 
 passed = 0
 for score in scores:
     if score >= 60:
         passed += 1
+\`\`\`
 
-# Step 5: Display results
-print("\\n=== Student Results ===")
+**Determine grade function:**
+\`\`\`python
+def get_grade(score):
+    if score >= 90:
+        return "A"
+    elif score >= 80:
+        return "B"
+    elif score >= 70:
+        return "C"
+    elif score >= 60:
+        return "D"
+    else:
+        return "F"
+\`\`\`
+
+**Display student (without function):**
+\`\`\`python
 for i in range(len(names)):
-    status = "PASS" if scores[i] >= 60 else "FAIL"
-    print(f"{names[i]}: {scores[i]} - {status}")
+    score = scores[i]
+    
+    if score >= 90:
+        grade = "A"
+    elif score >= 80:
+        grade = "B"
+    elif score >= 70:
+        grade = "C"
+    elif score >= 60:
+        grade = "D"
+    else:
+        grade = "F"
+    
+    status = "PASS" if score >= 60 else "FAIL"
+    print(f"{i+1}. {names[i]}: {score} points [Grade {grade}] - {status}")
+\`\`\`
 
-# Step 6: Display summary
-print("\\n=== Summary ===")
-print(f"Total Students: {num_students}")
+### 🔴 Hint Level 4: Complete Statistics Section
+
+\`\`\`python
+print("\\n" + "=" * 50)
+print("Summary Statistics")
+print("=" * 50)
+print(f"Total Students: {len(names)}")
 print(f"Average Score: {average:.2f}")
-print(f"Passed: {passed}")`
+print(f"Highest Score: {highest}")
+print(f"Lowest Score: {lowest}")
+print(f"Passed: {passed}")
+print(f"Failed: {len(names) - passed}")
+pass_rate = (passed / len(names)) * 100
+print(f"Pass Rate: {pass_rate:.1f}%")
+\`\`\`
+          `,
+          starterCode: `# Student data (predefined for browser environment)
+names = ["Alice", "Bob", "Charlie", "David", "Emma"]
+scores = [92, 78, 85, 54, 88]
+
+print("=== Student Grade Manager ===")
+print(f"\\nProcessing {len(names)} students...")
+
+# Step 1: Calculate statistics
+
+
+# Step 2: Display student report
+
+
+# Step 3: Display summary statistics
+
+`,
+          solution: `# Student data (predefined for browser environment)
+names = ["Alice", "Bob", "Charlie", "David", "Emma"]
+scores = [92, 78, 85, 54, 88]
+
+print("=== Student Grade Manager ===")
+print(f"\\nProcessing {len(names)} students...")
+
+# Step 1: Calculate statistics
+average = sum(scores) / len(scores)
+highest = max(scores)
+lowest = min(scores)
+
+# Count passed students
+passed = 0
+for score in scores:
+    if score >= 60:
+        passed += 1
+
+# Step 2: Display student report
+print("\\n" + "=" * 50)
+print("Student Grade Report")
+print("=" * 50)
+
+for i in range(len(names)):
+    name = names[i]
+    score = scores[i]
+    
+    # Determine grade
+    if score >= 90:
+        grade = "A"
+    elif score >= 80:
+        grade = "B"
+    elif score >= 70:
+        grade = "C"
+    elif score >= 60:
+        grade = "D"
+    else:
+        grade = "F"
+    
+    # Determine status
+    status = "PASS" if score >= 60 else "FAIL"
+    
+    print(f"{i+1}. {name}: {score} points [Grade {grade}] - {status}")
+
+# Step 3: Display summary statistics
+print("\\n" + "=" * 50)
+print("Summary Statistics")
+print("=" * 50)
+print(f"Total Students: {len(names)}")
+print(f"Average Score: {average:.2f}")
+print(f"Highest Score: {highest}")
+print(f"Lowest Score: {lowest}")
+print(f"Passed: {passed}")
+print(f"Failed: {len(names) - passed}")
+print(f"Pass Rate: {(passed/len(names)*100):.1f}%")`,
+          expectedOutput: `=== Student Grade Manager ===
+
+Processing 5 students...
+
+==================================================
+Student Grade Report
+==================================================
+1. Alice: 92 points [Grade A] - PASS
+2. Bob: 78 points [Grade C] - PASS
+3. Charlie: 85 points [Grade B] - PASS
+4. David: 54 points [Grade F] - FAIL
+5. Emma: 88 points [Grade B] - PASS
+
+==================================================
+Summary Statistics
+==================================================
+Total Students: 5
+Average Score: 79.40
+Highest Score: 92
+Lowest Score: 54
+Passed: 4
+Failed: 1
+Pass Rate: 80.0%`
         }
       }
     }

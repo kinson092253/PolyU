@@ -96,14 +96,20 @@ CREATE TABLE code_history (
 
 CREATE INDEX idx_code_user_lesson ON code_history(user_id, lesson_id);
 
--- Insert achievement data
-INSERT INTO achievements (achievement_name, achievement_icon, description, requirement_type, requirement_value) VALUES
-('First Chapter', '🏆', 'Complete your first chapter', 'chapters_completed', 1),
-('10 Practices', '🎯', 'Complete 10 practice exercises', 'practices_completed', 10),
-('Perfect Score', '⭐', 'Get a perfect score on any practice', 'perfect_practices', 1),
-('5 Day Streak', '🔥', 'Study for 5 consecutive days', 'streak_days', 5),
-('All Tests Passed', '💎', 'Pass all chapter tests', 'tests_passed', 12),
-('Course Complete', '🚀', 'Complete all lessons', 'overall_completion', 100);
+-- User files table
+CREATE TABLE user_files (
+    file_id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(user_id) ON DELETE CASCADE,
+    lesson_id VARCHAR(10),
+    file_name VARCHAR(255) NOT NULL,
+    file_content TEXT NOT NULL,
+    file_type VARCHAR(50) DEFAULT 'text',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(user_id, lesson_id, file_name)
+);
+
+CREATE INDEX idx_user_files_user_lesson ON user_files(user_id, lesson_id);
 
 -- Create view: user stats summary
 CREATE VIEW user_stats_summary AS

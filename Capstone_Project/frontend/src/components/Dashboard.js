@@ -9,13 +9,10 @@ const Dashboard = ({ onBackToLearning, userId = 1 }) => {
     practicesCompleted: 0,
     totalPractices: 31,
     testsPassed: 0,
-    totalTests: 12,
-    currentStreak: 0,
-    achievements: []
+    totalTests: 12
   });
 
   const [chapterProgress, setChapterProgress] = useState([]);
-  const [weakPoints, setWeakPoints] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -32,7 +29,6 @@ const Dashboard = ({ onBackToLearning, userId = 1 }) => {
       if (data) {
         setStats(data.stats);
         setChapterProgress(data.chapterProgress || []);
-        setWeakPoints(data.weakPoints || []);
         setError(null);
       } else {
         setError('Failed to load dashboard data');
@@ -77,9 +73,6 @@ const Dashboard = ({ onBackToLearning, userId = 1 }) => {
     <div className="dashboard">
       <div className="dashboard-header">
         <h1>📊 <span>Learning Dashboard</span></h1>
-        <button className="btn-back" onClick={onBackToLearning}>
-          ← Back to Learning
-        </button>
       </div>
 
       {/* 核心指标卡片 */}
@@ -105,14 +98,6 @@ const Dashboard = ({ onBackToLearning, userId = 1 }) => {
           <div className="stat-content">
             <h3>Tests Passed</h3>
             <div className="stat-value">{stats.testsPassed}/{stats.totalTests}</div>
-          </div>
-        </div>
-
-        <div className="stat-card">
-          <div className="stat-icon">🔥</div>
-          <div className="stat-content">
-            <h3>Learning Streak</h3>
-            <div className="stat-value">{stats.currentStreak} days</div>
           </div>
         </div>
       </div>
@@ -154,66 +139,6 @@ const Dashboard = ({ onBackToLearning, userId = 1 }) => {
               <Bar dataKey="percentage" fill="#667eea" />
             </BarChart>
           </ResponsiveContainer>
-        </div>
-      </div>
-
-      {/* 薄弱环节 */}
-      <div className="weak-points-section">
-        <h3>📌 <span>Areas for Improvement</span></h3>
-        <div className="weak-points-list">
-          {weakPoints.map((point, index) => (
-            <div key={index} className="weak-point-item">
-              <div className="weak-point-header">
-                <span className="weak-point-topic">{point.topic}</span>
-                <span className="weak-point-accuracy" style={{
-                  color: point.accuracy < 60 ? '#ff6b6b' : point.accuracy < 80 ? '#ffa500' : '#51cf66'
-                }}>
-                  {point.accuracy}% accuracy
-                </span>
-              </div>
-              <div className="weak-point-bar">
-                <div 
-                  className="weak-point-fill" 
-                  style={{ 
-                    width: `${point.accuracy}%`,
-                    background: point.accuracy < 60 ? '#ff6b6b' : point.accuracy < 80 ? '#ffa500' : '#51cf66'
-                  }}
-                />
-              </div>
-              <div className="weak-point-attempts">{point.attempts} attempts</div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* 成就徽章 */}
-      <div className="achievements-section">
-        <h3>🏆 <span>Achievements</span></h3>
-        <div className="achievements-list">
-          <div className="achievement-badge earned">
-            <span className="badge-icon">🏆</span>
-            <span className="badge-name">First Chapter</span>
-          </div>
-          <div className="achievement-badge earned">
-            <span className="badge-icon">🎯</span>
-            <span className="badge-name">10 Practices</span>
-          </div>
-          <div className="achievement-badge earned">
-            <span className="badge-icon">⭐</span>
-            <span className="badge-name">Perfect Score</span>
-          </div>
-          <div className="achievement-badge earned">
-            <span className="badge-icon">🔥</span>
-            <span className="badge-name">5 Day Streak</span>
-          </div>
-          <div className="achievement-badge locked">
-            <span className="badge-icon">💎</span>
-            <span className="badge-name">All Tests Passed</span>
-          </div>
-          <div className="achievement-badge locked">
-            <span className="badge-icon">🚀</span>
-            <span className="badge-name">Course Complete</span>
-          </div>
         </div>
       </div>
     </div>

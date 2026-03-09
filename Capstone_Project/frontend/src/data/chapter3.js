@@ -341,7 +341,8 @@ if score >= 60:
         print("Grade: C")
 else:
     print("Grade: F")`,
-          expectedOutput: "Grade: A- (with extra credit)"
+          expectedOutput: `You passed!
+Grade: A- (with extra credit)`
         }
       }
     }

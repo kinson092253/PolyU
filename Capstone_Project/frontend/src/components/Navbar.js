@@ -1,7 +1,7 @@
 import React from 'react';
 import './Navbar.css';
 
-const Navbar = ({ onDashboardClick, onSettingsClick }) => {
+const Navbar = ({ onDashboardClick, onMyCoursesClick, showDashboard = false }) => {
   return (
     <nav className="navbar">
       <div className="navbar-brand">
@@ -10,25 +10,19 @@ const Navbar = ({ onDashboardClick, onSettingsClick }) => {
       </div>
       
       <div className="navbar-menu">
-        <button className="navbar-btn" onClick={onDashboardClick}>
-          <span className="btn-icon">📊</span>
-          Dashboard
-        </button>
+        {!showDashboard && (
+          <button className="navbar-btn" onClick={onDashboardClick}>
+            <span className="btn-icon">📊</span>
+            Dashboard
+          </button>
+        )}
         
-        <button className="navbar-btn">
-          <span className="btn-icon">📚</span>
-          My Courses
-        </button>
-        
-        <button className="navbar-btn" onClick={onSettingsClick}>
-          <span className="btn-icon">⚙️</span>
-          Settings
-        </button>
-        
-        <button className="navbar-btn">
-          <span className="btn-icon">👤</span>
-          Profile
-        </button>
+        {showDashboard && (
+          <button className="navbar-btn" onClick={onMyCoursesClick}>
+            <span className="btn-icon">📚</span>
+            My Courses
+          </button>
+        )}
       </div>
     </nav>
   );

@@ -53,10 +53,22 @@ const ResizablePanel = ({ children, minWidth = 200 }) => {
 
   const rightWidth = 100 - leftWidth;
 
+  // 如果只有一个children（没有选择课程时），只显示左侧面板
+  const childrenArray = React.Children.toArray(children);
+  if (childrenArray.length === 1) {
+    return (
+      <div className="resizable-container">
+        <div className="left-panel" style={{ width: '100%' }}>
+          {childrenArray[0]}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="resizable-container">
       <div className="left-panel" style={{ width: `${leftWidth}%` }}>
-        {children[0]}
+        {childrenArray[0]}
       </div>
       
       <div 
@@ -68,7 +80,7 @@ const ResizablePanel = ({ children, minWidth = 200 }) => {
       
       <div className="right-panel" style={{ width: `${rightWidth}%` }}>
         <div className="code-section" style={{ height: `${codeHeight}%` }}>
-          {children[1]}
+          {childrenArray[1]}
         </div>
         
         <div 
@@ -79,7 +91,7 @@ const ResizablePanel = ({ children, minWidth = 200 }) => {
         </div>
         
         <div className="output-section" style={{ height: `${100 - codeHeight}%` }}>
-          {children[2]}
+          {childrenArray[2]}
         </div>
       </div>
     </div>
