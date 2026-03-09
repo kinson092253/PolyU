@@ -1,19 +1,21 @@
 import psycopg2
 import os
 
-# Database connection parameters
-db_params = {
-    'host': 'localhost',
-    'port': 5432,
-    'database': 'python_learning',
-    'user': 'postgres',
-    'password': 'admin'
-}
-
 def rebuild_database():
     """Complete database rebuild: drop all tables and recreate from schema"""
     
-    conn = psycopg2.connect(**db_params)
+    # 连接到数据库 - 优先使用 DATABASE_URL（Replit/生产环境）
+    database_url = os.getenv('DATABASE_URL')
+    if database_url:
+        conn = psycopg2.connect(database_url)
+    else:
+        conn = psycopg2.connect(
+            host=os.getenv('DB_HOST', 'localhost'),
+            port=os.getenv('DB_PORT', '5432'),
+            database=os.getenv('DB_NAME', 'python_learning'),
+            user=os.getenv('DB_USER', 'postgres'),
+            password=os.getenv('DB_PASSWORD', 'admin')
+        )
     conn.autocommit = True
     cursor = conn.cursor()
     

@@ -4,14 +4,18 @@ import os
 def initialize_database():
     """初始化資料庫：完全刪除舊表格並重新建立（用於新環境部署）"""
     try:
-        # 连接到数据库
-        conn = psycopg2.connect(
-            host=os.getenv('DB_HOST', 'localhost'),
-            port=os.getenv('DB_PORT', '5432'),
-            database=os.getenv('DB_NAME', 'python_learning'),
-            user=os.getenv('DB_USER', 'postgres'),
-            password=os.getenv('DB_PASSWORD', 'admin')
-        )
+        # 连接到数据库 - 优先使用 DATABASE_URL（Replit/生产环境）
+        database_url = os.getenv('DATABASE_URL')
+        if database_url:
+            conn = psycopg2.connect(database_url)
+        else:
+            conn = psycopg2.connect(
+                host=os.getenv('DB_HOST', 'localhost'),
+                port=os.getenv('DB_PORT', '5432'),
+                database=os.getenv('DB_NAME', 'python_learning'),
+                user=os.getenv('DB_USER', 'postgres'),
+                password=os.getenv('DB_PASSWORD', 'admin')
+            )
         conn.autocommit = True
         cur = conn.cursor()
         

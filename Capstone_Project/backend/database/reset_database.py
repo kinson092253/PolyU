@@ -21,14 +21,18 @@ load_dotenv(Path(__file__).parent.parent / '.env')
 def reset_database():
     """清空數據庫中的所有用戶進度數據"""
     try:
-        # 連接到數據庫
-        conn = psycopg2.connect(
-            host=os.getenv('DB_HOST', 'localhost'),
-            port=os.getenv('DB_PORT', '5432'),
-            database=os.getenv('DB_NAME', 'python_learning'),
-            user=os.getenv('DB_USER', 'postgres'),
-            password=os.getenv('DB_PASSWORD', 'admin')
-        )
+        # 連接到數據庫 - 优先使用 DATABASE_URL（Replit/生产环境）
+        database_url = os.getenv('DATABASE_URL')
+        if database_url:
+            conn = psycopg2.connect(database_url)
+        else:
+            conn = psycopg2.connect(
+                host=os.getenv('DB_HOST', 'localhost'),
+                port=os.getenv('DB_PORT', '5432'),
+                database=os.getenv('DB_NAME', 'python_learning'),
+                user=os.getenv('DB_USER', 'postgres'),
+                password=os.getenv('DB_PASSWORD', 'admin')
+            )
         
         cur = conn.cursor()
         
