@@ -1,5 +1,6 @@
 import psycopg2
 import os
+from pathlib import Path
 
 def initialize_database():
     """初始化資料庫：完全刪除舊表格並重新建立（用於新環境部署）"""
@@ -44,8 +45,9 @@ def initialize_database():
         print("🔨 CREATING TABLES...")
         print("="*60)
         
-        # 读取schema文件
-        schema_path = 'Capstone_Project/backend/database/schema_fixed.sql'
+        # 读取schema文件 - 使用脚本所在目录的绝对路径
+        script_dir = Path(__file__).parent
+        schema_path = script_dir / 'schema_fixed.sql'
         with open(schema_path, 'r', encoding='utf-8') as f:
             schema_sql = f.read()
         
