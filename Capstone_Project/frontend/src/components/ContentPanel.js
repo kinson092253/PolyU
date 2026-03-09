@@ -54,7 +54,7 @@ const ContentPanel = ({ lesson, isPracticeComplete, onNextLesson, isChapterCompl
     if (contentRef.current) {
       contentRef.current.scrollTop = 0;
     }
-  }, [lesson?.id]); // 監聽課程 ID 變化
+  }, [lesson?.id, lesson?.content?.lecture]); // 監聽課程 ID 和内容變化
 
   // 监听滚动事件，检测是否滚动到底部
   useEffect(() => {
@@ -112,9 +112,10 @@ const ContentPanel = ({ lesson, isPracticeComplete, onNextLesson, isChapterCompl
         }
       }
     }
-  }, [answersState, mode, lesson?.id]);
+  }, [answersState, mode, lesson?.id, lesson?.content?.test]);
 
   // 當切換到 test 模式或切換題目時，初始化當前題目
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (mode === 'test' && lesson?.content?.test) {
       const testContent = lesson.content.test;
