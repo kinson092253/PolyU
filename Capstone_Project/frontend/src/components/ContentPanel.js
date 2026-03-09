@@ -115,6 +115,8 @@ const ContentPanel = ({ lesson, isPracticeComplete, onNextLesson, isChapterCompl
   }, [answersState, mode, lesson?.id, lesson?.content?.test]);
 
   // 當切換到 test 模式或切換題目時，初始化當前題目
+  // answersState 只用于读取保存的状态，不应作为依赖触发重新运行
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (mode === 'test' && lesson?.content?.test) {
       const testContent = lesson.content.test;
@@ -191,7 +193,7 @@ const ContentPanel = ({ lesson, isPracticeComplete, onNextLesson, isChapterCompl
         setShowResult(false);
       }
     }
-  }, [mode, currentQuestionIndex, lesson?.content?.test, answersState]);
+  }, [mode, currentQuestionIndex, lesson?.content?.test]);
 
   if (!lesson) {
     return (
