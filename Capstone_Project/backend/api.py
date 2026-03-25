@@ -1,4 +1,5 @@
 import os
+import json
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import psycopg2
@@ -39,8 +40,8 @@ def get_dashboard(user_id):
         # 获取总体统计
         cur.execute("""
             SELECT 
-                COALESCE(COUNT(DISTINCT CASE WHEN up.is_completed AND up.lesson_type = 'practice' AND up.lesson_id NOT LIKE 'test%%' THEN up.lesson_id END), 0) as practices_completed,
-                COALESCE(COUNT(DISTINCT CASE WHEN tr.is_correct THEN tr.lesson_id END), 0) + COALESCE(COUNT(DISTINCT CASE WHEN pa.is_correct AND pa.lesson_id LIKE 'test%%' THEN pa.lesson_id END), 0) as tests_passed
+                COALESCE(COUNT(DISTINCT CASE WHEN up.is_completed AND up.lesson_type = 'practice' AND up.lesson_id NOT LIKE 'test%%' AND up.lesson_id NOT LIKE 'finalTest%%' THEN up.lesson_id END), 0) as practices_completed,
+                COALESCE(COUNT(DISTINCT CASE WHEN tr.is_correct THEN tr.lesson_id END), 0) + COALESCE(COUNT(DISTINCT CASE WHEN pa.is_correct AND (pa.lesson_id LIKE 'test%%' OR pa.lesson_id LIKE 'finalTest%%') THEN pa.lesson_id END), 0) as tests_passed
             FROM users u
             LEFT JOIN user_progress up ON u.user_id = up.user_id
             LEFT JOIN test_results tr ON u.user_id = tr.user_id
@@ -145,7 +146,7 @@ def get_dashboard(user_id):
                 'practicesCompleted': practices_completed,
                 'totalPractices': 31,
                 'testsPassed': stats.get('tests_passed', 0) or 0,
-                'totalTests': 2,
+                'totalTests': 3,  # Mid-Test 1, Mid-Test 2, Final Test
                 'currentStreak': streak_result.get('streak', 0) or 0,
                 'achievements': []
             },
@@ -239,6 +240,113 @@ def submit_test():
         conn.close()
         
         return jsonify({'success': True, 'testId': test_id})
+        
+    except Exception as e:
+        print(f"Error: {e}")
+        return jsonify({'error': str(e)}), 500
+
+# ==================== Final Test Answers API ====================
+
+@app.route('/api/final-test/answers/<int:user_id>', methods=['GET'])
+def get_final_test_answers(user_id):
+    """獲取用戶的 Final Test 答案"""
+    try:
+        conn = get_db_connection()
+        cur = conn.cursor()
+        
+        cur.execute("""
+            SELECT question_type, question_index, answer_data
+            FROM final_test_answers
+            WHERE user_id = %s
+            ORDER BY question_type, question_index
+        """, (user_id,))
+        
+        rows = cur.fetchall()
+        
+        # 組織答案數據
+        answers = {
+            'mc': {},
+            'dropdown': {},
+            'coding': {}
+        }
+        
+        for row in rows:
+            question_type, question_index, answer_data = row
+            if question_type == 'mc':
+                answers['mc'][question_index] = answer_data
+            elif question_type == 'dropdown':
+                answers['dropdown'][question_index] = answer_data
+            elif question_type == 'coding':
+                answers['coding'][question_index] = answer_data
+        
+        cur.close()
+        conn.close()
+        
+        return jsonify({'success': True, 'answers': answers})
+        
+    except Exception as e:
+        print(f"Error: {e}")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/final-test/answers', methods=['POST'])
+def save_final_test_answer():
+    """保存 Final Test 答案"""
+    try:
+        data = request.json
+        conn = get_db_connection()
+        cur = conn.cursor()
+        
+        cur.execute("""
+            INSERT INTO final_test_answers 
+            (user_id, question_type, question_index, answer_data, updated_at)
+            VALUES (%s, %s, %s, %s, NOW())
+            ON CONFLICT (user_id, question_type, question_index)
+            DO UPDATE SET 
+                answer_data = EXCLUDED.answer_data,
+                updated_at = NOW()
+            RETURNING answer_id
+        """, (
+            data['userId'],
+            data['questionType'],
+            data['questionIndex'],
+            json.dumps(data['answerData'])
+        ))
+        
+        answer_id = cur.fetchone()[0]
+        
+        conn.commit()
+        cur.close()
+        conn.close()
+        
+        return jsonify({'success': True, 'answerId': answer_id})
+        
+    except Exception as e:
+        print(f"Error: {e}")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/final-test/answers/<int:user_id>', methods=['DELETE'])
+def clear_final_test_answers(user_id):
+    """清除用戶的 Final Test 答案 (Restart)"""
+    try:
+        conn = get_db_connection()
+        cur = conn.cursor()
+        
+        cur.execute("""
+            DELETE FROM final_test_answers
+            WHERE user_id = %s
+        """, (user_id,))
+        
+        deleted_count = cur.rowcount
+        
+        conn.commit()
+        cur.close()
+        conn.close()
+        
+        return jsonify({
+            'success': True, 
+            'message': f'Cleared {deleted_count} answers',
+            'deletedCount': deleted_count
+        })
         
     except Exception as e:
         print(f"Error: {e}")
@@ -750,6 +858,46 @@ def reset_database():
     except Exception as e:
         print(f"Error resetting database: {e}")
         return jsonify({'success': False, 'error': str(e)}), 500
+
+# ==================== Lesson Status API ====================
+
+@app.route('/api/lesson/status/<int:user_id>/<lesson_id>', methods=['GET'])
+def get_lesson_status(user_id, lesson_id):
+    """获取课程的完成状态"""
+    try:
+        conn = get_db_connection()
+        cur = conn.cursor(cursor_factory=RealDictCursor)
+        
+        # 检查practice是否完成
+        cur.execute("""
+            SELECT is_completed, completed_at
+            FROM user_progress
+            WHERE user_id = %s AND lesson_id = %s AND lesson_type = 'practice'
+        """, (user_id, lesson_id))
+        practice_result = cur.fetchone()
+        
+        # 检查test是否完成
+        cur.execute("""
+            SELECT is_completed, completed_at
+            FROM user_progress
+            WHERE user_id = %s AND lesson_id = %s AND lesson_type = 'test'
+        """, (user_id, lesson_id))
+        test_result = cur.fetchone()
+        
+        cur.close()
+        conn.close()
+        
+        return jsonify({
+            'success': True,
+            'practiceCompleted': practice_result['is_completed'] if practice_result else False,
+            'testCompleted': test_result['is_completed'] if test_result else False,
+            'practiceCompletedAt': practice_result['completed_at'].isoformat() if (practice_result and practice_result['completed_at']) else None,
+            'testCompletedAt': test_result['completed_at'].isoformat() if (test_result and test_result['completed_at']) else None
+        })
+        
+    except Exception as e:
+        print(f"Error getting lesson status: {e}")
+        return jsonify({'error': str(e)}), 500
 
 # ==================== Health Check ====================
 

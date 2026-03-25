@@ -9,7 +9,7 @@ const Dashboard = ({ onBackToLearning, userId = 1 }) => {
     practicesCompleted: 0,
     totalPractices: 31,
     testsPassed: 0,
-    totalTests: 12
+    totalTests: 3  // Mid-Test 1, Mid-Test 2, Final Test
   });
 
   const [chapterProgress, setChapterProgress] = useState([]);

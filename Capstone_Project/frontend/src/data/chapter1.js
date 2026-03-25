@@ -335,12 +335,14 @@ Create a program that asks for the user's age and calculates their age next year
 
 Your task:
 1. Use \`input()\` to ask: "Enter your age: "
+2. Save the input to a variable \`age\`
 2. Convert the input to an integer
 3. Calculate age next year (add 1)
 4. Print the result in the format shown below
 
 **Example**:
-If user enters: \`25\`
+If user enters: \`25\`\n
+output should be: \`Next year you will be 26 years old\`
 
 **Hints**:
 - Use \`input()\` to get user input

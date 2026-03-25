@@ -100,6 +100,19 @@ class LearningTracker {
     }
   }
 
+  // ==================== Lesson Status ====================
+  
+  async getLessonStatus(lessonId, userId = CURRENT_USER_ID) {
+    try {
+      const response = await fetch(`${API_BASE_URL}/lesson/status/${userId}/${lessonId}`);
+      if (!response.ok) throw new Error('Failed to get lesson status');
+      return await response.json();
+    } catch (error) {
+      console.error('Error getting lesson status:', error);
+      return { success: false, error: error.message };
+    }
+  }
+
   // ==================== Health Check ====================
   
   async checkHealth() {

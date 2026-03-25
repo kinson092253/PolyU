@@ -3,6 +3,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import learningTracker from '../services/learningTracker';
 import './ContentPanel.css';
 
 const ContentPanel = ({ lesson, isPracticeComplete, onNextLesson, isChapterComplete }) => {
@@ -29,6 +30,21 @@ const ContentPanel = ({ lesson, isPracticeComplete, onNextLesson, isChapterCompl
 
   // 當課程改變時，重置所有狀態並滾動到頂部
   useEffect(() => {
+    // 异步函数来加载完成状态
+    const loadLessonStatus = async () => {
+      if (lesson?.id) {
+        try {
+          const statusResult = await learningTracker.getLessonStatus(lesson.id);
+          if (statusResult.success) {
+            setIsPracticeCompleted(statusResult.practiceCompleted || false);
+            setIsTestCompleted(statusResult.testCompleted || false);
+          }
+        } catch (error) {
+          console.error('Error loading lesson status:', error);
+        }
+      }
+    };
+
     // For project challenges without lecture/test, default to practice mode
     if (lesson?.content && !lesson.content.lecture) {
       setMode('practice');
@@ -47,8 +63,9 @@ const ContentPanel = ({ lesson, isPracticeComplete, onNextLesson, isChapterCompl
     setCurrentQuestionIndex(0);
     setAnswersState({});
     setIsScrolledToBottom(false);
-    setIsTestCompleted(false);
-    setIsPracticeCompleted(false);
+    
+    // 加载完成状态（而不是重置为false）
+    loadLessonStatus();
     
     // 滾動到頂部
     if (contentRef.current) {
@@ -107,6 +124,22 @@ const ContentPanel = ({ lesson, isPracticeComplete, onNextLesson, isChapterCompl
         
         if (allCorrect && totalQuestions > 0) {
           setIsTestCompleted(true);
+          
+          // 提交 test 完成记录到数据库
+          if (lesson?.id && !answersState.__submitted) {
+            learningTracker.submitTest(
+              lesson.id,
+              'all_correct',
+              'all_correct',
+              true
+            ).then(() => {
+              console.log('✅ Test completed and tracked!');
+              // 标记为已提交，避免重复提交
+              setAnswersState(prev => ({ ...prev, __submitted: true }));
+            }).catch(error => {
+              console.error('Failed to track test:', error);
+            });
+          }
         } else {
           setIsTestCompleted(false);
         }

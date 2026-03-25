@@ -75,7 +75,7 @@ result = (2 + 3) * 4  # 20
 ## Exercise: Calculate the Area of a Circle
 
 **Task**:
-Calculate the area of a circle with radius 5 (using formula: area = π × r²)
+Calculate the area of a circle with radius 5 (using formula: area = π × r × r)
 
 **Hints**:
 - π is approximately 3.14159

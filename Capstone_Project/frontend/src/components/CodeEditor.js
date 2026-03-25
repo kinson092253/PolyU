@@ -46,6 +46,20 @@ const CodeEditor = forwardRef(({
     }
   }, [initialCode]);
 
+  // 音效播放函数
+  const playSound = (isCorrect) => {
+    try {
+      const soundFile = isCorrect ? '/correct_output.mp3' : '/wrong_output.mp3';
+      const audio = new Audio(soundFile);
+      audio.volume = 0.5; // 设置音量为50%
+      audio.play().catch(err => {
+        console.log('Audio playback failed:', err);
+      });
+    } catch (error) {
+      console.error('Error playing sound:', error);
+    }
+  };
+
   const handleEditorDidMount = (editor, monaco) => {
     editorRef.current = editor;
     
@@ -85,9 +99,11 @@ const CodeEditor = forwardRef(({
     const hasInput = /input\s*\(/.test(currentCode);
     
     // 检测是否需要后端执行
-    // 1. 包含文件操作
+    // 1. 包含文件操作或使用 json/datetime 等需要后端的模块
     const hasFileOperations = /open\s*\(|with\s+open|csv\.|json\./i.test(currentCode);
-    // 2. 导入自定义模块（非标准库）- 检测 import 语句但排除常见标准库
+    // 2. 导入需要后端支持的模块（json, datetime, csv 等 Skulpt 不支持的模块）
+    const hasBackendModules = /import\s+(json|datetime|csv)|from\s+(json|datetime|csv)\s+import/i.test(currentCode);
+    // 3. 导入自定义模块（非标准库）- 检测 import 语句但排除常见标准库
     const hasCustomImport = /import\s+(?!math|random|datetime|re|sys|os|time|json|csv)[\w]+|from\s+(?!math|random|datetime|re|sys|os|time|json|csv)[\w]+\s+import/i.test(currentCode);
     // 3. FileManager 中有用户创建的文件
     const hasUserFiles = fileManagerRef?.current && lessonId;
@@ -95,8 +111,8 @@ const CodeEditor = forwardRef(({
     // 如果包含 input()，强制使用浏览器执行
     if (hasInput) {
       await executeCodeInBrowser(currentCode);
-    } else if (hasFileOperations || hasCustomImport || hasUserFiles) {
-      // 使用后端执行（支持文件操作和自定义模块）
+    } else if (hasFileOperations || hasBackendModules || hasCustomImport || hasUserFiles) {
+      // 使用后端执行（支持文件操作、json/datetime 等模块和自定义模块）
       await executeCodeWithFiles(currentCode);
     } else {
       // 使用 Skulpt 在浏览器端执行
@@ -138,6 +154,7 @@ const CodeEditor = forwardRef(({
           
           // Check if practice is completed correctly
           if (lessonId && expectedOutput && output.trim() === expectedOutput.trim()) {
+            playSound(true); // Play correct sound
             const timeSpent = Math.floor((Date.now() - execStartTime) / 1000);
             
             try {
@@ -153,15 +170,20 @@ const CodeEditor = forwardRef(({
             } catch (error) {
               console.error('Failed to track practice:', error);
             }
+          } else if (lessonId && expectedOutput) {
+            playSound(false); // Play wrong sound when output doesn't match
           }
         } else {
           wrappedOnRunCode(currentCode, '', `❌ Execution Error\n${output}`);
+          if (expectedOutput) playSound(false); // Play wrong sound on execution error
         }
       } else {
         wrappedOnRunCode(currentCode, '', `❌ ${data.error || 'Execution failed'}`);
+        if (expectedOutput) playSound(false); // Play wrong sound on execution failure
       }
     } catch (error) {
       wrappedOnRunCode(currentCode, '', `❌ Network error: ${error.message}\nTip: Make sure the backend server is running`);
+      if (expectedOutput) playSound(false); // Play wrong sound on network error
     } finally {
       setIsRunning(false);
     }
@@ -213,6 +235,7 @@ const CodeEditor = forwardRef(({
       
       // 检查是否正确完成 practice
       if (lessonId && expectedOutput && finalOutput.trim() === expectedOutput.trim()) {
+        playSound(true); // Play correct sound
         const timeSpent = Math.floor((Date.now() - (startTime || execStartTime)) / 1000);
         
         // 提交 practice 完成记录
@@ -229,6 +252,8 @@ const CodeEditor = forwardRef(({
         } catch (error) {
           console.error('Failed to track practice:', error);
         }
+      } else if (lessonId && expectedOutput) {
+        playSound(false); // Play wrong sound when output doesn't match
       }
     } catch (err) {
       let errorMessage = err.toString();
@@ -239,6 +264,7 @@ const CodeEditor = forwardRef(({
       }
       
       wrappedOnRunCode(currentCode, '', errorMessage);
+      if (expectedOutput) playSound(false); // Play wrong sound on execution error
     } finally {
       setIsRunning(false);
     }

@@ -297,6 +297,11 @@ if not found:
 **Task**: 
 Write a program that prints numbers counting down from 10 to 1 using a while loop.
 
+**Output Format**:
+- Print each number on a separate line
+- Start from 10 and end at 1
+- Each number should be on its own line (use print() without any special parameters)
+
 **Hints**:
 - Start with \`count = 10\`
 - Use a while loop with condition \`count > 0\`
@@ -473,7 +478,7 @@ while count < 10:
           questions: [
             {
               type: "multiple-choice",
-              question: "What will be the output of the following code?\\n\\n```python\\nfor i in range(5):\\n    if i == 2:\\n        continue\\n    if i == 4:\\n        break\\n    print(i)\\nelse:\\n    print('Done')\\n```",
+              question: "What will be the output of the following code?\n\n```python\nfor i in range(5):\n    if i == 2:\n        continue\n    if i == 4:\n        break\n    print(i)\nelse:\n    print('Done')\n```",
               options: [
                 "0 1 3",
                 "0 1 2 3",
@@ -509,16 +514,16 @@ while count < 10:
 
 **Task**: 
 Create a program that searches through a list of numbers and prints:
-- The numbers being checked
-- Stop when you find the target number (99)
-- Skip negative numbers using continue
-- If not found, print a message (using else)
+- The numbers being checked, print "Checking: {num}"
+- Stop when you find the target number
+- Skip negative numbers
+- If not found, print a message ( {target} not found ), target is variable.
 
 Test with the provided list.
 
 **Hints**:
 - Use \`if num < 0: continue\` to skip negatives
-- Use \`if num == 99: break\` to stop when found
+- Use \`if num == target: break\` to stop when found
 - Use the else clause for "not found" message
 - Print each number being checked`,
           starterCode: `numbers = [5, -3, 8, -1, 99, -7, 3]
@@ -539,7 +544,7 @@ for num in numbers:
     print(f"Checking: {num}")
 else:
     print(f"{target} not found")`,
-          expectedOutput: "Checking: 5\nChecking: 8\nChecking: -1\nFound 99!"
+          expectedOutput: "Checking: 5\nChecking: 8\nFound 99!"
         }
       }
     },

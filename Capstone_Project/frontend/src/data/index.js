@@ -11,6 +11,7 @@ import { chapter8 } from './chapter8';
 import { test2 } from './test2';
 import { chapter9 } from './chapter9';
 import { chapter10 } from './chapter10';
+import { finalTest } from './finalTest';
 
 // Combine all chapters into the lessons array
 export const lessons = [
@@ -25,7 +26,8 @@ export const lessons = [
   chapter8,
   test2,
   chapter9,
-  chapter10
+  chapter10,
+  finalTest
 ];
 
 export default lessons;

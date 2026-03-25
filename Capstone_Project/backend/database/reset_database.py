@@ -49,6 +49,7 @@ def reset_database():
             "DELETE FROM test_results;",
             "DELETE FROM practice_attempts;",
             "DELETE FROM user_progress;",
+            "DELETE FROM final_test_answers;",
         ]
         
         for sql in sql_commands:

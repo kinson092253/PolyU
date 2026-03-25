@@ -8,6 +8,7 @@ import ResizablePanel from './components/ResizablePanel';
 import Dashboard from './components/Dashboard';
 import FileManager from './components/FileManager';
 import AIAssistantModal from './components/AIAssistantModal';
+import FinalTest from './components/FinalTest';
 import learningTracker from './services/learningTracker';
 import { lessons as pythonLessons } from './data/index';
 import './App.css';
@@ -259,51 +260,59 @@ function App() {
           </div>
         )}
 
-        <ResizablePanel>
-          <ContentPanel 
-            lesson={selectedLesson}
-            isPracticeComplete={isPracticeComplete}
-            onNextLesson={handleNextLesson}
-            isChapterComplete={isCurrentChapterComplete}
+        {/* Check if it's the final test */}
+        {selectedLesson?.content?.isFinalTest ? (
+          <FinalTest 
+            lesson={selectedLesson} 
+            fileManagerRef={fileManagerRef}
           />
-          {selectedLesson && (
-            <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-              <CodeEditor 
-                ref={codeEditorRef}
-                initialCode={editorCode} 
-                onRunCode={handleRunCode}
-                onCodeChange={handleCodeChange}
-                lessonId={selectedLesson?.id}
-                expectedOutput={expectedOutput}
-                fileManagerRef={fileManagerRef}
-                lesson={selectedLesson}
-                hint={hint}
-                hintLevel={hintLevel}
-                loadingHint={loadingHint}
-                setHint={setHint}
-                setHintLevel={setHintLevel}
-                setLoadingHint={setLoadingHint}
-                onAIAssistantClick={() => setShowAIModal(true)}
-                key={`${selectedLesson?.id}-${refreshEditorKey}`}
-              />
-              <FileManager
-                ref={fileManagerRef}
-                userId={1}
-                lessonId={selectedLesson?.id}
-                onFileSelect={(file) => {
-                  console.log('Selected file:', file);
-                }}
-              />
-            </div>
-          )}
-          {selectedLesson && (
-            <OutputPanel 
-              output={output} 
-              isError={isError} 
-              expectedOutput={expectedOutput}
+        ) : (
+          <ResizablePanel>
+            <ContentPanel 
+              lesson={selectedLesson}
+              isPracticeComplete={isPracticeComplete}
+              onNextLesson={handleNextLesson}
+              isChapterComplete={isCurrentChapterComplete}
             />
-          )}
-        </ResizablePanel>
+            {selectedLesson && (
+              <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+                <CodeEditor 
+                  ref={codeEditorRef}
+                  initialCode={editorCode} 
+                  onRunCode={handleRunCode}
+                  onCodeChange={handleCodeChange}
+                  lessonId={selectedLesson?.id}
+                  expectedOutput={expectedOutput}
+                  fileManagerRef={fileManagerRef}
+                  lesson={selectedLesson}
+                  hint={hint}
+                  hintLevel={hintLevel}
+                  loadingHint={loadingHint}
+                  setHint={setHint}
+                  setHintLevel={setHintLevel}
+                  setLoadingHint={setLoadingHint}
+                  onAIAssistantClick={() => setShowAIModal(true)}
+                  key={`${selectedLesson?.id}-${refreshEditorKey}`}
+                />
+                <FileManager
+                  ref={fileManagerRef}
+                  userId={1}
+                  lessonId={selectedLesson?.id}
+                  onFileSelect={(file) => {
+                    console.log('Selected file:', file);
+                  }}
+                />
+              </div>
+            )}
+            {selectedLesson && (
+              <OutputPanel 
+                output={output} 
+                isError={isError} 
+                expectedOutput={expectedOutput}
+              />
+            )}
+          </ResizablePanel>
+        )}
       </div>
       
       {/* AI Assistant Modal */}

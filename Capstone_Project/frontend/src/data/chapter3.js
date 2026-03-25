@@ -262,7 +262,7 @@ if age >= 21 and income >= 30000:
           questions: [
             {
               type: "multiple-choice",
-              question: "What will be the output of the following code?\\n\\n```python\\nage = 16\\nhas_license = True\\n\\nif age >= 18:\\n    if has_license:\\n        print('Can drive')\\n    else:\\n        print('Need license')\\nelse:\\n    print('Too young')\\n```",
+              question: "What will be the output of the following code?\n\n```python\nage = 16\nhas_license = True\n\nif age >= 18:\n    if has_license:\n        print('Can drive')\n    else:\n        print('Need license')\nelse:\n    print('Too young')\n```",
               options: [
                 "Can drive",
                 "Need license",
@@ -301,6 +301,7 @@ if age >= 21 and income >= 30000:
 Create a nested conditional system that:
 1. Check if score >= 60 (passing grade)
 2. If passing:
+   - Print "You passed!"
    - If score >= 90: print "Grade: A"
    - Else if score >= 80:
      - If has_extra_credit == True: print "Grade: A- (with extra credit)"
