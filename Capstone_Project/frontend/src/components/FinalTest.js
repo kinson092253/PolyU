@@ -8,6 +8,7 @@ import OutputPanel from './OutputPanel';
 import ResizablePanel from './ResizablePanel';
 import AIAssistantModal from './AIAssistantModal';
 import CongratulationsModal from './CongratulationsModal';
+import { API_BASE_URL } from '../config';
 import './FinalTest.css';
 
 const FinalTest = ({ lesson, fileManagerRef }) => {
@@ -54,7 +55,7 @@ const FinalTest = ({ lesson, fileManagerRef }) => {
   useEffect(() => {
     const loadSavedAnswers = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/final-test/answers/${userId}`);
+        const response = await fetch(`${API_BASE_URL}/final-test/answers/${userId}`);
         if (response.ok) {
           const data = await response.json();
           if (data.success && data.answers) {
@@ -133,7 +134,7 @@ const FinalTest = ({ lesson, fileManagerRef }) => {
   // Save answer to backend
   const saveAnswer = async (questionType, questionIndex, answerData) => {
     try {
-      await fetch('http://localhost:5000/api/final-test/answers', {
+      await fetch(`${API_BASE_URL}/final-test/answers`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -152,7 +153,7 @@ const FinalTest = ({ lesson, fileManagerRef }) => {
   const handleRestart = async () => {
     if (window.confirm('Are you sure you want to restart the Final Test? All your answers will be cleared.')) {
       try {
-        const response = await fetch(`http://localhost:5000/api/final-test/answers/${userId}`, {
+        const response = await fetch(`${API_BASE_URL}/final-test/answers/${userId}`, {
           method: 'DELETE'
         });
         
