@@ -62,6 +62,14 @@ const CodeEditor = forwardRef(({
 
   const handleEditorDidMount = (editor, monaco) => {
     editorRef.current = editor;
+
+    // Sync editor content with initialCode prop.
+    // This handles the re-mount case (e.g. switching stages in FinalTest) where
+    // the useEffect ran before editorRef was set, so setValue() was never called.
+    const initCode = initialCode !== undefined && initialCode !== null ? initialCode : '';
+    if (initCode && editor.getValue() !== initCode) {
+      editor.setValue(initCode);
+    }
     
     // 設置編輯器主題和配置
     monaco.editor.defineTheme('customTheme', {

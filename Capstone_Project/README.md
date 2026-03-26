@@ -33,53 +33,97 @@
 
 ## 🚀 快速開始
 
-### 使用 Docker（推薦）
+### 前置需求
+
+在開始之前，請確保已安裝以下軟體：
+
+| 軟體 | 建議版本 | 下載 |
+|------|---------|------|
+| Python | 3.9+ | https://www.python.org/downloads/ |
+| Node.js | 16+ | https://nodejs.org/ |
+| PostgreSQL | 14+ | https://www.postgresql.org/download/ |
+
+---
+
+### 第一步：設置 PostgreSQL 資料庫
+
+安裝 PostgreSQL 後，建立資料庫：
 
 ```bash
-# 克隆倉庫
-git clone <repository-url>
-cd Capstone_Project
+# 以 postgres 用戶登入 psql
+psql -U postgres
 
-# 啟動所有服務
-docker-compose up --build
+# 在 psql 中執行（建立資料庫）
+CREATE DATABASE python_learning;
+\q
 ```
 
-訪問 http://localhost:3000 使用應用
+> 預設資料庫密碼為 `admin`（可在 `backend/api.py` 的 `get_db_connection()` 中修改 `DB_PASSWORD`）
+
+---
+
+### 第二步：設置並啟動後端
+
+```bash
+cd Capstone_Project/backend
+
+# 建立 Python 虛擬環境
+python -m venv venv
+
+# 啟動虛擬環境
+# Windows:
+venv\Scripts\activate
+# macOS / Linux:
+source venv/bin/activate
+
+# 安裝 Python 依賴
+pip install -r requirements.txt
+
+# 初始化資料庫（建立所有表格）
+python database/initialize_database.py
+
+# 啟動後端伺服器（port 5000）
+python api.py
+```
+
+後端成功啟動後，你會看到：
+```
+ * Running on http://127.0.0.1:5000
+```
+
+---
+
+### 第三步：設置並啟動前端
+
+**開啟新的終端視窗**，然後：
+
+```bash
+cd Capstone_Project/frontend
+
+# 安裝 Node.js 依賴
+npm install
+
+# 啟動前端開發伺服器（port 3000）
+npm start
+```
+
+瀏覽器會自動開啟 http://localhost:3000
+
+---
 
 ### 本地開發
 
-#### 後端設置
+### 本地開發
+
+如果想分開啟動（不用虛擬環境），直接：
 
 ```bash
-cd backend
+# 後端（需已安裝依賴）
+cd Capstone_Project/backend
+python api.py
 
-# 創建虛擬環境
-python -m venv venv
-
-# Windows
-venv\Scripts\activate
-# macOS/Linux
-source venv/bin/activate
-
-# 安裝依賴
-pip install -r requirements.txt
-
-# 初始化數據庫
-python database/initialize_database.py
-
-# 啟動服務器
-python app.py
-```
-
-#### 前端設置
-
-```bash
-cd frontend
-
-# 安裝依賴
-npm install
-
-# 啟動開發服務器
+# 前端（另開終端）
+cd Capstone_Project/frontend
 npm start
 ```
 

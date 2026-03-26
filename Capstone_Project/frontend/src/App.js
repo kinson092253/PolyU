@@ -105,7 +105,8 @@ function App() {
 
   // 保存用户代码到数据库
   const handleCodeChange = (newCode) => {
-    setEditorCode(newCode);
+    // 不更新 editorCode 状态，避免触发 useEffect 导致 Monaco 编辑器光标跳回第一行
+    // editorCode 只在切换课程时更新，不在用户输入时更新
     
     // 使用防抖保存到数据库
     if (selectedLesson && newCode) {
