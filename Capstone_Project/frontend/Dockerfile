@@ -14,7 +14,8 @@ RUN npm install
 # Copy source code
 COPY . .
 
-# Build the React app
+# Build the React app (Docker 用相對路徑 /api，由 nginx proxy 轉發)
+ENV REACT_APP_API_URL=/api
 RUN npm run build
 
 # Stage 2: Production stage with nginx
