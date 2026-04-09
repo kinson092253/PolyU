@@ -55,7 +55,12 @@ const FinalTest = ({ lesson, fileManagerRef }) => {
   useEffect(() => {
     const loadSavedAnswers = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}/final-test/answers/${userId}`);
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 3000); // 3秒 timeout
+        const response = await fetch(`${API_BASE_URL}/final-test/answers/${userId}`, {
+          signal: controller.signal
+        });
+        clearTimeout(timeoutId);
         if (response.ok) {
           const data = await response.json();
           if (data.success && data.answers) {

@@ -933,4 +933,4 @@ if __name__ == '__main__':
     print(f"Dashboard: http://127.0.0.1:{port}/api/dashboard/1")
     print(f"Health: http://127.0.0.1:{port}/api/health")
     print("=" * 50 + "\n")
-    app.run(debug=True, port=port, use_reloader=False)
+    app.run(debug=True, host='0.0.0.0', port=port, use_reloader=False)

@@ -11,8 +11,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # 複製應用代碼
-COPY app.py .
-COPY database/ ./database/
+COPY . .
 
 # 創建非 root 用戶來運行應用（安全考慮）
 RUN useradd -m -u 1000 appuser && \
@@ -25,11 +24,8 @@ USER appuser
 EXPOSE 5000
 
 # 設置環境變量
-ENV FLASK_APP=app.py
+ENV FLASK_APP=api.py
 ENV PYTHONUNBUFFERED=1
 
-# 運行應用（生產環境）
-CMD ["python", "app.py"]
-
-# 如果想用 Gunicorn（更適合生產環境），可以使用：
-# CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "app:app"]
+# 運行應用
+CMD ["python", "api.py"]
