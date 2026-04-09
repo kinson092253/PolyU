@@ -24,6 +24,11 @@ htmlcov/
 *.swp
 *.swo
 
+# 環境變數（含 API Key，絕對不能上傳！）
+.env
+.env.local
+.env.production
+
 # 臨時文件
 *.log
 *.tmp
