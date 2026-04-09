@@ -793,6 +793,20 @@ def get_ai_hint():
         print(f"Error getting AI hint: {e}")
         return jsonify({'success': False, 'error': str(e)}), 500
 
+@app.route('/api/ai/explain-error', methods=['POST'])
+def explain_ai_error():
+    """Explain a Python error to a student in plain language"""
+    try:
+        data = request.json
+        result = ai_service.explain_error(
+            student_code=data.get('studentCode', ''),
+            error_message=data.get('errorMessage', '')
+        )
+        return jsonify(result)
+    except Exception as e:
+        print(f"Error explaining AI error: {e}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+
 # ==================== Reset Database ====================
 
 @app.route('/api/reset-database', methods=['POST'])

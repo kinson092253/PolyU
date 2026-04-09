@@ -622,6 +622,7 @@ const FinalTest = ({ lesson, fileManagerRef }) => {
             output={output}
             isError={isError}
             expectedOutput={expectedOutput}
+            code={code}
           />
         </ResizablePanel>
       </div>

@@ -30,6 +30,7 @@ function App() {
   const fileManagerRef = useRef(null); // Reference to FileManager
   const codeEditorRef = useRef(null); // Reference to CodeEditor for AI hints
   const [completedChapters, setCompletedChapters] = useState(new Set()); // Set of completed chapter numbers
+  const [failedAttemptCount, setFailedAttemptCount] = useState(0); // Count of failed practice runs
 
   // 加载课程代码的函数
   const loadLessonCodeFromDatabase = async (lesson) => {
@@ -95,6 +96,7 @@ function App() {
     setHint(null);
     setHintLevel(0);
     setLoadingHint(false);
+    setFailedAttemptCount(0); // Reset failed attempt counter on lesson change
     
     loadLessonCodeFromDatabase(selectedLesson);
   }, [selectedLesson]);
@@ -135,8 +137,19 @@ function App() {
   // Handle code execution from Skulpt
   const handleRunCode = async (code, userInput = '', output = '') => {
     // Skulpt 直接返回输出结果
-    setIsError(output.includes('❌') || output.includes('Error') || output.includes('Traceback'));
+    const hasError = output.includes('❌') || output.includes('Error') || output.includes('Traceback');
+    setIsError(hasError);
     setOutput(output);
+
+    // Track failed attempts: increment when output exists but is wrong or has error
+    if (output) {
+      const isSuccess = !hasError && expectedOutput && output.trim() === expectedOutput.trim();
+      if (isSuccess) {
+        setFailedAttemptCount(0);
+      } else {
+        setFailedAttemptCount(prev => prev + 1);
+      }
+    }
   };
 
   // 计算是否完成练习（output与expected output一致）
@@ -274,6 +287,7 @@ function App() {
               isPracticeComplete={isPracticeComplete}
               onNextLesson={handleNextLesson}
               isChapterComplete={isCurrentChapterComplete}
+              failedAttemptCount={failedAttemptCount}
             />
             {selectedLesson && (
               <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
@@ -310,6 +324,7 @@ function App() {
                 output={output} 
                 isError={isError} 
                 expectedOutput={expectedOutput}
+                code={editorCode}
               />
             )}
           </ResizablePanel>

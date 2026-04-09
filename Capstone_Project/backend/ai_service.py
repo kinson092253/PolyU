@@ -124,5 +124,76 @@ Provide an appropriate hint for level {hint_level}. Remember: Guide, don't solve
                 'error': f'Error: {str(e)}'
             }
 
+    def explain_error(self, student_code, error_message):
+        """Explain a Python error to a student in plain, friendly language"""
+
+        if not self.api_key:
+            return {
+                'success': False,
+                'error': 'OpenRouter API key not configured'
+            }
+
+        system_prompt = """You are a friendly Python tutor helping beginner students understand error messages.
+
+RULES:
+1. Explain what the error means in simple, plain English (no jargon)
+2. Point out which line or part of the code caused the error
+3. Give a clear, concise suggestion on how to fix it
+4. Keep the response under 5 sentences
+5. Be encouraging — errors are a normal part of learning!"""
+
+        user_prompt = f"""A student got the following error when running their Python code:
+
+Error:
+{error_message}
+
+Student's Code:
+```python
+{student_code}
+```
+
+Please explain what went wrong in simple terms and how they can fix it."""
+
+        try:
+            headers = {
+                'Authorization': f'Bearer {self.api_key}',
+                'Content-Type': 'application/json',
+                'HTTP-Referer': 'http://localhost:3000',
+                'X-Title': 'Python Learning Platform'
+            }
+
+            payload = {
+                'model': self.model,
+                'messages': [
+                    {'role': 'system', 'content': system_prompt},
+                    {'role': 'user', 'content': user_prompt}
+                ],
+                'temperature': 0.5,
+                'max_tokens': 350
+            }
+
+            response = requests.post(
+                self.api_url,
+                headers=headers,
+                json=payload,
+                timeout=30
+            )
+
+            if response.status_code == 200:
+                data = response.json()
+                explanation = data['choices'][0]['message']['content'].strip()
+                return {'success': True, 'explanation': explanation}
+            else:
+                return {
+                    'success': False,
+                    'error': f'API error: {response.status_code} - {response.text}'
+                }
+
+        except requests.exceptions.Timeout:
+            return {'success': False, 'error': 'Request timeout. Please try again.'}
+        except Exception as e:
+            return {'success': False, 'error': f'Error: {str(e)}'}
+
+
 # Create singleton instance
 ai_service = AIHintService()
