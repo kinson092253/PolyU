@@ -9,6 +9,7 @@ import Dashboard from './components/Dashboard';
 import FileManager from './components/FileManager';
 import AIAssistantModal from './components/AIAssistantModal';
 import FinalTest from './components/FinalTest';
+import ErrorBoundary from './components/ErrorBoundary';
 import learningTracker from './services/learningTracker';
 import { lessons as pythonLessons } from './data/index';
 import './App.css';
@@ -275,6 +276,7 @@ function App() {
         )}
 
         {/* Check if it's the final test */}
+        <ErrorBoundary>
         {selectedLesson?.content?.isFinalTest ? (
           <FinalTest 
             lesson={selectedLesson} 
@@ -329,6 +331,7 @@ function App() {
             )}
           </ResizablePanel>
         )}
+        </ErrorBoundary>
       </div>
       
       {/* AI Assistant Modal */}

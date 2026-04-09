@@ -8,6 +8,7 @@ import OutputPanel from './OutputPanel';
 import ResizablePanel from './ResizablePanel';
 import AIAssistantModal from './AIAssistantModal';
 import CongratulationsModal from './CongratulationsModal';
+import ErrorBoundary from './ErrorBoundary';
 import { API_BASE_URL } from '../config';
 import './FinalTest.css';
 
@@ -570,6 +571,7 @@ const FinalTest = ({ lesson, fileManagerRef }) => {
 
     return (
       <div className="final-test-stage stage-coding">
+        <ErrorBoundary>
         <ResizablePanel>
           {/* Left Panel - Description */}
           <div className="coding-description">
@@ -630,6 +632,7 @@ const FinalTest = ({ lesson, fileManagerRef }) => {
             code={code}
           />
         </ResizablePanel>
+        </ErrorBoundary>
       </div>
     );
   };
