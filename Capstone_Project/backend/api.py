@@ -793,6 +793,20 @@ def get_ai_hint():
         print(f"Error getting AI hint: {e}")
         return jsonify({'success': False, 'error': str(e)}), 500
 
+@app.route('/api/ai/explain-error', methods=['POST'])
+def explain_ai_error():
+    """Explain a Python error to a student in plain language"""
+    try:
+        data = request.json
+        result = ai_service.explain_error(
+            student_code=data.get('studentCode', ''),
+            error_message=data.get('errorMessage', '')
+        )
+        return jsonify(result)
+    except Exception as e:
+        print(f"Error explaining AI error: {e}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+
 # ==================== Reset Database ====================
 
 @app.route('/api/reset-database', methods=['POST'])
@@ -915,7 +929,8 @@ if __name__ == '__main__':
     print("\n" + "=" * 50)
     print("Flask Server Starting...")
     print("=" * 50)
-    print("Dashboard: http://127.0.0.1:5000/api/dashboard/1")
-    print("Health: http://127.0.0.1:5000/api/health")
+    port = int(os.getenv('PORT', 5000))
+    print(f"Dashboard: http://127.0.0.1:{port}/api/dashboard/1")
+    print(f"Health: http://127.0.0.1:{port}/api/health")
     print("=" * 50 + "\n")
-    app.run(debug=True, port=5000, use_reloader=False)
+    app.run(debug=True, port=port, use_reloader=False)

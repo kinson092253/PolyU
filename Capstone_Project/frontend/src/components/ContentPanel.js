@@ -6,7 +6,7 @@ import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import learningTracker from '../services/learningTracker';
 import './ContentPanel.css';
 
-const ContentPanel = ({ lesson, isPracticeComplete, onNextLesson, isChapterComplete }) => {
+const ContentPanel = ({ lesson, isPracticeComplete, onNextLesson, isChapterComplete, failedAttemptCount = 0 }) => {
   const [mode, setMode] = useState('lecture'); // lecture, test, practice
   const [theme, setTheme] = useState('dark'); // light, dark
   const [fontSize, setFontSize] = useState('medium'); // small, medium, large
@@ -1265,20 +1265,24 @@ const ContentPanel = ({ lesson, isPracticeComplete, onNextLesson, isChapterCompl
           <p>💡 Write your code in the editor on the right, then click "Run" to see the result</p>
         </div>
 
-        {/* Hints 和 Solution 按鈕 */}
+        {/* Hints 和 Solution 按鈕 - 根據失敗次數顯示 */}
         <div className="practice-buttons">
-          <button 
-            className="btn btn-hints"
-            onClick={() => setShowHints(!showHints)}
-          >
-            {showHints ? '🔼 Hide Hints' : '💡 Show Hints'}
-          </button>
-          <button 
-            className="btn btn-solution"
-            onClick={() => setShowSolution(!showSolution)}
-          >
-            {showSolution ? '🔼 Hide Solution' : '📖 Show Solution'}
-          </button>
+          {failedAttemptCount >= 5 && (
+            <button 
+              className="btn btn-hints"
+              onClick={() => setShowHints(!showHints)}
+            >
+              {showHints ? '🔼 Hide Hints' : '💡 Show Hints'}
+            </button>
+          )}
+          {failedAttemptCount >= 10 && (
+            <button 
+              className="btn btn-solution"
+              onClick={() => setShowSolution(!showSolution)}
+            >
+              {showSolution ? '🔼 Hide Solution' : '📖 Show Solution'}
+            </button>
+          )}
         </div>
 
         {/* Hints 內容 - 點擊後顯示 */}

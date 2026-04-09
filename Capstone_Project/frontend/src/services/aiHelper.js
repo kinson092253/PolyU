@@ -40,6 +40,20 @@ class AIHelper {
       };
     }
   }
+  async explainError(studentCode, errorMessage) {
+    try {
+      const response = await fetch(`${API_BASE_URL}/ai/explain-error`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ studentCode, errorMessage })
+      });
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+      return await response.json();
+    } catch (error) {
+      console.error('Error explaining error:', error);
+      return { success: false, error: error.message || 'Failed to connect to AI service' };
+    }
+  }
 }
 
 const aiHelperInstance = new AIHelper();

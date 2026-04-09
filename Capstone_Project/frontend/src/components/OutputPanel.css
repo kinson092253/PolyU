@@ -190,3 +190,222 @@
   background: linear-gradient(180deg, #059669, #047857);
   box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
 }
+
+/* Ask AI error button */
+.output-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Ask AI button — matches CodeEditor .ask-ai-btn style */
+.output-ask-ai-btn {
+  padding: 5px 14px;
+  border: 2px solid rgba(139, 92, 246, 0.4);
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(124, 58, 237, 0.2));
+  color: #c4b5fd;
+  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.output-ask-ai-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.25), rgba(124, 58, 237, 0.3));
+  border-color: #8b5cf6;
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 4px 16px rgba(139, 92, 246, 0.4);
+  color: #e9d5ff;
+}
+
+.output-ask-ai-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Console tab: ask AI button row */
+.console-ask-ai {
+  margin-top: 12px;
+}
+
+/* Ask AI row inside output content (appears below error text) */
+.output-ask-ai-row {
+  margin-top: 10px;
+}
+
+/* ===== AI Error Explanation Modal ===== */
+.error-explanation-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.error-explanation-modal {
+  background: linear-gradient(135deg, #1e1e1e 0%, #2d2d30 100%);
+  border-radius: 12px;
+  width: 90%;
+  max-width: 620px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  animation: slideUp 0.3s ease-out;
+  border: 1px solid rgba(139, 92, 246, 0.25);
+}
+
+.error-explanation-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.error-explanation-modal-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.error-explanation-modal-title .ai-icon {
+  font-size: 26px;
+  animation: bounce 2s infinite;
+}
+
+.error-explanation-modal-title h3 {
+  margin: 0;
+  color: #c4b5fd;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.error-explanation-modal-close {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  font-size: 22px;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.error-explanation-modal-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.error-explanation-modal-body {
+  padding: 24px;
+  overflow-y: auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.error-explanation-error-box {
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.error-explanation-error-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #fca5a5;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.error-explanation-error-box pre {
+  margin: 0;
+  color: #fca5a5;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.error-explanation-text {
+  background: rgba(139, 92, 246, 0.08);
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.error-explanation-ai-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #c4b5fd;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.error-explanation-text p {
+  margin: 0;
+  color: #e2e8f0;
+  font-size: 14px;
+  line-height: 1.8;
+  white-space: pre-wrap;
+}
+
+.error-explanation-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 32px 0;
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+.error-explanation-loading .spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(148, 163, 184, 0.3);
+  border-top-color: #8b5cf6;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-5px); }
+}
+
